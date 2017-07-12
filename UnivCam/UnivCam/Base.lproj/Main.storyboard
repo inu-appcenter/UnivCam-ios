@@ -22,7 +22,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="kX4-Ri-h3d"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_home" id="kX4-Ri-h3d">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
+                    </tabBarItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXs-gs-d7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -53,7 +56,7 @@
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="txB-0n-NVJ" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="KnB-h6-Fdx">
+                    <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="fill" id="KnB-h6-Fdx">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
@@ -90,4 +93,7 @@
             <point key="canvasLocation" x="768" y="269"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_home" width="24" height="24"/>
+    </resources>
 </document>

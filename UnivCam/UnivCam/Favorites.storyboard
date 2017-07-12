@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Favorite Album List View Controller-->
         <scene sceneID="Fcn-jS-JaP">
             <objects>
                 <viewController id="os7-pB-TQd" customClass="FavoriteAlbumListViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,7 +22,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="EF7-os-c4W"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_star" id="EF7-os-c4W">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0m-rK-r4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -30,4 +32,7 @@
             <point key="canvasLocation" x="882" y="481"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_star" width="24" height="24"/>
+    </resources>
 </document>

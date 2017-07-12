@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Camera View Controller-->
         <scene sceneID="fbm-bP-HHN">
             <objects>
                 <viewController id="3c1-tN-cFj" customClass="CameraViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
@@ -22,7 +22,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="Nii-ty-16C"/>
+                    <tabBarItem key="tabBarItem" title="" image="ic_photo_camera" id="Nii-ty-16C">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2b3-AZ-W1O" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -30,4 +32,7 @@
             <point key="canvasLocation" x="2450" y="-433"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ic_photo_camera" width="24" height="24"/>
+    </resources>
 </document>
