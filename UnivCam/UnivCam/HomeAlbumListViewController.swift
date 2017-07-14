@@ -1,5 +1,5 @@
 //
-//  MainAlbumListViewController.swift
+//  HomeAlbumListViewController.swift
 //  UnivCam
 //
 //  Created by BLU on 2017. 7. 13..
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainAlbumListViewController: UIViewController {
+class HomeAlbumListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

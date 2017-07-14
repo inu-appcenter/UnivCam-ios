@@ -9,47 +9,25 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main Album List View Controller-->
-        <scene sceneID="qAh-1J-A6L">
-            <objects>
-                <viewController id="7v1-fi-STO" customClass="MainAlbumListViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="YPh-Yo-luJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wm3-kP-2nh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5q9-od-csg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="ic_home" id="kX4-Ri-h3d">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
-                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
-                    </tabBarItem>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vXs-gs-d7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="902" y="-406"/>
-        </scene>
         <!--Search-->
         <scene sceneID="kB2-W6-7xN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EsP-wu-cdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Search" id="0WA-2m-Vej" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Search" id="3FY-tv-yEB"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EsP-wu-cdD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="758" y="180"/>
+            <point key="canvasLocation" x="766" y="-54"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="EZw-bV-W3r">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QgI-5O-uuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Favorites" id="648-8w-RXj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Favorites" id="5dS-hx-Jey"/>
                 </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QgI-5O-uuL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="777" y="343"/>
+            <point key="canvasLocation" x="768" y="268"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Cks-Ib-tb1">
@@ -57,11 +35,12 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="txB-0n-NVJ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="fill" id="KnB-h6-Fdx">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="7v1-fi-STO" kind="relationship" relationship="viewControllers" id="Meo-EB-JIz"/>
+                        <segue destination="Dh6-5K-JEm" kind="relationship" relationship="viewControllers" id="Meo-EB-JIz"/>
                         <segue destination="0WA-2m-Vej" kind="relationship" relationship="viewControllers" id="PiQ-2r-DgQ"/>
                         <segue destination="WyZ-aL-4za" kind="relationship" relationship="viewControllers" id="8nN-yp-XsD"/>
                         <segue destination="648-8w-RXj" kind="relationship" relationship="viewControllers" id="p3H-Ql-PPh"/>
@@ -80,7 +59,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9fv-xa-R4J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="781" y="428"/>
+            <point key="canvasLocation" x="770" y="390"/>
         </scene>
         <!--Camera-->
         <scene sceneID="HLN-Ue-x5U">
@@ -90,10 +69,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtn-MH-gaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="768" y="269"/>
+            <point key="canvasLocation" x="775" y="123"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="Bse-d6-YEA">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Home" id="Dh6-5K-JEm" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="qZC-8N-YEQ"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wj4-7B-dOW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="752" y="-164"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ic_home" width="24" height="24"/>
-    </resources>
 </document>

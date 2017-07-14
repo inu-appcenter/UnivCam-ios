@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30B936BE1F186D0200F5040F /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30B936BC1F186D0200F5040F /* Home.storyboard */; };
 		30FB7FEA1F169850002C66AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB7FE91F169850002C66AC /* AppDelegate.swift */; };
 		30FB7FEF1F169850002C66AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB7FED1F169850002C66AC /* Main.storyboard */; };
 		30FB7FF11F169850002C66AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB7FF01F169850002C66AC /* Assets.xcassets */; };
@@ -16,13 +17,14 @@
 		30FB80091F169D4E002C66AC /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB80071F169D4E002C66AC /* Settings.storyboard */; };
 		30FB800B1F169DB3002C66AC /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB800A1F169DB3002C66AC /* Favorites.storyboard */; };
 		30FB800D1F169DEC002C66AC /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB800C1F169DEC002C66AC /* Search.storyboard */; };
-		30FB800F1F169EB1002C66AC /* MainAlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB800E1F169EB1002C66AC /* MainAlbumListViewController.swift */; };
+		30FB800F1F169EB1002C66AC /* HomeAlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB800E1F169EB1002C66AC /* HomeAlbumListViewController.swift */; };
 		30FB80111F169FC3002C66AC /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB80101F169FC3002C66AC /* Camera.storyboard */; };
 		30FB80131F16A0A2002C66AC /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB80121F16A0A2002C66AC /* CameraViewController.swift */; };
 		30FB80151F16A0C1002C66AC /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB80141F16A0C1002C66AC /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30B936BD1F186D0200F5040F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
 		30FB7FE61F169850002C66AC /* UnivCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB7FE91F169850002C66AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30FB7FEE1F169850002C66AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -34,7 +36,7 @@
 		30FB80081F169D4E002C66AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		30FB800A1F169DB3002C66AC /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
 		30FB800C1F169DEC002C66AC /* Search.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
-		30FB800E1F169EB1002C66AC /* MainAlbumListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainAlbumListViewController.swift; sourceTree = "<group>"; };
+		30FB800E1F169EB1002C66AC /* HomeAlbumListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAlbumListViewController.swift; sourceTree = "<group>"; };
 		30FB80101F169FC3002C66AC /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		30FB80121F16A0A2002C66AC /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		30FB80141F16A0C1002C66AC /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +53,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		30B936B61F186B9B00F5040F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				30FB800E1F169EB1002C66AC /* HomeAlbumListViewController.swift */,
+				30FB80011F169BAA002C66AC /* SearchPhotoListViewController.swift */,
+				30FB80121F16A0A2002C66AC /* CameraViewController.swift */,
+				30FB80031F169BF1002C66AC /* FavoriteAlbumListViewController.swift */,
+				30FB80141F16A0C1002C66AC /* SettingViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		30B936B71F186BBC00F5040F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		30B936B81F186BF500F5040F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		30B936B91F186BFC00F5040F /* Types */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Types;
+			sourceTree = "<group>";
+		};
+		30B936BA1F186C0E00F5040F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		30B936BB1F186C2200F5040F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				30FB7FED1F169850002C66AC /* Main.storyboard */,
+				30B936BC1F186D0200F5040F /* Home.storyboard */,
+				30FB800C1F169DEC002C66AC /* Search.storyboard */,
+				30FB80101F169FC3002C66AC /* Camera.storyboard */,
+				30FB800A1F169DB3002C66AC /* Favorites.storyboard */,
+				30FB80071F169D4E002C66AC /* Settings.storyboard */,
+				30FB7FF01F169850002C66AC /* Assets.xcassets */,
+				30FB7FF21F169850002C66AC /* LaunchScreen.storyboard */,
+				30FB7FF51F169850002C66AC /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		30FB7FDD1F169850002C66AC = {
 			isa = PBXGroup;
 			children = (
@@ -71,19 +129,12 @@
 			isa = PBXGroup;
 			children = (
 				30FB7FE91F169850002C66AC /* AppDelegate.swift */,
-				30FB800E1F169EB1002C66AC /* MainAlbumListViewController.swift */,
-				30FB80011F169BAA002C66AC /* SearchPhotoListViewController.swift */,
-				30FB80121F16A0A2002C66AC /* CameraViewController.swift */,
-				30FB80031F169BF1002C66AC /* FavoriteAlbumListViewController.swift */,
-				30FB80141F16A0C1002C66AC /* SettingViewController.swift */,
-				30FB7FED1F169850002C66AC /* Main.storyboard */,
-				30FB800C1F169DEC002C66AC /* Search.storyboard */,
-				30FB80101F169FC3002C66AC /* Camera.storyboard */,
-				30FB800A1F169DB3002C66AC /* Favorites.storyboard */,
-				30FB80071F169D4E002C66AC /* Settings.storyboard */,
-				30FB7FF01F169850002C66AC /* Assets.xcassets */,
-				30FB7FF21F169850002C66AC /* LaunchScreen.storyboard */,
-				30FB7FF51F169850002C66AC /* Info.plist */,
+				30B936B61F186B9B00F5040F /* ViewControllers */,
+				30B936B71F186BBC00F5040F /* Views */,
+				30B936B81F186BF500F5040F /* Models */,
+				30B936B91F186BFC00F5040F /* Types */,
+				30B936BA1F186C0E00F5040F /* Utils */,
+				30B936BB1F186C2200F5040F /* Resources */,
 			);
 			path = UnivCam;
 			sourceTree = "<group>";
@@ -154,6 +205,7 @@
 				30FB7FEF1F169850002C66AC /* Main.storyboard in Resources */,
 				30FB800D1F169DEC002C66AC /* Search.storyboard in Resources */,
 				30FB800B1F169DB3002C66AC /* Favorites.storyboard in Resources */,
+				30B936BE1F186D0200F5040F /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,7 +220,7 @@
 				30FB80131F16A0A2002C66AC /* CameraViewController.swift in Sources */,
 				30FB80021F169BAA002C66AC /* SearchPhotoListViewController.swift in Sources */,
 				30FB7FEA1F169850002C66AC /* AppDelegate.swift in Sources */,
-				30FB800F1F169EB1002C66AC /* MainAlbumListViewController.swift in Sources */,
+				30FB800F1F169EB1002C66AC /* HomeAlbumListViewController.swift in Sources */,
 				30FB80151F16A0C1002C66AC /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -176,6 +228,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		30B936BC1F186D0200F5040F /* Home.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30B936BD1F186D0200F5040F /* Base */,
+			);
+			name = Home.storyboard;
+			sourceTree = "<group>";
+		};
 		30FB7FED1F169850002C66AC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -341,6 +401,7 @@
 				30FB7FFA1F169850002C66AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
