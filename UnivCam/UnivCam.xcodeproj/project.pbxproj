@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		30B936BE1F186D0200F5040F /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30B936BC1F186D0200F5040F /* Home.storyboard */; };
+		30B936C11F186F7F00F5040F /* GetServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B936C01F186F7F00F5040F /* GetServices.swift */; };
+		30B936C31F1877D300F5040F /* PhotoSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B936C21F1877D300F5040F /* PhotoSize.swift */; };
+		30B936C51F18828500F5040F /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B936C41F18828500F5040F /* CollectionViewController.swift */; };
 		30FB7FEA1F169850002C66AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB7FE91F169850002C66AC /* AppDelegate.swift */; };
 		30FB7FEF1F169850002C66AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB7FED1F169850002C66AC /* Main.storyboard */; };
 		30FB7FF11F169850002C66AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30FB7FF01F169850002C66AC /* Assets.xcassets */; };
@@ -25,6 +28,9 @@
 
 /* Begin PBXFileReference section */
 		30B936BD1F186D0200F5040F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Home.storyboard; sourceTree = "<group>"; };
+		30B936C01F186F7F00F5040F /* GetServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetServices.swift; sourceTree = "<group>"; };
+		30B936C21F1877D300F5040F /* PhotoSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoSize.swift; sourceTree = "<group>"; };
+		30B936C41F18828500F5040F /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		30FB7FE61F169850002C66AC /* UnivCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB7FE91F169850002C66AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30FB7FEE1F169850002C66AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,6 +67,7 @@
 				30FB80121F16A0A2002C66AC /* CameraViewController.swift */,
 				30FB80031F169BF1002C66AC /* FavoriteAlbumListViewController.swift */,
 				30FB80141F16A0C1002C66AC /* SettingViewController.swift */,
+				30B936C41F18828500F5040F /* CollectionViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -82,6 +89,7 @@
 		30B936B91F186BFC00F5040F /* Types */ = {
 			isa = PBXGroup;
 			children = (
+				30B936C21F1877D300F5040F /* PhotoSize.swift */,
 			);
 			name = Types;
 			sourceTree = "<group>";
@@ -109,6 +117,14 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		30B936BF1F186E6300F5040F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				30B936C01F186F7F00F5040F /* GetServices.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
 		30FB7FDD1F169850002C66AC = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				30FB7FE91F169850002C66AC /* AppDelegate.swift */,
+				30B936BF1F186E6300F5040F /* Services */,
 				30B936B61F186B9B00F5040F /* ViewControllers */,
 				30B936B71F186BBC00F5040F /* Views */,
 				30B936B81F186BF500F5040F /* Models */,
@@ -216,12 +233,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30B936C51F18828500F5040F /* CollectionViewController.swift in Sources */,
 				30FB80041F169BF1002C66AC /* FavoriteAlbumListViewController.swift in Sources */,
 				30FB80131F16A0A2002C66AC /* CameraViewController.swift in Sources */,
 				30FB80021F169BAA002C66AC /* SearchPhotoListViewController.swift in Sources */,
 				30FB7FEA1F169850002C66AC /* AppDelegate.swift in Sources */,
 				30FB800F1F169EB1002C66AC /* HomeAlbumListViewController.swift in Sources */,
 				30FB80151F16A0C1002C66AC /* SettingViewController.swift in Sources */,
+				30B936C11F186F7F00F5040F /* GetServices.swift in Sources */,
+				30B936C31F1877D300F5040F /* PhotoSize.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
