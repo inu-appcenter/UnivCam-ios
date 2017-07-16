@@ -10,9 +10,16 @@ import UIKit
 
 class CameraViewController: UIViewController {
 
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //self.showCameraView()
+        //self.showCameraView()
         // Do any additional setup after loading the view.
     }
 
@@ -33,3 +40,19 @@ class CameraViewController: UIViewController {
     */
 
 }
+//extension CameraViewController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+//    
+//    func showCameraView() {
+//        let imagePicker = UIImagePickerController()
+//        imagePicker.allowsEditing = true
+//        imagePicker.sourceType = .camera
+//        imagePicker.delegate = self
+//        present(
+//            imagePicker,
+//            animated: true,
+//            completion: nil
+//        )
+//    }
+//    
+//}
+

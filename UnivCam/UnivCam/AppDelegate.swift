@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        configureAppearance()
         return true
     }
 
@@ -41,6 +42,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
+    
+    func configureAppearance() {
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        //navigationBarAppearace.barTintColor = UIColor(netHex:0x3e536e)
+        navigationBarAppearace.isTranslucent = false
+        //navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName:UIColor.black]
+        navigationBarAppearace.tintColor = UIColor.lightGray
+        navigationBarAppearace.shadowImage = UIImage()
+        navigationBarAppearace.setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().titleTextAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Regular", size:18)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        
+    }
 
 }
 

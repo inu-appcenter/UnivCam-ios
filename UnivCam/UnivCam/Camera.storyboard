@@ -12,7 +12,7 @@
         <!--Camera View Controller-->
         <scene sceneID="fbm-bP-HHN">
             <objects>
-                <viewController id="3c1-tN-cFj" customClass="CameraViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cameraviewcontroller" id="3c1-tN-cFj" customClass="CameraViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BSw-Iz-1ec"/>
                         <viewControllerLayoutGuide type="bottom" id="tp4-Jh-0hh"/>

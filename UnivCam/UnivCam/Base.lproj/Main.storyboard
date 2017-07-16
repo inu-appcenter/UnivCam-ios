@@ -29,15 +29,16 @@
             </objects>
             <point key="canvasLocation" x="768" y="268"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tabbar Controller-->
         <scene sceneID="Cks-Ib-tb1">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="txB-0n-NVJ" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="txB-0n-NVJ" customClass="TabbarController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" itemPositioning="fill" id="KnB-h6-Fdx">
+                    <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" itemPositioning="fill" id="KnB-h6-Fdx">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="Dh6-5K-JEm" kind="relationship" relationship="viewControllers" id="Meo-EB-JIz"/>
