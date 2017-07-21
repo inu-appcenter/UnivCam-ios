@@ -9,10 +9,15 @@
 import UIKit
 
 class FavoriteAlbumListViewController: UIViewController {
+    @IBOutlet var collectionView: UICollectionView!
 
+    let albumDataSource = AlbumDataSource()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        collectionView.dataSource = albumDataSource
+        collectionView.delegate = self
+        albumDataSource.photos = GetServices.photos(type: .big)
         // Do any additional setup after loading the view.
     }
 
@@ -32,4 +37,17 @@ class FavoriteAlbumListViewController: UIViewController {
     }
     */
 
+}
+
+
+extension FavoriteAlbumListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize{
+        
+        return CGSize(width: 175.5, height: 243)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsetsMake(27, 8, 27, 8)
+    }
 }

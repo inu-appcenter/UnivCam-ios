@@ -12,15 +12,15 @@ class HomeAlbumListViewController: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView!
     
-    let photoDataSource = PhotoDataSource()
+    let albumDataSource = AlbumDataSource()
     var titleLabel : UILabel?
     var isScrollGreaterThanSpace = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = photoDataSource
+        collectionView.dataSource = albumDataSource
         collectionView.delegate = self
-        photoDataSource.photos = GetServices.photos(type: .big)
+        albumDataSource.photos = GetServices.photos(type: .big)
         GetServices.albums()
 //        GetServices.getAlbumWithName(named: "Test")
 //        
