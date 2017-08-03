@@ -78,9 +78,16 @@ class PhotoViewController: UIViewController {
 }
 extension PhotoViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        thumbnailCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        //thumbnailCollectionView.cellForItem(at: indexPath)
+        
+        
+        self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        
+        if let cv = thumbnailCollectionView {
+            cv.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            cv.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            
+        }
+        
     }
 }
 
@@ -90,7 +97,7 @@ extension PhotoViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize{
         
         if collectionView == thumbnailCollectionView {
-            return CGSize(width: 58, height: 58)
+            return CGSize(width: 62, height: 62)
         }
         return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 63)
     }

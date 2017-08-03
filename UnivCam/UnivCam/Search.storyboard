@@ -16,10 +16,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Search Album List View Controller-->
+        <!--Search Album ListVC-->
         <scene sceneID="PaD-IU-AGu">
             <objects>
-                <viewController id="8Up-Dp-oob" customClass="SearchAlbumListViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8Up-Dp-oob" customClass="SearchAlbumListVC" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O3Y-ve-hpQ"/>
                         <viewControllerLayoutGuide type="bottom" id="7Gs-U7-8hp"/>

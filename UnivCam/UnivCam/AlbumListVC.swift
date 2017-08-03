@@ -36,7 +36,7 @@ class AlbumListVC: UIViewController {
         
         
         albumDataSource.photos = GetServices.photos(type: .big)
-        GetServices.albums()
+        //GetServices.albums()
         
         //        GetServices.getAlbumWithName(named: "Test")
         //

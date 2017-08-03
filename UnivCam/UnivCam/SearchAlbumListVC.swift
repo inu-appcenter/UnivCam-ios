@@ -8,16 +8,17 @@
 
 import UIKit
 
-class SearchAlbumListViewController: UIViewController {
+class SearchAlbumListVC: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
-            collectionView.dataSource = albumDataSource
+            collectionView.dataSource = photoDataSource
             collectionView.delegate = self
+            collectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
         }
     }
     
-    let albumDataSource = AlbumDataSource()
+    let photoDataSource = PhotoDataSource()
     
     override func viewWillAppear(_ animated: Bool) {
         self.extendedLayoutIncludesOpaqueBars = true
@@ -25,7 +26,7 @@ class SearchAlbumListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        albumDataSource.photos = GetServices.photos(type: .big)
+        photoDataSource.photos = GetServices.photos(type: .big)
         
         // Do any additional setup after loading the view.
     }
@@ -45,27 +46,32 @@ class SearchAlbumListViewController: UIViewController {
         if segue.identifier == "ShowPhoto" {
             
             if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
-                let photo = albumDataSource.photos[selectedIndexPath.row]
+                let photo = photoDataSource.photos[selectedIndexPath.row]
                 
                 let destinationVC = segue.destination as! PhotoViewController
-                destinationVC.photos = albumDataSource.photos
-                print("e")
+                destinationVC.photos = photoDataSource.photos
+                
             }
         }
     }
     
 
 }
-extension SearchAlbumListViewController: UICollectionViewDelegateFlowLayout {
+extension SearchAlbumListVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize{
         
         return CGSize(width: 123, height: 123)
     }
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 3
+    }
 }
-extension SearchAlbumListViewController: UICollectionViewDelegate {
+extension SearchAlbumListVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "ShowPhoto", sender: self)
         

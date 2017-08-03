@@ -31,7 +31,7 @@
 		30FB7FEA1F169850002C66AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB7FE91F169850002C66AC /* AppDelegate.swift */; };
 		30FB7FEF1F169850002C66AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB7FED1F169850002C66AC /* Main.storyboard */; };
 		30FB7FF41F169850002C66AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB7FF21F169850002C66AC /* LaunchScreen.storyboard */; };
-		30FB80021F169BAA002C66AC /* SearchAlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB80011F169BAA002C66AC /* SearchAlbumListViewController.swift */; };
+		30FB80021F169BAA002C66AC /* SearchAlbumListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB80011F169BAA002C66AC /* SearchAlbumListVC.swift */; };
 		30FB80041F169BF1002C66AC /* FavoriteAlbumListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB80031F169BF1002C66AC /* FavoriteAlbumListViewController.swift */; };
 		30FB80091F169D4E002C66AC /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB80071F169D4E002C66AC /* Settings.storyboard */; };
 		30FB800B1F169DB3002C66AC /* Favorites.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB800A1F169DB3002C66AC /* Favorites.storyboard */; };
@@ -69,7 +69,7 @@
 		30FB7FEE1F169850002C66AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30FB7FF31F169850002C66AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		30FB7FF51F169850002C66AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		30FB80011F169BAA002C66AC /* SearchAlbumListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAlbumListViewController.swift; sourceTree = "<group>"; };
+		30FB80011F169BAA002C66AC /* SearchAlbumListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAlbumListVC.swift; sourceTree = "<group>"; };
 		30FB80031F169BF1002C66AC /* FavoriteAlbumListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteAlbumListViewController.swift; sourceTree = "<group>"; };
 		30FB80081F169D4E002C66AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Settings.storyboard; sourceTree = "<group>"; };
 		30FB800A1F169DB3002C66AC /* Favorites.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Favorites.storyboard; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 				30FB800E1F169EB1002C66AC /* AlbumListVC.swift */,
 				305E1EE71F19FA2800ADA1CD /* AlbumDetailVC.swift */,
 				305E1EEB1F1A1B3C00ADA1CD /* PhotoViewController.swift */,
-				30FB80011F169BAA002C66AC /* SearchAlbumListViewController.swift */,
+				30FB80011F169BAA002C66AC /* SearchAlbumListVC.swift */,
 				30FB80121F16A0A2002C66AC /* CameraViewController.swift */,
 				30FB80031F169BF1002C66AC /* FavoriteAlbumListViewController.swift */,
 				30FB80141F16A0C1002C66AC /* SettingViewController.swift */,
@@ -309,7 +309,7 @@
 				30D996091F33818B00382AD9 /* PhotoDataSource.swift in Sources */,
 				30D996031F33788B00382AD9 /* AlbumCell.swift in Sources */,
 				305E1EEA1F1A15C300ADA1CD /* AlbumCollectionViewCell.swift in Sources */,
-				30FB80021F169BAA002C66AC /* SearchAlbumListViewController.swift in Sources */,
+				30FB80021F169BAA002C66AC /* SearchAlbumListVC.swift in Sources */,
 				305E1EE41F19F47800ADA1CD /* UIView+Extension.swift in Sources */,
 				30D9960C1F33902C00382AD9 /* PhotoCell.swift in Sources */,
 				30D996071F3380E400382AD9 /* AlbumDataSource.swift in Sources */,
