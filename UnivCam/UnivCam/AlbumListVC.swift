@@ -20,7 +20,7 @@ class AlbumListVC: UIViewController {
     }
     
     lazy var titleLabel : UILabel = {
-        var titleLabel = UILabel()
+        let titleLabel = UILabel()
         titleLabel.text = "앨범"
         titleLabel.textColor = UIColor.init(hex: 0x353946)
         titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
@@ -76,9 +76,14 @@ class AlbumListVC: UIViewController {
     
     public func cellImageViewDidTap() {
         print("yes")
-        self.performSegue(withIdentifier: "pushToAlbum", sender: self)
+        //self.performSegue(withIdentifier: "ShowAlbumDetail", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetailAlbum" {
+            
+        }
+    }
 }
 
 extension AlbumListVC: UICollectionViewDelegateFlowLayout {
@@ -91,5 +96,9 @@ extension AlbumListVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(27, 8, 27, 8)
     }
-    
+}
+extension AlbumListVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "ShowAlbumDetail", sender: self)
+    }
 }

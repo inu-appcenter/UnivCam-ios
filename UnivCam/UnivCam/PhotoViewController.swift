@@ -14,17 +14,19 @@ class PhotoViewController: UIViewController {
         didSet {
             collectionView.dataSource = photoDataSource
             collectionView.delegate = self
+            collectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
         }
     }
     @IBOutlet var thumbnailCollectionView: UICollectionView! {
         didSet {
             thumbnailCollectionView.dataSource = photoDataSource
             thumbnailCollectionView.delegate = self
+            thumbnailCollectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
         }
     }
     
     let photoDataSource = PhotoDataSource()
-    let albumDataSource = PhotoDataSource()
+    
     var photos = [UIImage]()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +38,7 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        albumDataSource.photos = GetServices.photos(type: .big)
+        //albumDataSource.photos = GetServices.photos(type: .big)
         photoDataSource.photos = GetServices.photos(type: .big)
         
         let button = UIButton(type: .system)
@@ -74,6 +76,13 @@ class PhotoViewController: UIViewController {
      */
     
 }
+extension PhotoViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        thumbnailCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        //thumbnailCollectionView.cellForItem(at: indexPath)
+    }
+}
 
 extension PhotoViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
@@ -83,7 +92,7 @@ extension PhotoViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == thumbnailCollectionView {
             return CGSize(width: 58, height: 58)
         }
-        return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 71.5)
+        return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 63)
     }
     
 }
