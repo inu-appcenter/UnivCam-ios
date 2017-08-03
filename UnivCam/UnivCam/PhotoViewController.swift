@@ -10,23 +10,34 @@ import UIKit
 
 class PhotoViewController: UIViewController {
     
-    @IBOutlet var collectionView: UICollectionView!
-    @IBOutlet var thumbnailCollectionView: UICollectionView!
+    @IBOutlet var collectionView: UICollectionView! {
+        didSet {
+            collectionView.dataSource = photoDataSource
+            collectionView.delegate = self
+        }
+    }
+    @IBOutlet var thumbnailCollectionView: UICollectionView! {
+        didSet {
+            thumbnailCollectionView.dataSource = photoDataSource
+            thumbnailCollectionView.delegate = self
+        }
+    }
     
     let photoDataSource = PhotoDataSource()
-    let albumDataSource = AlbumDataSource()
+    let albumDataSource = PhotoDataSource()
+    var photos = [UIImage]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+//        albumDataSource.photos = photos
+//        collectionView.reloadData()
+//        print(albumDataSource.photos)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dataSource = photoDataSource
-        collectionView.delegate = self
-        thumbnailCollectionView.dataSource = photoDataSource
-        thumbnailCollectionView.delegate = self
-        
+        albumDataSource.photos = GetServices.photos(type: .big)
         photoDataSource.photos = GetServices.photos(type: .big)
-        
-        
         
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "icNavigateNext2X"), for: .normal)

@@ -9,7 +9,13 @@
 import UIKit
 
 class SearchAlbumListViewController: UIViewController {
-    @IBOutlet var collectionView: UICollectionView!
+    
+    @IBOutlet var collectionView: UICollectionView! {
+        didSet {
+            collectionView.dataSource = albumDataSource
+            collectionView.delegate = self
+        }
+    }
     
     let albumDataSource = AlbumDataSource()
     
@@ -19,8 +25,6 @@ class SearchAlbumListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.dataSource = albumDataSource
-        collectionView.delegate = self
         albumDataSource.photos = GetServices.photos(type: .big)
         
         // Do any additional setup after loading the view.
@@ -32,15 +36,24 @@ class SearchAlbumListViewController: UIViewController {
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "ShowPhoto" {
+            
+            if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
+                let photo = albumDataSource.photos[selectedIndexPath.row]
+                
+                let destinationVC = segue.destination as! PhotoViewController
+                destinationVC.photos = albumDataSource.photos
+                print("e")
+            }
+        }
     }
-    */
+    
 
 }
 extension SearchAlbumListViewController: UICollectionViewDelegateFlowLayout {
@@ -54,6 +67,9 @@ extension SearchAlbumListViewController: UICollectionViewDelegateFlowLayout {
 }
 extension SearchAlbumListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "pushPhotoSegue", sender: self)
+        performSegue(withIdentifier: "ShowPhoto", sender: self)
+        
     }
 }
+
+

@@ -10,24 +10,23 @@ import UIKit
 
 class TabbarController: UITabBarController, UITabBarControllerDelegate {
     
-    let button = UIButton.init(type: .custom)
-    let vc = FavoriteAlbumListViewController()
-
+    lazy var button : UIButton = {
+        var btn : UIButton = .init(type: .custom)
+        btn.setTitle("Cam", for: .normal)
+        btn.setTitleColor(.black, for: .normal)
+        btn.setTitleColor(.yellow, for: .highlighted)
+        btn.backgroundColor = .orange
+        btn.layer.cornerRadius = 32
+        btn.layer.borderWidth = 4
+        btn.layer.borderColor = UIColor.yellow.cgColor
+        btn.addTarget(self, action: #selector(switchView), for: .touchUpInside)
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self
         
-        
-        button.setTitle("Cam", for: .normal)
-        button.setTitleColor(.black, for: .normal)
-        button.setTitleColor(.yellow, for: .highlighted)
-        
-        button.backgroundColor = .orange
-        button.layer.cornerRadius = 32
-        button.layer.borderWidth = 4
-        button.layer.borderColor = UIColor.yellow.cgColor
         self.view.insertSubview(button, aboveSubview: self.tabBar)
-        button.addTarget(self, action: #selector(switchView), for: .touchUpInside)
         // Do any additional setup after loading the view.
         
     }
@@ -37,6 +36,8 @@ class TabbarController: UITabBarController, UITabBarControllerDelegate {
         
         // safe place to set the frame of button manually
         button.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 54, width: 64, height: 64)
+        self.tabBar.tintColor = UIColor(hex: 0x353946)
+        self.tabBar.unselectedItemTintColor = UIColor(hex: 0xBABAC0)
     }
 
     override func didReceiveMemoryWarning() {

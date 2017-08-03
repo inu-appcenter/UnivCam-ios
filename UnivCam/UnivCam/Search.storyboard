@@ -102,7 +102,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="xuG-h0-oge" id="L9i-GO-Y4J"/>
-                        <segue destination="yNl-0A-Mk3" kind="push" identifier="pushPhotoSegue" id="QlR-cx-XUW"/>
+                        <segue destination="yNl-0A-Mk3" kind="push" identifier="ShowPhoto" id="QlR-cx-XUW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdv-sz-IaF" userLabel="First Responder" sceneMemberID="firstResponder"/>

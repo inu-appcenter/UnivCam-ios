@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="maO-w1-L2c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vNR-hY-IaQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -12,7 +12,7 @@
         <!--Setting View Controller-->
         <scene sceneID="Ghs-m2-nCX">
             <objects>
-                <viewController id="maO-w1-L2c" customClass="SettingViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="maO-w1-L2c" customClass="SettingViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HTr-7k-Ctd"/>
                         <viewControllerLayoutGuide type="bottom" id="OWa-wX-vhN"/>
@@ -20,14 +20,78 @@
                     <view key="view" contentMode="scaleToFill" id="92D-vK-rcI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3k2-Kq-Aho">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="Yxm-LY-9ay"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="설정" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nRa-11-zZQ">
+                                <rect key="frame" x="13" y="77.5" width="55.5" height="39"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="32"/>
+                                <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NZQ-gd-EHt">
+                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dEe-rH-n1C">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dEe-rH-n1C" id="NXf-vx-1zb">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="NZQ-gd-EHt" secondAttribute="bottom" id="J4D-D4-pbs"/>
+                            <constraint firstItem="3k2-Kq-Aho" firstAttribute="top" secondItem="HTr-7k-Ctd" secondAttribute="bottom" id="MmI-Zw-9zS"/>
+                            <constraint firstItem="nRa-11-zZQ" firstAttribute="top" secondItem="HTr-7k-Ctd" secondAttribute="bottom" constant="13.5" id="Mn3-q4-zxL"/>
+                            <constraint firstAttribute="trailing" secondItem="NZQ-gd-EHt" secondAttribute="trailing" id="QjN-4z-H3H"/>
+                            <constraint firstItem="NZQ-gd-EHt" firstAttribute="top" secondItem="3k2-Kq-Aho" secondAttribute="bottom" id="TQG-1h-6c0"/>
+                            <constraint firstItem="3k2-Kq-Aho" firstAttribute="leading" secondItem="92D-vK-rcI" secondAttribute="leading" id="XR8-sg-cNU"/>
+                            <constraint firstAttribute="trailing" secondItem="3k2-Kq-Aho" secondAttribute="trailing" id="jkg-bf-Jvd"/>
+                            <constraint firstItem="NZQ-gd-EHt" firstAttribute="leading" secondItem="92D-vK-rcI" secondAttribute="leading" id="lTS-Jd-sLE"/>
+                            <constraint firstItem="nRa-11-zZQ" firstAttribute="leading" secondItem="92D-vK-rcI" secondAttribute="leading" constant="13" id="q9b-r8-icC"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="more" id="NvX-D4-k7B"/>
+                    <navigationItem key="navigationItem" id="glS-zL-ZA0"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Css-73-aiL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="882" y="481"/>
+            <point key="canvasLocation" x="1820" y="480.80959520239884"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="db1-L7-Eln">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vNR-hY-IaQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" image="icSettings" id="NvX-D4-k7B">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qkb-3S-Yxj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="maO-w1-L2c" kind="relationship" relationship="rootViewController" id="6t4-dz-ktA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YSN-PP-vVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="880.79999999999995" y="480.80959520239884"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icSettings" width="22" height="22"/>
+    </resources>
 </document>
