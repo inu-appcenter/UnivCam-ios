@@ -28,6 +28,7 @@ class AlbumDetailVC: UIViewController {
         return btn
     }()
     
+    
     let photoDataSource = PhotoDataSource()
     var photos = [UIImage]()
     
@@ -55,7 +56,7 @@ class AlbumDetailVC: UIViewController {
 }
 extension AlbumDetailVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let nvc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoViewController
+        let nvc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoVC
         
         nvc.photos = photos
         

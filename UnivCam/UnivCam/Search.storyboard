@@ -115,10 +115,10 @@
             </objects>
             <point key="canvasLocation" x="1577" y="481"/>
         </scene>
-        <!--Photo View Controller-->
+        <!--PhotoVC-->
         <scene sceneID="9DB-qh-VZF">
             <objects>
-                <viewController storyboardIdentifier="PhotoViewController" automaticallyAdjustsScrollViewInsets="NO" id="yNl-0A-Mk3" customClass="PhotoViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhotoViewController" automaticallyAdjustsScrollViewInsets="NO" id="yNl-0A-Mk3" customClass="PhotoVC" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cVd-K1-MIS"/>
                         <viewControllerLayoutGuide type="bottom" id="kbs-3J-ssN"/>

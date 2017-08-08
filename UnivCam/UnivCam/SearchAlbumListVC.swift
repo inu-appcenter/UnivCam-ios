@@ -28,6 +28,7 @@ class SearchAlbumListVC: UIViewController {
         
         photoDataSource.photos = GetServices.photos(type: .big)
         
+        
         // Do any additional setup after loading the view.
     }
 
@@ -48,7 +49,7 @@ class SearchAlbumListVC: UIViewController {
             if let selectedIndexPath = collectionView.indexPathsForSelectedItems?.first {
                 let photo = photoDataSource.photos[selectedIndexPath.row]
                 
-                let destinationVC = segue.destination as! PhotoViewController
+                let destinationVC = segue.destination as! PhotoVC
                 destinationVC.photos = photoDataSource.photos
                 
             }

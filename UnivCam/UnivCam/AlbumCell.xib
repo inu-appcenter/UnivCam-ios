@@ -52,7 +52,10 @@
                             <constraint firstAttribute="height" constant="40" id="3uT-S1-fy7"/>
                             <constraint firstAttribute="width" constant="40" id="4nc-0B-r92"/>
                         </constraints>
-                        <state key="normal" image="icStar"/>
+                        <state key="normal" image="icStarBorderWhite"/>
+                        <connections>
+                            <action selector="favButtonDidTap:" destination="rh5-0Y-Lge" eventType="touchUpInside" id="cd9-rO-zXr"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyh-Tj-mbc">
                         <rect key="frame" x="135.5" y="0.0" width="40" height="40"/>
@@ -85,7 +88,11 @@
             </constraints>
             <size key="customSize" width="175.5" height="243"/>
             <connections>
+                <outlet property="editButton" destination="dyh-Tj-mbc" id="xEt-I9-Ms0"/>
+                <outlet property="favoriteButton" destination="0GH-Zl-oU7" id="QQU-6L-0Bv"/>
                 <outlet property="imageView" destination="ASn-Y1-qXz" id="PFL-xy-2yt"/>
+                <outlet property="pictureCountLabel" destination="ihm-s7-X4O" id="d6U-5p-Gsc"/>
+                <outlet property="titleLabel" destination="cvl-c3-sM8" id="26S-gZ-qAM"/>
             </connections>
             <point key="canvasLocation" x="25" y="52.5"/>
         </collectionViewCell>
@@ -93,6 +100,6 @@
     <resources>
         <image name="_ic_camera__ic_camera" width="24" height="24"/>
         <image name="icMoreVertWhite" width="4" height="15"/>
-        <image name="icStar" width="16" height="15"/>
+        <image name="icStarBorderWhite" width="19" height="18"/>
     </resources>
 </document>

@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AlbumListVC: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
             navigationItem.titleView = titleLabel
-            collectionView.dataSource = albumDataSource
+            collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
         }
@@ -27,63 +28,135 @@ class AlbumListVC: UIViewController {
         return titleLabel
     }()
     
-    let albumDataSource = AlbumDataSource()
+    var albums = [Album]()
     
     var isScrollGreaterThanSpace = false
     
+    func fetchFromDirectories() {
+        
+        let mainPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let documentDirecortPath = mainPath + "/UnivCam"
+        
+        if let files = try! FileManager.default.contentsOfDirectory(atPath: documentDirecortPath) as? [String] {
+            for filename in files {
+                print(filename)
+            }
+        }
+        let files = try! FileManager.default.contentsOfDirectory(atPath: documentDirecortPath)
+        print(files.count)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        print("결과")
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        RealmHelper.fetchData(dataList: &albums)
+        fetchFromDirectories()
+        collectionView.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        albumDataSource.photos = GetServices.photos(type: .big)
-        //GetServices.albums()
-        
-        //        GetServices.getAlbumWithName(named: "Test")
-        //
-        
-        
-        //        let gesture = UITapGestureRecognizer(
-        //            target: self,
-        //            action: #selector(cellImageViewDidTap)
-        //        )
-        //        collectionView.cellForItem(at: IndexPath(row: 0, section: 0))?.addGestureRecognizer(gesture)
-        
-        
-        //titleLabel?.isHidden = true
-        
-        
-        
-        //        let createFolderButton = UIBarButtonItem(image: UIImage(named:"icCreateNewFolder2X"),  style: .plain, target: self, action: nil)
-        //        let sortListButton = UIBarButtonItem(image: UIImage(named:"icSort2X"),  style: .plain, target: self, action: nil)
-        //
-        //        navigationItem.rightBarButtonItems = [createFolderButton, sortListButton]
-        
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        //        print(scrollView.contentOffset.y)
-        //        if scrollView.contentOffset.y > -27 && !isScrollGreaterThanSpace {
-        //            titleLabel?.isHidden = false
-        //            isScrollGreaterThanSpace = true
-        //            self.titleLabel?.slideInFromTop()
-        //        }
-        //        else if scrollView.contentOffset.y < -27 && isScrollGreaterThanSpace {
-        //            isScrollGreaterThanSpace = false
-        //            titleLabel?.isHidden = true
-        //        }
         
     }
     
     public func cellImageViewDidTap() {
         print("yes")
-        //self.performSegue(withIdentifier: "ShowAlbumDetail", sender: self)
     }
+    @IBAction func addFolderButtonDidTap(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title:"앨범 생성", message:"앨범을 생성하시겠습니까?", preferredStyle: .alert)
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "앨범 명을 입력하세요."
+            textField.clearButtonMode = .whileEditing
+            //textField.text = defaultText
+        })
+        let okAction = UIAlertAction(
+            title: "확인",
+            style: UIAlertActionStyle.destructive,
+            handler: {(action: UIAlertAction!) in
+                let text = alert.textFields?.first?.text ?? ""
+                self.createAlbumFolder(title: text)
+        }
+        )
+        let cancelAction = UIAlertAction(
+            title: "취소",
+            style: UIAlertActionStyle.cancel,
+            handler: nil
+        )
+        alert.addAction(okAction)
+        alert.addAction(cancelAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    func createAlbumFolder(title: String) {
+        let createdAt = NSDate()
+        let mainPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let documentDirecortPath = mainPath + "/UnivCam" + "/\(title)"
+        
+        var ojeCtBool : ObjCBool = true
+        let isExit = FileManager.default.fileExists(atPath: documentDirecortPath, isDirectory: &ojeCtBool)
+        print(isExit)
+        print(documentDirecortPath)
+        if isExit == false {
+            do {
+                try FileManager.default.createDirectory(at: URL(fileURLWithPath: documentDirecortPath), withIntermediateDirectories: true, attributes: nil)
+//                let album = CoreDataHelper.newAlbum()
+//                album.title = title
+//                album.createdAt = NSDate()
+//                album.isFavorite = false
+//                album.thumbnail = "icStar"
+//                CoreDataHelper.saveAlbum()
+                let album = Album()
+                album.title = title
+                album.url = documentDirecortPath
+                album.id = Album.incrementID()
+                RealmHelper.addData(data: album)
+                albums.removeAll()
+                RealmHelper.fetchData(dataList: &albums)
+                collectionView.reloadData()
+                
+            } catch {
+                print("error")
+            }
+        } else {
+            print("fail")
+        }
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetailAlbum" {
             
         }
     }
+}
+
+extension AlbumListVC: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return albums.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let identifier = "UICollectionViewCell"
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! AlbumCell
+        let album = albums[indexPath.row]
+        cell.imageView.image = UIImage(named: "back")
+        cell.titleLabel.text = album.title
+//        cell.favToggleButton.isHidden = (viewType == "Favorites")
+//        cell.editButton.addTarget(self, action: #selector(test(sender:)), for: .touchUpInside)
+        cell.editButton.tag = indexPath.row
+        
+        return cell
+    }
+    
 }
 
 extension AlbumListVC: UICollectionViewDelegateFlowLayout {
@@ -100,5 +173,31 @@ extension AlbumListVC: UICollectionViewDelegateFlowLayout {
 extension AlbumListVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         self.performSegue(withIdentifier: "ShowAlbumDetail", sender: self)
+    }
+}
+
+extension AlbumListVC: Editable {
+    func cellIsEditing() {
+        
+        let alert = UIAlertController(title: "", message: "앨범 선택", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "앨범 선택", style: .default) { action in
+            // perhaps use action.title here
+        })
+        alert.addAction(UIAlertAction(title: "앨범 상세정보", style: .default) { action in
+            // perhaps use action.title here
+        })
+        alert.addAction(UIAlertAction(title: "앨범 삭제", style: .default) { action in
+            // perhaps use action.title here
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel) { action in
+            
+        })
+        
+        self.present(
+            alert,
+            animated: true,
+            completion: { () in
+                // add view tapped evnets
+        })
     }
 }

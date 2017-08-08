@@ -8,13 +8,34 @@
 
 import UIKit
 
+protocol Editable {
+    func cellIsEditing()
+}
+
 class AlbumCell: UICollectionViewCell {
     
+    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var pictureCountLabel: UILabel!
     @IBOutlet var imageView: UIImageView!
-
+    @IBOutlet var favoriteButton: UIButton!
+    @IBOutlet var editButton: UIButton!
+    
+    var isFavButtonChecked = false
+    var delegate: Editable?
+    
+    @IBAction func favButtonDidTap(_ sender: UIButton) {
+        if isFavButtonChecked {
+            favoriteButton.setImage(UIImage(named: "icStarBorderWhite"), for: .normal)
+        } else {
+            favoriteButton.setImage(UIImage(named: "icStar"), for: .normal)
+        }
+        isFavButtonChecked = !isFavButtonChecked
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
 }

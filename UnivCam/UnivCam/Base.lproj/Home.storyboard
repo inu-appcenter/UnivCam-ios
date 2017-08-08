@@ -68,7 +68,11 @@
                     <navigationItem key="navigationItem" id="KEC-4x-bGB">
                         <rightBarButtonItems>
                             <barButtonItem image="icSort2X" id="gGK-9d-1fu"/>
-                            <barButtonItem image="icCreateNewFolder2X" id="5ot-au-b58"/>
+                            <barButtonItem image="icCreateNewFolder2X" id="5ot-au-b58">
+                                <connections>
+                                    <action selector="addFolderButtonDidTap:" destination="7v1-fi-STO" id="gBP-22-lIY"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
