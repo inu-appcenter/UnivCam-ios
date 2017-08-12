@@ -120,12 +120,14 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
         self.view.addSubview(cancelButton)
         self.view.addSubview(toggleCameraButton)
         
-        self.shutterButton.addTarget(
-            self,
-            action: #selector(saveCaptureImage),
-            for: .touchUpInside
-        )
-        
+//        self.shutterButton.addTarget(
+//            self,
+//            action: #selector(saveCaptureImage),
+//            for: .touchUpInside
+//        )
+        self.shutterButton.actionHandle(controlEvents: .touchUpInside) {
+            self.takePhoto()
+        }
     }
     
     
@@ -147,19 +149,36 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
                 if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(CMSampleBuffer) {
                     
                     if let cameraImage = UIImage(data: imageData) {
-                        DispatchQueue.main.async {
-                            //let fileManager = FileManager.default
-                            let imageName = String(describing: Date())
-                            let imageData =  UIImageJPEGRepresentation(cameraImage, 1.0)
+                        self.storePhotoImage(image: cameraImage, completion: { (success) in
                             
-                            try! imageData?.write(to: URL.init(fileURLWithPath: (self.album?.url)! + "/\(imageName)"), options: .atomicWrite)
-                            self.folderUpdate()
-                        }
+                        })
                     }
                 }
             })
         }
     }
+    
+    func storePhotoImage(
+        image: UIImage,
+        completion: @escaping (_ success: Bool) -> ()
+        ) {
+        let imageName = String(describing: Date())
+        let imageData =  UIImageJPEGRepresentation(image, 1.0)
+        
+        
+//        try! imageData?.write(to: URL.init(fileURLWithPath: (self.album?.url)! + "/\(imageName)"), options: .atomicWrite)
+        
+        do {
+            try imageData?.write(to: URL.init(fileURLWithPath: (self.album?.url)! + "/\(imageName)"), options: .atomicWrite)
+            completion(true)
+        } catch {
+            completion(false)
+        }
+        
+    }
+    
+    
+    
     func folderUpdate() {
         
         guard let oldAlbum = album else { return }

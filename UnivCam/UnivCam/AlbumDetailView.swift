@@ -47,7 +47,7 @@ class AlbumDetailView: UIView,UICollectionViewDataSource,UICollectionViewDelegat
         //collectionView.isPagingEnabled = true//每次滚一页
         
         collectionView.delegate = self
-        photoDataSource.photos = GetServices.photos(type: .big)
+        //photoDataSource.photos = GetServices.photos(type: .big)
         collectionView.dataSource = photoDataSource
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = true

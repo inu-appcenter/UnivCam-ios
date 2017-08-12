@@ -23,7 +23,7 @@ class AlbumListVC: UIViewController {
     lazy var titleLabel : UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "앨범"
-        titleLabel.textColor = UIColor.init(hex: 0x353946)
+        titleLabel.textColor = Palette.title.color
         titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
         return titleLabel
     }()
@@ -146,7 +146,7 @@ class AlbumListVC: UIViewController {
                 
                 let album = Album()
                 album.title = title
-                album.url = UnivCamAPI.baseURL() + "/" + title
+                album.url = UnivCamAPI.baseURLString + "/" + title
                 album.id = Album.incrementID()
                 
                 guard let files = try! FileManager.default.contentsOfDirectory(atPath: album.url) as? [String] else {

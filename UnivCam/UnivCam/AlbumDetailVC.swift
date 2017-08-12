@@ -12,10 +12,10 @@ class AlbumDetailVC: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         }
     }
     
@@ -28,8 +28,6 @@ class AlbumDetailVC: UIViewController {
         return btn
     }()
     
-    
-    let photoDataSource = PhotoDataSource()
     var photos = [UIImage]()
     var dirPath : String?
     

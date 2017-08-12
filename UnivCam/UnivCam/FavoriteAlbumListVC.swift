@@ -149,7 +149,7 @@ extension FavoriteAlbumListVC {
                 
                 let album = Album()
                 album.title = title
-                album.url = UnivCamAPI.baseURL() + "/" + title
+                album.url = UnivCamAPI.baseURLString + "/" + title
                 album.id = Album.incrementID()
                 
                 guard let files = try! FileManager.default.contentsOfDirectory(atPath: album.url) as? [String] else {
