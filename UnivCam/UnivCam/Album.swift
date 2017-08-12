@@ -13,8 +13,12 @@ class Album: Object {
     
     dynamic var id = 0
     dynamic var title = ""
+    dynamic var isFavorite : Bool = false
     dynamic var createdAt = NSDate()
     dynamic var url = ""
+    dynamic var photoCount = 0
+    
+    
     
     static func incrementID() -> Int {
         let realm = try! Realm()

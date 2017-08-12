@@ -9,11 +9,11 @@
 import UIKit
 
 class AlbumDetailVC: UIViewController {
-
+    
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-            collectionView.dataSource = photoDataSource
+            collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
         }
@@ -31,36 +31,67 @@ class AlbumDetailVC: UIViewController {
     
     let photoDataSource = PhotoDataSource()
     var photos = [UIImage]()
+    var dirPath : String?
     
     override func viewWillAppear(_ animated: Bool) {
+        //self.tabBarController?.tabBar.isHidden = true
+//        let dirPath = UnivCamAPI.baseURL() + "/" + dirName
         
-        //self.extendedLayoutIncludesOpaqueBars = true
-        //albumDetailView.albumDataSource.photos = GetServices.photos(type: .big)
-        //albumDetailView.collectionView.reloadData()
-        //albumDetailViewHeightConstraint.constant = ((20 / 3) + 1) * 123
-        //albumDetailView.collectionView.frame = CGRect(x: 0, y: 0, width: 375, height: ((20 / 3) + 1) * 123)
+        
+        guard let dirPath = dirPath else { return }
+        
+        if let files = try! FileManager.default.contentsOfDirectory(atPath: dirPath) as? [String] {
+            for filename in files {
+                print(filename)
+                let imageURL = dirPath + "/" + filename
+                photos.append(UIImage(named: imageURL)!)
+            }
+        }
+        
+//        print(RealmHelper.objectsFromQuery(data: Album(), query: ""))
+        
         
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        photos = GetServices.photos(type: .big)
-        photoDataSource.photos = photos
-        
         
     }
+    
+    
     
     func unwindToHome() {
         self.navigationController?.popToRootViewController(animated: true)
     }
     
 }
+
+extension AlbumDetailVC: UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let identifier = "UICollectionViewCell"
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCell
+        let photo = photos[indexPath.row]
+        cell.imageView.image = photo
+        //cell.backgroundColor = UIColor.brown
+        //cell.backgroundColor = UIColor(patternImage: photo)
+        
+        return cell
+    }
+    
+}
 extension AlbumDetailVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nvc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoVC
-        
         nvc.photos = photos
-        
-        self.navigationController?.pushViewController(nvc, animated: true)
+         self.navigationController?.pushViewController(nvc, animated: true)
     }
 }
 

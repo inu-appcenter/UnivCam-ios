@@ -34,12 +34,14 @@ class PhotoVC: UIViewController {
 //        albumDataSource.photos = photos
 //        collectionView.reloadData()
 //        print(albumDataSource.photos)
+        photoDataSource.photos = photos
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //albumDataSource.photos = GetServices.photos(type: .big)
-        photoDataSource.photos = GetServices.photos(type: .big)
+        //photoDataSource.photos = GetServices.photos(type: .big)
         
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "icNavigateNext2X"), for: .normal)
@@ -107,19 +109,26 @@ extension PhotoVC : UICollectionViewDelegate {
     }
     
     
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        var visibleRect = CGRect()
-//        
-//        visibleRect.origin = collectionView.contentOffset
-//        visibleRect.size = collectionView.bounds.size
-//        
-//        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
-//        
-//        let visibleIndexPath: IndexPath = self.collectionView.indexPathForItem(at: visiblePoint)!
-//        
-//        print(visibleIndexPath)
-//        //self.thumbnailCollectionView.scrollToItem(at: visibleIndexPath, at: .centeredHorizontally, animated: true)
-//    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        var visibleRect = CGRect()
+        
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+        
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+        
+        let visibleIndexPath: IndexPath = self.collectionView.indexPathForItem(at: visiblePoint)!
+        thumbnailCollectionView.selectItem(
+            at: visibleIndexPath,
+            animated: true,
+            scrollPosition: .centeredHorizontally
+        )
+        print(visibleIndexPath)
+        
+    }
+}
+extension PhotoVC {
+    
 }
 
 extension PhotoVC: UICollectionViewDelegateFlowLayout {

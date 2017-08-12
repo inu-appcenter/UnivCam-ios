@@ -46,32 +46,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="31"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="UICollectionViewCell" id="irk-8N-YOv" customClass="AlbumCollectionViewCell" customModule="UnivCam" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="33" width="123" height="123"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="n4J-BR-9Xx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="n4J-BR-9Xx" secondAttribute="bottom" id="3sf-V0-XXq"/>
-                                            <constraint firstAttribute="trailing" secondItem="n4J-BR-9Xx" secondAttribute="trailing" id="iAX-nZ-6ZG"/>
-                                            <constraint firstItem="n4J-BR-9Xx" firstAttribute="top" secondItem="irk-8N-YOv" secondAttribute="top" id="mTq-u5-N4i"/>
-                                            <constraint firstItem="n4J-BR-9Xx" firstAttribute="leading" secondItem="irk-8N-YOv" secondAttribute="leading" id="wtF-Y4-u5E"/>
-                                        </constraints>
-                                        <size key="customSize" width="123" height="123"/>
-                                        <connections>
-                                            <outlet property="imageView" destination="n4J-BR-9Xx" id="bAy-ny-qS2"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CustomHeaderCell" id="PNx-mg-tBu">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="33"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -103,11 +78,17 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="4rE-3g-zBb">
-                        <barButtonItem key="rightBarButtonItem" image="icCloseWhite2X" id="D5E-hD-l0E"/>
+                        <barButtonItem key="rightBarButtonItem" image="icCloseWhite2X" id="D5E-hD-l0E">
+                            <connections>
+                                <action selector="clearTextField:" destination="8Up-Dp-oob" id="HVD-yA-prC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="xuG-h0-oge" id="L9i-GO-Y4J"/>
+                        <outlet property="deleteTextButton" destination="D5E-hD-l0E" id="m0k-NM-THV"/>
+                        <outlet property="searchTextField" destination="NA2-BZ-jTw" id="XRt-H1-f3X"/>
                         <segue destination="yNl-0A-Mk3" kind="push" identifier="ShowPhoto" id="QlR-cx-XUW"/>
                     </connections>
                 </viewController>

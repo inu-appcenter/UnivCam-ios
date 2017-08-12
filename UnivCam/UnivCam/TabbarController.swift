@@ -6,26 +6,40 @@
 //  Copyright © 2017년 futr_blu. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 
 class TabbarController: UITabBarController, UITabBarControllerDelegate {
     
     lazy var button : UIButton = {
         var btn : UIButton = .init(type: .custom)
-        btn.setTitle("Cam", for: .normal)
+        btn.setImage(
+            UIImage(named:"icCamera"),
+            for: .normal
+        )
         btn.setTitleColor(.black, for: .normal)
         btn.setTitleColor(.yellow, for: .highlighted)
-        btn.backgroundColor = .orange
-        btn.layer.cornerRadius = 32
-        btn.layer.borderWidth = 4
-        btn.layer.borderColor = UIColor.yellow.cgColor
-        btn.addTarget(self, action: #selector(switchView), for: .touchUpInside)
+        btn.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        btn.addTarget(
+            self,
+            action: #selector(showCameraVC), for: .touchUpInside
+        )
         return btn
     }()
     
+    let captureSession = AVCaptureSession()
+    let stillImageOutput = AVCaptureStillImageOutput()
+    var previewLayer : AVCaptureVideoPreviewLayer?
+    
+    // If we find a device we'll store it here for later use
+    var captureDevice : AVCaptureDevice?
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        
         self.view.insertSubview(button, aboveSubview: self.tabBar)
         // Do any additional setup after loading the view.
         
@@ -35,17 +49,47 @@ class TabbarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLayoutSubviews()
         
         // safe place to set the frame of button manually
-        button.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 54, width: 64, height: 64)
+        button.frame = CGRect.init(x: self.tabBar.center.x - 32, y: self.view.bounds.height - 49, width: 64, height: 50)
         self.tabBar.tintColor = UIColor(hex: 0x353946)
         self.tabBar.unselectedItemTintColor = UIColor(hex: 0xBABAC0)
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func showCameraVC() {
+        
+        
+        let captureSession = AVCaptureSession()
+        
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) {
+            (granted: Bool) -> Void in
+            guard granted else {
+                /// Report an error. We didn't get access to hardware.
+                DispatchQueue.main.async(execute: { () -> Void in
+                    self.selectedIndex = 2
+                })
+                print("에러")
+                return
+            }
+            
+            // access granted
+            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CustomCameraNVC")
+                //as! CustomCameraVC
+            
+            self.present(
+                vc,
+                animated: true,
+                completion: nil
+            )
+            
+        }
+    }
     func switchView() {
-        //        let controllerIndex: Int = 4
+//        let controllerIndex: Int = 4
 //        let tabBarController: UITabBarController? = self.tabBarController
 //        let fromView: UIView? = tabBarController?.selectedViewController?.view
 //        let toView = tabBarController?.viewControllers?[controllerIndex] as? UIView
@@ -55,10 +99,13 @@ class TabbarController: UITabBarController, UITabBarControllerDelegate {
 //                tabBarController?.selectedIndex = controllerIndex
 //            }
 //        })
-        self.selectedIndex = 1
-           }
+        //self.selectedIndex = 1
+    }
+    
+    
     // UITabBarDelegate
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        self.selectedIndex = 1
         print("Selected item")
         print(item.description)
     }
@@ -67,28 +114,12 @@ class TabbarController: UITabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
         print(viewController)
-        //self.showCameraView()
-//        if viewController == CameraViewController() {
-//            // Present image picker
-//            print("yes")
-//        }
+        
+        //        if viewController == CameraViewController() {
+        //            // Present image picker
+        //            print("yes")
+        //        }
     }
-
-
-}
-
-extension TabbarController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
-    func showCameraView() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .camera
-        imagePicker.delegate = self
-        present(
-            imagePicker,
-            animated: true,
-            completion: nil
-        )
-    }
-
+    
+    
 }

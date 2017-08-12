@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f6H-er-GI7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="f6H-er-GI7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -67,7 +67,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="KEC-4x-bGB">
                         <rightBarButtonItems>
-                            <barButtonItem image="icSort2X" id="gGK-9d-1fu"/>
+                            <barButtonItem image="icSort2X" id="gGK-9d-1fu">
+                                <connections>
+                                    <action selector="sortAlbumList:" destination="7v1-fi-STO" id="3PX-25-hss"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="icCreateNewFolder2X" id="5ot-au-b58">
                                 <connections>
                                     <action selector="addFolderButtonDidTap:" destination="7v1-fi-STO" id="gBP-22-lIY"/>
@@ -78,7 +82,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="9oz-dc-A7j" id="Pgx-UN-qaT"/>
-                        <segue destination="0hj-Wj-11C" kind="show" identifier="ShowAlbumDetail" id="5pN-Wn-0h0"/>
+                        <segue destination="0hj-Wj-11C" kind="show" identifier="ShowDetailAlbum" id="5pN-Wn-0h0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXs-gs-d7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -258,7 +262,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ls9-cC-cgY">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

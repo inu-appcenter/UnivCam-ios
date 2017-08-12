@@ -1,14 +1,8 @@
-//
-//  GetServices.swift
-//  UnivCam
-//
-//  Created by BLU on 2017. 7. 14..
-//  Copyright © 2017년 futr_blu. All rights reserved.
-//
 
 import Photos
 
 struct GetServices {
+    
     static func photos(type: PhotoType) -> [UIImage] {
         let imgManager = PHImageManager.default()
         var imageArray = [UIImage]()
@@ -117,3 +111,5 @@ struct GetServices {
         
     }
 }
+
+

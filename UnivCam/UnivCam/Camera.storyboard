@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3c1-tN-cFj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3c1-tN-cFj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Bold</string>
+            <string>AppleSDGothicNeo-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--Camera View Controller-->
+        <!--Confirm AuthVC-->
         <scene sceneID="fbm-bP-HHN">
             <objects>
-                <viewController storyboardIdentifier="cameraviewcontroller" id="3c1-tN-cFj" customClass="CameraViewController" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3c1-tN-cFj" customClass="ConfirmAuthVC" customModule="UnivCam" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BSw-Iz-1ec"/>
                         <viewControllerLayoutGuide type="bottom" id="tp4-Jh-0hh"/>
@@ -20,9 +26,63 @@
                     <view key="view" contentMode="scaleToFill" id="Mmw-sV-hvl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UnivCam 서비스를 이용하기 위해서는" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k2O-IQ-20n">
+                                <rect key="frame" x="17" y="184" width="238.5" height="19.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카메라, 저장공간에 대한 접근 권한이 필요합니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq7-Mo-ukJ">
+                                <rect key="frame" x="17" y="208.5" width="302" height="19.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아래 버튼을 눌러 접근 권한을 승인해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cB-WS-mtE">
+                                <rect key="frame" x="17" y="268.5" width="270.5" height="19.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="권한 승인 요청" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3j-KC-czn">
+                                <rect key="frame" x="17" y="77" width="183" height="38.5"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="32"/>
+                                <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jTm-aC-7uy">
+                                <rect key="frame" x="16.5" y="454.5" width="142" height="43"/>
+                                <color key="tintColor" red="0.20784313725490194" green="0.22352941176470587" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="권한 설정하기">
+                                            <attributes>
+                                                <font key="NSFont" size="26" name="AppleSDGothicNeo-Bold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="showAppSettings:" destination="3c1-tN-cFj" eventType="touchUpInside" id="nrd-s1-JmK"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="4cB-WS-mtE" firstAttribute="top" secondItem="Oq7-Mo-ukJ" secondAttribute="bottom" constant="41" id="2ve-sp-jpX"/>
+                            <constraint firstItem="k2O-IQ-20n" firstAttribute="leading" secondItem="c3j-KC-czn" secondAttribute="leading" id="9kS-vS-gx2"/>
+                            <constraint firstItem="jTm-aC-7uy" firstAttribute="leading" secondItem="Mmw-sV-hvl" secondAttribute="leading" constant="16.5" id="Gcr-Pi-7x1"/>
+                            <constraint firstItem="c3j-KC-czn" firstAttribute="leading" secondItem="Mmw-sV-hvl" secondAttribute="leading" constant="17" id="HYR-FP-zED"/>
+                            <constraint firstItem="tp4-Jh-0hh" firstAttribute="top" secondItem="jTm-aC-7uy" secondAttribute="bottom" constant="120.5" id="HwV-DB-qsa"/>
+                            <constraint firstItem="Oq7-Mo-ukJ" firstAttribute="leading" secondItem="k2O-IQ-20n" secondAttribute="leading" id="Lr0-zg-IHV"/>
+                            <constraint firstItem="c3j-KC-czn" firstAttribute="top" secondItem="Mmw-sV-hvl" secondAttribute="top" constant="77" id="OVG-FC-esh"/>
+                            <constraint firstItem="Oq7-Mo-ukJ" firstAttribute="top" secondItem="k2O-IQ-20n" secondAttribute="bottom" constant="5" id="bl9-EJ-hea"/>
+                            <constraint firstItem="4cB-WS-mtE" firstAttribute="leading" secondItem="Oq7-Mo-ukJ" secondAttribute="leading" id="h9a-1g-Ihg"/>
+                            <constraint firstItem="k2O-IQ-20n" firstAttribute="top" secondItem="c3j-KC-czn" secondAttribute="bottom" constant="69" id="kH8-eK-mKN"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="ic_photo_camera" id="Nii-ty-16C">
+                    <tabBarItem key="tabBarItem" title="" id="Nii-ty-16C">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -32,7 +92,4 @@
             <point key="canvasLocation" x="2450" y="-433"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="ic_photo_camera" width="24" height="24"/>
-    </resources>
 </document>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Bold</string>
+            <string>AppleSDGothicNeo-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfirmDeleteView" customModule="UnivCam" customModuleProvider="target">
+            <connections>
+                <outlet property="albumTitleLabel" destination="ZEI-OZ-wIm" id="KO3-vy-vm0"/>
+                <outlet property="cancelButton" destination="Avz-75-tzc" id="AOw-ay-obK"/>
+                <outlet property="deleteButton" destination="JFQ-TU-IHw" id="yWG-cm-Za2"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGP-T5-raT">
+                    <rect key="frame" x="0.0" y="0.0" width="49" height="49"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="Cfh-tu-d6s"/>
+                        <constraint firstAttribute="width" constant="49" id="qPf-3i-T40"/>
+                    </constraints>
+                    <state key="normal" image="icCloseWhite2X-1"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앨범 삭제" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tn5-AE-2DG">
+                    <rect key="frame" x="17" y="52" width="119.5" height="38.5"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="32"/>
+                    <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="쉽게배우는 React 프로그래밍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZEI-OZ-wIm">
+                    <rect key="frame" x="17" y="159.5" width="187" height="19.5"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
+                    <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앨범을 정말 삭제하시겠습니까?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkz-Ku-bpW">
+                    <rect key="frame" x="17" y="184" width="196" height="19.5"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                    <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앨범과 앨범의 모든 사진이 삭제됩니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fv1-Kl-Gnr">
+                    <rect key="frame" x="17" y="244.5" width="242.5" height="19.5"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                    <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mGD-Oe-BoK">
+                    <rect key="frame" x="17" y="503" width="341" height="43"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Avz-75-tzc">
+                            <rect key="frame" x="0.0" y="0.0" width="170.5" height="43"/>
+                            <color key="tintColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="취소">
+                                        <attributes>
+                                            <font key="NSFont" size="26" name="AppleSDGothicNeo-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JFQ-TU-IHw">
+                            <rect key="frame" x="170.5" y="0.0" width="170.5" height="43"/>
+                            <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="삭제">
+                                        <attributes>
+                                            <font key="NSFont" size="26" name="AppleSDGothicNeo-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                            </state>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Tn5-AE-2DG" secondAttribute="trailing" id="5xg-lX-poF"/>
+                <constraint firstItem="fv1-Kl-Gnr" firstAttribute="leading" secondItem="gkz-Ku-bpW" secondAttribute="leading" id="7uP-vo-PYN"/>
+                <constraint firstItem="VGP-T5-raT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="JDs-1s-3OW"/>
+                <constraint firstItem="mGD-Oe-BoK" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="17" id="RC2-DJ-pcU"/>
+                <constraint firstItem="ZEI-OZ-wIm" firstAttribute="leading" secondItem="Tn5-AE-2DG" secondAttribute="leading" id="SDm-FI-AM8"/>
+                <constraint firstItem="ZEI-OZ-wIm" firstAttribute="top" secondItem="Tn5-AE-2DG" secondAttribute="bottom" constant="69" id="UhZ-3o-vsr"/>
+                <constraint firstItem="Tn5-AE-2DG" firstAttribute="top" secondItem="VGP-T5-raT" secondAttribute="bottom" constant="3" id="V8G-Bc-OjA"/>
+                <constraint firstItem="gkz-Ku-bpW" firstAttribute="leading" secondItem="ZEI-OZ-wIm" secondAttribute="leading" id="VDv-KV-EVs"/>
+                <constraint firstItem="Tn5-AE-2DG" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="17" id="Zgl-cp-56G"/>
+                <constraint firstItem="gkz-Ku-bpW" firstAttribute="top" secondItem="ZEI-OZ-wIm" secondAttribute="bottom" constant="5" id="ZzR-qR-SdA"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mGD-Oe-BoK" secondAttribute="bottom" constant="120.5" id="by0-yl-eHM"/>
+                <constraint firstItem="fv1-Kl-Gnr" firstAttribute="top" secondItem="gkz-Ku-bpW" secondAttribute="bottom" constant="41" id="hrn-Yx-atY"/>
+                <constraint firstItem="VGP-T5-raT" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oUo-ev-t0v"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ZEI-OZ-wIm" secondAttribute="trailing" constant="17" id="tTz-P4-o4w"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mGD-Oe-BoK" secondAttribute="trailing" constant="17" id="y6O-ww-58U"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="32" y="-83"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icCloseWhite2X-1" width="14" height="14"/>
+    </resources>
+</document>

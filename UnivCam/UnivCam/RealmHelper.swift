@@ -29,7 +29,7 @@ class RealmHelper: NSObject {
         }
     }
     
-    static func removeData<T: Object>(data: Results<T>) {
+    static func removeData<T: Object>(data: T) {
         let realm = try! Realm()
         try! realm.write {
             realm.delete(data)
@@ -54,21 +54,21 @@ class RealmHelper: NSObject {
         guard let object = realm.objects(T.self).filter("id = 1").first else { return nil }
         return object
     }
-    static func updateObject<T: Object>(data: T, query: NSPredicate) {
+    static func updateObject<T: Object>(data: T, query: String) {
         let realm = try! Realm()
         
-        var object = realm.objects(T.self).filter("id = 1").first
+        var object = realm.objects(T.self).filter(query).first
         object = data
         try! realm.write {
             realm.add(object!, update: true)
         }
     }
     
-    //    static func updateData<T: Object>(data: T, query: NSPredicate) {
-    //
-    //        try! realm.write {
-    //            realm.add(updateTask)
-    //        }
-    //    }
+    static func objectsFromQuery<T: Object>(data: T, query: String) -> Results<T>? {
+        let realm = try! Realm()
+
+        let objects = realm.objects(T.self).filter("isFavorite = true")
+        return objects
+    }
     
 }

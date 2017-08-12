@@ -9,5 +9,11 @@
 import Foundation
 
 struct UnivCamAPI {
-    static let baseURLString = ""
+    
+    static func baseURL() -> String {
+        let documentDirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let mainPath = documentDirPath.appending("/UnivCam")
+        return mainPath
+    }
+    
 }

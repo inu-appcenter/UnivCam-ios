@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -66,6 +66,13 @@
                         <inset key="imageEdgeInsets" minX="6" minY="0.0" maxX="0.0" maxY="2"/>
                         <state key="normal" image="icMoreVertWhite"/>
                     </button>
+                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icCheckBox2X" translatesAutoresizingMaskIntoConstraints="NO" id="EB1-BG-ukj">
+                        <rect key="frame" x="152" y="8" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="JSd-ZC-fIj"/>
+                            <constraint firstAttribute="width" constant="16" id="hle-mX-46o"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -73,6 +80,7 @@
                 <constraint firstItem="ISt-mm-dCA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cvl-c3-sM8" secondAttribute="trailing" id="4EN-BY-lbW"/>
                 <constraint firstItem="cvl-c3-sM8" firstAttribute="top" secondItem="ASn-Y1-qXz" secondAttribute="bottom" constant="15" id="AKk-6a-jQn"/>
                 <constraint firstItem="ASn-Y1-qXz" firstAttribute="leading" secondItem="rh5-0Y-Lge" secondAttribute="leading" id="BXq-Yn-qde"/>
+                <constraint firstItem="EB1-BG-ukj" firstAttribute="top" secondItem="rh5-0Y-Lge" secondAttribute="top" constant="8" id="DXg-ZF-sH5"/>
                 <constraint firstItem="0GH-Zl-oU7" firstAttribute="top" secondItem="rh5-0Y-Lge" secondAttribute="top" id="LaC-HP-TJu"/>
                 <constraint firstItem="ASn-Y1-qXz" firstAttribute="top" secondItem="rh5-0Y-Lge" secondAttribute="top" id="NIh-od-U8M"/>
                 <constraint firstItem="ihm-s7-X4O" firstAttribute="leading" secondItem="cvl-c3-sM8" secondAttribute="leading" id="OKs-ob-XeV"/>
@@ -81,6 +89,7 @@
                 <constraint firstItem="0GH-Zl-oU7" firstAttribute="leading" secondItem="rh5-0Y-Lge" secondAttribute="leading" id="YH7-4U-sqF"/>
                 <constraint firstItem="ISt-mm-dCA" firstAttribute="top" secondItem="ASn-Y1-qXz" secondAttribute="bottom" constant="5.5" id="d6w-LH-Z9o"/>
                 <constraint firstAttribute="trailing" secondItem="ASn-Y1-qXz" secondAttribute="trailing" id="dfO-zL-7b5"/>
+                <constraint firstAttribute="trailing" secondItem="EB1-BG-ukj" secondAttribute="trailing" constant="8" id="j5g-KK-SED"/>
                 <constraint firstItem="ihm-s7-X4O" firstAttribute="top" secondItem="cvl-c3-sM8" secondAttribute="bottom" constant="5.5" id="jQC-zj-ysw"/>
                 <constraint firstAttribute="trailing" secondItem="ISt-mm-dCA" secondAttribute="trailing" id="jig-C6-7Sm"/>
                 <constraint firstItem="cvl-c3-sM8" firstAttribute="leading" secondItem="rh5-0Y-Lge" secondAttribute="leading" constant="8.5" id="kZa-0X-vbq"/>
@@ -88,9 +97,12 @@
             </constraints>
             <size key="customSize" width="175.5" height="243"/>
             <connections>
+                <outlet property="cameraButton" destination="ISt-mm-dCA" id="n13-WH-h8X"/>
+                <outlet property="checkImage" destination="EB1-BG-ukj" id="buz-Qa-T4x"/>
                 <outlet property="editButton" destination="dyh-Tj-mbc" id="xEt-I9-Ms0"/>
                 <outlet property="favoriteButton" destination="0GH-Zl-oU7" id="QQU-6L-0Bv"/>
                 <outlet property="imageView" destination="ASn-Y1-qXz" id="PFL-xy-2yt"/>
+                <outlet property="photoCountLabel" destination="ihm-s7-X4O" id="uzj-RS-48R"/>
                 <outlet property="pictureCountLabel" destination="ihm-s7-X4O" id="d6U-5p-Gsc"/>
                 <outlet property="titleLabel" destination="cvl-c3-sM8" id="26S-gZ-qAM"/>
             </connections>
@@ -99,6 +111,7 @@
     </objects>
     <resources>
         <image name="_ic_camera__ic_camera" width="24" height="24"/>
+        <image name="icCheckBox2X" width="19" height="19"/>
         <image name="icMoreVertWhite" width="4" height="15"/>
         <image name="icStarBorderWhite" width="19" height="18"/>
     </resources>
