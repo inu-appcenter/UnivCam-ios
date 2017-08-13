@@ -21,7 +21,9 @@ class AlbumDetailVC: UIViewController {
     
     lazy var backButton : UIButton = {
         let btn : UIButton = .init(type: .system)
-        btn.setImage(UIImage(named: "icNavigateNext2X"), for: .normal)
+        btn.setImage(
+            Assets.leftNavigationItem.image,
+            for: .normal)
         btn.setTitle("  뒤로가기", for: .normal)
         btn.sizeToFit()
         btn.addTarget(self, action: #selector(unwindToHome), for: .touchUpInside)
@@ -38,7 +40,7 @@ class AlbumDetailVC: UIViewController {
         
         guard let dirPath = dirPath else { return }
         
-        if let files = try! FileManager.default.contentsOfDirectory(atPath: dirPath) as? [String] {
+        if let files = try? FileManager.default.contentsOfDirectory(atPath: dirPath) {
             for filename in files {
                 print(filename)
                 let imageURL = dirPath + "/" + filename

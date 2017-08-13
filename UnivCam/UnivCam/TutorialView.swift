@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TutorialView: UIView {
+class TutorialView: UIView, NibFileOwnerLoadable {
     
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
@@ -19,33 +19,17 @@ class TutorialView: UIView {
         }
         
     }
-    let nibName = "TutorialView"
-    var view : UIView!
-    let images : [UIImage] = [UIImage(named:"1")!,UIImage(named:"2")!,UIImage(named:"3")!]
+
+    let images : [UIImage] = [Assets.tutorial1.image, Assets.tutorial2.image, Assets.tutorial3.image]
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        xibSetUp()
+        loadNibContent()
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        xibSetUp()
+        loadNibContent()
     }
-    func loadViewFromNib() ->UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        
-        return view
-    }
-    func xibSetUp() {
-        view = loadViewFromNib()
-        view.frame = self.bounds
-        view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        view.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        addSubview(view)
-    }
-    
 }
 extension TutorialView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {

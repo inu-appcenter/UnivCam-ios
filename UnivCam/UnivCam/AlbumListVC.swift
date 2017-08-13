@@ -14,7 +14,7 @@ class AlbumListVC: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
-            navigationItem.titleView = titleLabel
+            
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
@@ -24,11 +24,14 @@ class AlbumListVC: UIViewController {
         let titleLabel = UILabel()
         titleLabel.text = "앨범"
         titleLabel.textColor = Palette.title.color
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        titleLabel.font = Fonts.navigationTitle.style
+        titleLabel.sizeToFit()
+        titleLabel.frame.origin.y = titleLabel.frame.origin.y + 50
         return titleLabel
     }()
     
     var albums : Results<Album> = AppDelegate.getDelegate().albums
+    var keyWindow = AppDelegate.getDelegate().keyWindow
     var notificationToken: NotificationToken? = nil
     
     var isScrollGreaterThanSpace = false
@@ -36,21 +39,49 @@ class AlbumListVC: UIViewController {
     var createAlbumView : CreateAlbumView?
     var confirmDeleteView : ConfirmDeleteView?
     
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let yPosition = scrollView.contentOffset.y
+        
+        print(yPosition)
+        if yPosition < 0 {
+            titleLabel.frame.origin.y = -yPosition + 50
+        }
+        // 위로 스크롤링을 하는 경우
+//        if yPosition > 0 {
+//            // 이미지를 확대한다.
+//            //let scale = 1 + ((-yPosition) * 2 / imageView.frame.height)
+//            //imageView.transform = CGAffineTransformIdentity
+//            //imageView.transform = CGAffineTransformMakeScale(scale, scale)
+//
+//            // 이미지를 가장 위로 이동시킨다.
+////            var imageViewFrame = imageView.frame
+////            imageViewFrame.origin.y = yPosition
+////            imageView.frame = imageViewFrame
+//            titleLabel.frame.origin.y = -yPosition + 50
+//        } else if yPosition < 50 && yPosition >= 0 {
+//            titleLabel.frame.origin.y = yPosition + 50
+//        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-        self.tabBarController?.tabBar.isHidden = false
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.addSubview(titleLabel)
+        self.navigationController?.navigationItem.titleView = titleLabel
         
-        tutorialView = TutorialView(frame: (UIApplication.shared.keyWindow?.frame)!)
-        UIApplication.shared.keyWindow?.addSubview(tutorialView!)
+        tutorialView = TutorialView(frame: (keyWindow.frame))
+        guard let tutorialView = tutorialView else { return }
+        keyWindow.addSubview(tutorialView)
+        
         let tapGesture = UITapGestureRecognizer(
             target: self,
             action: #selector(removeTutorial))
-        tutorialView?.addGestureRecognizer(tapGesture)
-        //        tutorialView?.frame.origin.y = 20
+        tutorialView.addGestureRecognizer(tapGesture)
         
         notificationToken = albums.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             guard let collectionView = self?.collectionView else { return }
@@ -115,8 +146,8 @@ class AlbumListVC: UIViewController {
         //            options: nil
         //            )?[0] as! UIView
         
-        createAlbumView = CreateAlbumView(frame: (UIApplication.shared.keyWindow?.frame)!)
-        UIApplication.shared.keyWindow?.addSubview(createAlbumView!)
+        createAlbumView = CreateAlbumView(frame: keyWindow.frame)
+        keyWindow.addSubview(createAlbumView!)
         createAlbumView?.frame.origin.y = 20
         createAlbumView?.cancelButton.addTarget(
             self,

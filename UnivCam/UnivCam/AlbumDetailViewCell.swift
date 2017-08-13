@@ -10,11 +10,6 @@ import UIKit
 
 class AlbumDetailViewCell: UICollectionViewCell {
 
-    var imageView: UIImageView = {
-        let iv = UIImageView(frame: .zero)
-        iv.image = UIImage(named: "icStar")
-        return iv
-    }()
     var button: UIButton?
     
     override init(frame: CGRect) {

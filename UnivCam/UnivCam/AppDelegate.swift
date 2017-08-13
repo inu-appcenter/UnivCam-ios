@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return realm.objects(Album.self)
     }()
     
+    var keyWindow: UIWindow {
+        return UIApplication.shared.keyWindow ?? UIWindow()
+    }
     class func getDelegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
@@ -51,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.tintColor = Palette.navigationTint.color
         navigationBarAppearace.shadowImage = UIImage()
         navigationBarAppearace.setBackgroundImage(UIImage(), for: .default)
-        navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: UIFont(name: "AppleSDGothicNeo-Regular", size:18)!]
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         
     }

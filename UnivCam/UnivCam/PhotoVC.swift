@@ -44,7 +44,7 @@ class PhotoVC: UIViewController {
         //photoDataSource.photos = GetServices.photos(type: .big)
         
         let button = UIButton(type: .system)
-        button.setImage(UIImage(named: "icNavigateNext2X"), for: .normal)
+        button.setImage(Assets.leftNavigationItem.image, for: .normal)
         button.setTitle("  뒤로가기", for: .normal)
         button.sizeToFit()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)

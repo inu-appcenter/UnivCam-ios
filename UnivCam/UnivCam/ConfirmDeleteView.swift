@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ConfirmDeleteView: UIView {
+class ConfirmDeleteView: UIView, NibFileOwnerLoadable {
     
     @IBOutlet var albumTitleLabel: UILabel!
     @IBOutlet var cancelButton: UIButton! {
@@ -23,28 +23,13 @@ class ConfirmDeleteView: UIView {
         }
     }
     
-    let nibName = "ConfirmDeleteView"
-    var view : UIView!
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        xibSetUp()
+        loadNibContent()
     }
     override init(frame: CGRect) {
         super.init(frame: frame)
-        xibSetUp()
+        loadNibContent()
     }
-    func loadViewFromNib() ->UIView {
-        let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: nibName, bundle: bundle)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-        
-        return view
-    }
-    func xibSetUp() {
-        view = loadViewFromNib()
-        view.frame = self.bounds
-        view.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
-        addSubview(view)
-    }
+    
 }

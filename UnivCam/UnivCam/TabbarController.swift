@@ -14,7 +14,7 @@ class TabbarController: UITabBarController {
     lazy var button : UIButton = {
         var btn : UIButton = .init(type: .custom)
         btn.setImage(
-            UIImage(named:"icCamera"),
+            Assets.camera.image,
             for: .normal
         )
         btn.backgroundColor = UIColor.red
@@ -28,7 +28,6 @@ class TabbarController: UITabBarController {
             width: 64,
             height: 50
         )
-        
         return btn
     }()
     

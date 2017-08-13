@@ -27,9 +27,9 @@ class AlbumCell: UICollectionViewCell {
     var isFavButtonChecked = false {
         didSet {
             if isFavButtonChecked == true {
-                favoriteButton.setImage(UIImage(named: "icStar"), for: .normal)
+                favoriteButton.setImage(Assets.favoriteOn.image, for: .normal)
             } else {
-                favoriteButton.setImage(UIImage(named: "icStarBorderWhite"), for: .normal)
+                favoriteButton.setImage(Assets.favoriteOff.image, for: .normal)
             }
         }
     }
