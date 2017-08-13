@@ -17,7 +17,7 @@ class TabbarController: UITabBarController {
             Assets.camera.image,
             for: .normal
         )
-        btn.backgroundColor = UIColor.red
+        btn.backgroundColor = UIColor.clear
         btn.addTarget(
             self,
             action: #selector(showCameraVC), for: .touchUpInside

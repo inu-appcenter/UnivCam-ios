@@ -91,7 +91,10 @@ extension AlbumDetailVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let nvc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoVC
         nvc.photos = photos
-         self.navigationController?.pushViewController(nvc, animated: true)
+        nvc.selectedIndex = indexPath
+        
+        
+        self.navigationController?.pushViewController(nvc, animated: true)
     }
 }
 

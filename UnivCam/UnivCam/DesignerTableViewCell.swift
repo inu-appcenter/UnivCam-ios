@@ -1,17 +1,17 @@
 //
-//  SettingTableViewCell.swift
+//  DesignerTableViewCell.swift
 //  UnivCam
 //
-//  Created by 조용문 on 2017. 8. 9..
+//  Created by 조용문 on 2017. 8. 12..
 //  Copyright © 2017년 futr_blu. All rights reserved.
 //
 
 import UIKit
 
-class SettingTableViewCell: UITableViewCell {
-    @IBOutlet weak var setting_title: UILabel!
-
-    @IBOutlet weak var versionInfo: UILabel!
+class DesignerTableViewCell: UITableViewCell {
+    @IBOutlet weak var left_label: UILabel!
+    
+    @IBOutlet weak var right_label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

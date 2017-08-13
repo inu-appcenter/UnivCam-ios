@@ -34,7 +34,7 @@ extension Assets {
             case .camera:
                 return #imageLiteral(resourceName: "icCamera")
             case .favoriteOn:
-                return #imageLiteral(resourceName: "ic_star")
+                return #imageLiteral(resourceName: "icStar")
             case .favoriteOff:
                 return #imageLiteral(resourceName: "icStarBorderWhite")
             case .leftNavigationItem:

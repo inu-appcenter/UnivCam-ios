@@ -26,8 +26,9 @@ class PhotoVC: UIViewController {
     }
     
     let photoDataSource = PhotoDataSource()
-    
+    var selectedIndex : IndexPath?
     var photos = [UIImage]()
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -36,12 +37,20 @@ class PhotoVC: UIViewController {
 //        print(albumDataSource.photos)
         photoDataSource.photos = photos
         
+        guard let selectedIndex = selectedIndex else { return }
+        
+        collectionView.selectItem(at: selectedIndex,
+                                  animated: false,
+                                  scrollPosition: .centeredHorizontally)
+        
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //albumDataSource.photos = GetServices.photos(type: .big)
         //photoDataSource.photos = GetServices.photos(type: .big)
+        
         
         let button = UIButton(type: .system)
         button.setImage(Assets.leftNavigationItem.image, for: .normal)

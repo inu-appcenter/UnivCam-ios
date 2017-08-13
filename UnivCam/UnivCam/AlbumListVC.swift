@@ -14,10 +14,10 @@ class AlbumListVC: UIViewController {
     
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
-            
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
+            collectionView.register(UINib(nibName: "AlbumCell", bundle: nil),
+                                    forCellWithReuseIdentifier: "UICollectionViewCell")
         }
     }
     lazy var titleLabel : UILabel = {
@@ -30,7 +30,11 @@ class AlbumListVC: UIViewController {
         return titleLabel
     }()
     
-    var albums : Results<Album> = AppDelegate.getDelegate().albums
+    //var albums : Results<Album> = AppDelegate.getDelegate().albums
+    let albums: Results<Album> = {
+        let realm = try! Realm()
+        return realm.objects(Album.self)
+    }()
     var keyWindow = AppDelegate.getDelegate().keyWindow
     var notificationToken: NotificationToken? = nil
     
@@ -43,10 +47,10 @@ class AlbumListVC: UIViewController {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let yPosition = scrollView.contentOffset.y
         
-        print(yPosition)
-        if yPosition < 0 {
-            titleLabel.frame.origin.y = -yPosition + 50
-        }
+        //print(yPosition)
+//        if yPosition < 0 {
+//            titleLabel.frame.origin.y = -yPosition + 50
+//        }
         // 위로 스크롤링을 하는 경우
 //        if yPosition > 0 {
 //            // 이미지를 확대한다.
@@ -62,6 +66,12 @@ class AlbumListVC: UIViewController {
 //        } else if yPosition < 50 && yPosition >= 0 {
 //            titleLabel.frame.origin.y = yPosition + 50
 //        }
+        
+        if yPosition < 50 {
+            self.navigationController?.navigationBar.shadowImage = UIImage()
+        } else {
+            self.navigationController?.navigationBar.shadowImage = nil
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,17 +81,18 @@ class AlbumListVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.addSubview(titleLabel)
-        self.navigationController?.navigationItem.titleView = titleLabel
         
-        tutorialView = TutorialView(frame: (keyWindow.frame))
-        guard let tutorialView = tutorialView else { return }
-        keyWindow.addSubview(tutorialView)
+        //self.navigationController?.navigationBar.addSubview(titleLabel)
+//        self.navigationController?.navigationItem.titleView = titleLabel
+        
+//        tutorialView = TutorialView(frame: (keyWindow.frame))
+//        guard let tutorialView = tutorialView else { return }
+//        keyWindow.addSubview(tutorialView)
         
         let tapGesture = UITapGestureRecognizer(
             target: self,
             action: #selector(removeTutorial))
-        tutorialView.addGestureRecognizer(tapGesture)
+        //tutorialView.addGestureRecognizer(tapGesture)
         
         notificationToken = albums.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             guard let collectionView = self?.collectionView else { return }
@@ -116,38 +127,8 @@ class AlbumListVC: UIViewController {
         print("yes")
     }
     @IBAction func addFolderButtonDidTap(_ sender: UIBarButtonItem) {
-        //        let alert = UIAlertController(title:"앨범 생성", message:"앨범을 생성하시겠습니까?", preferredStyle: .alert)
-        //        alert.addTextField(configurationHandler: { textField in
-        //            textField.placeholder = "앨범 명을 입력하세요."
-        //            textField.clearButtonMode = .whileEditing
-        //            //textField.text = defaultText
-        //        })
-        //        let okAction = UIAlertAction(
-        //            title: "확인",
-        //            style: UIAlertActionStyle.destructive,
-        //            handler: {(action: UIAlertAction!) in
-        //                let text = alert.textFields?.first?.text ?? ""
-        //                self.createAlbumFolder(title: text)
-        //
-        //        }
-        //        )
-        //        let cancelAction = UIAlertAction(
-        //            title: "취소",
-        //            style: UIAlertActionStyle.cancel,
-        //            handler: nil
-        //        )
-        //        alert.addAction(okAction)
-        //        alert.addAction(cancelAction)
-        //self.view.addSubview(<#T##view: UIView##UIView#>)
-        //self.present(alert, animated: true, completion: nil)
-        //        let createAlbumView = Bundle.main.loadNibNamed(
-        //            "CreateAlbumView",
-        //            owner: self,
-        //            options: nil
-        //            )?[0] as! UIView
-        
-        createAlbumView = CreateAlbumView(frame: keyWindow.frame)
-        keyWindow.addSubview(createAlbumView!)
+        createAlbumView = CreateAlbumView(frame: (UIApplication.shared.keyWindow?.frame)!)
+        UIApplication.shared.keyWindow?.addSubview(createAlbumView!)
         createAlbumView?.frame.origin.y = 20
         createAlbumView?.cancelButton.addTarget(
             self,

@@ -164,6 +164,8 @@ class SearchAlbumListVC: UIViewController {
             searchedAlbums.removeAll()
             searchedAlbums = Array(albums)
             collectionView.reloadData()
+        } else if searchTextField.text?.isEmpty ?? false {
+            self.searchTextField.endEditing(true)
         }
     }
 
