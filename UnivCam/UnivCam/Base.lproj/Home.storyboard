@@ -42,7 +42,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앨범" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tN8-HF-xs8">
-                                            <rect key="frame" x="17" y="8.5" width="55.5" height="36"/>
+                                            <rect key="frame" x="17" y="8.5" width="52" height="36"/>
                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="30"/>
                                             <color key="textColor" red="0.20784313725490194" green="0.22352941176470587" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -58,7 +58,6 @@
                                     <constraints>
                                         <constraint firstItem="tN8-HF-xs8" firstAttribute="top" secondItem="Een-by-0uS" secondAttribute="top" constant="8.5" id="4mf-Yn-YkP"/>
                                         <constraint firstItem="tN8-HF-xs8" firstAttribute="leading" secondItem="Een-by-0uS" secondAttribute="leading" constant="17" id="Kzi-Nm-cz2"/>
-                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="tN8-HF-xs8" secondAttribute="trailing" constant="247.5" id="PWv-to-OM6"/>
                                     </constraints>
                                 </collectionReusableView>
                             </collectionView>
