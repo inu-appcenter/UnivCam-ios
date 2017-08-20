@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import AVFoundation
 
 class FavoriteAlbumListVC: UIViewController {
     
@@ -15,14 +16,21 @@ class FavoriteAlbumListVC: UIViewController {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
+            collectionView.register(Cells.album.nib, forCellWithReuseIdentifier: Cells.album.identifier)
         }
     }
-    
+    @IBOutlet var noMessageView: NoMessageView! {
+        didSet {
+            noMessageView.messageLabel.text = Messages.has_no_favorite_albums.rawValue
+            noMessageView.actionButton.isHidden = true
+        }
+    }
     let albums: Results<Album> = {
         let realm = try! Realm()
         return realm.objects(Album.self).filter("isFavorite == true")
     }()
+    
+    var selectedAlbum : Album?
     var notificationToken: NotificationToken? = nil
     
     var createAlbumView : CreateAlbumView?
@@ -30,21 +38,26 @@ class FavoriteAlbumListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("값나왔냐", albums.count)
+        // Do any additional setup after loading the view.
+    }
+    
+    func addRealmNotification() {
         notificationToken = albums.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             guard let collectionView = self?.collectionView else { return }
             switch changes {
             case .initial:
                 // Results are now populated and can be accessed without blocking the UI
-                collectionView.reloadData()
-                break
-                
+                self?.noMessageView.isHidden = self?.albums.count == 0 ? false : true
             case .update(_, let deletions, let insertions, let modifications):
                 // Query results have changed, so apply them to the UITableView
                 collectionView.performBatchUpdates({
                     collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
                     collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
                     collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
+                    
+                    self?.collectionView.reloadData()
+                    self?.noMessageView.isHidden = self?.albums.count == 0 ? false : true
                 }, completion: { _ in })
                 break
             case .error(let error):
@@ -53,145 +66,13 @@ class FavoriteAlbumListVC: UIViewController {
                 break
             }
         }
-        
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 }
-extension FavoriteAlbumListVC {
-    func updateFavoriteAlbum(sender: UIButton) {
-        let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
-        guard let indexPath: IndexPath = self.collectionView.indexPathForItem(at: buttonPosition) else { return }
-        //print(albums[indexPath.row].title)
-        
-        let oldAlbum = albums[indexPath.row]
-        
-        let updateAlbum = Album()
-        updateAlbum.title = oldAlbum.title
-        updateAlbum.id = oldAlbum.id
-        updateAlbum.createdAt = oldAlbum.createdAt
-        updateAlbum.isFavorite = !oldAlbum.isFavorite
-        updateAlbum.createdAt = oldAlbum.createdAt
-        updateAlbum.url = oldAlbum.url
-        updateAlbum.photoCount = oldAlbum.photoCount
-        
-        let query = "id == \(updateAlbum.id)"
-        RealmHelper.updateObject(data: updateAlbum, query: query)
-        
-        
-    }
-    
-    
-    func cellIsEditing(sender: UIButton) {
-        
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "앨범 선택", style: .default) { action in
-            // perhaps use action.title here
-        })
-        alert.addAction(UIAlertAction(title: "앨범 이름변경", style: .default) { action in
-            // perhaps use action.title here
-        })
-        alert.addAction(UIAlertAction(title: "앨범 삭제", style: .default) { action in
-            // perhaps use action.title here
-            
-            let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
-            guard let indexPath: IndexPath = self.collectionView.indexPathForItem(at: buttonPosition) else { return }
-            
-            self.confirmDeleteView = ConfirmDeleteView(frame: (UIApplication.shared.keyWindow?.frame)!)
-            
-            self.confirmDeleteView?.cancelButton.addTarget(
-                self,
-                action: #selector(self.removeDeleteView),
-                for: .touchUpInside
-            )
-            self.confirmDeleteView?.deleteButton.tag = indexPath.row
-            self.confirmDeleteView?.deleteButton.addTarget(
-                self,
-                action: #selector(self.removeAlbum(sender:)),
-                for: .touchUpInside
-            )
-            UIApplication.shared.keyWindow?.addSubview(self.confirmDeleteView!)
-            self.confirmDeleteView?.frame.origin.y = 20
-            
-            
-        })
-        alert.addAction(UIAlertAction(title: "취소", style: .cancel) { action in
-            
-        })
-        
-        self.present(
-            alert,
-            animated: true,
-            completion: { () in
-                // add view tapped evnets
-        })
-    }
-    func removeCreateView() {
-        createAlbumView?.removeFromSuperview()
-    }
-    func createAlbumFolder(title: String) {
-        let createdAt = NSDate()
-        let mainPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let documentDirecortPath = mainPath + "/UnivCam" + "/\(title)"
-        
-        var ojeCtBool : ObjCBool = true
-        let isExit = FileManager.default.fileExists(atPath: documentDirecortPath, isDirectory: &ojeCtBool)
-        print(isExit)
-        print(documentDirecortPath)
-        if isExit == false {
-            do {
-                try FileManager.default.createDirectory(at: URL(fileURLWithPath: documentDirecortPath), withIntermediateDirectories: true, attributes: nil)
-                
-                let album = Album()
-                album.title = title
-                album.url = UnivCamAPI.baseURLString + "/" + title
-                album.id = Album.incrementID()
-                
-                guard let files = try! FileManager.default.contentsOfDirectory(atPath: album.url) as? [String] else {
-                    return
-                }
-                album.photoCount = files.count
-                
-                
-                RealmHelper.addData(data: album)
-                //albums.removeAll()
-                //RealmHelper.fetchData(dataList: &albums)
-                //collectionView.reloadData()
-                
-            } catch {
-                print("error")
-            }
-        } else {
-            print("fail")
-        }
-    }
-    
-    func createAlbum() {
-        guard let albumTitle = createAlbumView?.albumTitleTextField.text, !(createAlbumView?.albumTitleTextField.text?.characters.isEmpty)! else {
-            return
-        }
-        createAlbumFolder(title: albumTitle)
-        removeCreateView()
-    }
-    func removeDeleteView() {
-        confirmDeleteView?.removeFromSuperview()
-    }
-    func removeAlbum(sender: UIButton) {
-        print("호출?")
-        let indexPath = IndexPath(row: sender.tag, section: 0)
-        let album = self.albums[indexPath.row]
-        RealmHelper.removeData(data: album)
-        //self.albums.remove(at: indexPath.row)
-        //self.collectionView.deleteItems(at: [indexPath])
-        removeDeleteView()
-    }
-}
-
 extension FavoriteAlbumListVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -206,34 +87,31 @@ extension FavoriteAlbumListVC: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! AlbumCell
         let album = albums[indexPath.row]
-        cell.imageView.image = UIImage(named: "back")
         cell.titleLabel.text = album.title
         cell.favoriteButton.isHidden = true
-        
-        cell.favoriteButton.addTarget(
-            self,
-            action: #selector(updateFavoriteAlbum(sender:)),
-            for: .touchUpInside
-        )
-        cell.editButton.tag = indexPath.row
         cell.editButton.addTarget(
             self,
             action: #selector(cellIsEditing(sender:)),
             for: .touchUpInside
         )
         cell.pictureCountLabel.text = String(album.photoCount) + "장의 사진"
-        cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = UIColor.lightGray.cgColor
+        cell.cameraButton.addTarget(
+            self,
+            action: #selector(showCamera(sender:)),
+            for: .touchUpInside
+        )
+        
+        if let coverImageData = album.coverImageData {
+            cell.imageView.image = UIImage(data: coverImageData as Data)
+            return cell
+        }
+        if let coverImageURL = album.photos.last?.url {
+            cell.imageView.image = UIImage(named: coverImageURL)
+        }
         
         return cell
     }
     
-}
-
-extension FavoriteAlbumListVC: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.performSegue(withIdentifier: "ShowDetailAlbum", sender: self)
-    }
 }
 
 extension FavoriteAlbumListVC: UICollectionViewDelegateFlowLayout {
@@ -251,5 +129,160 @@ extension FavoriteAlbumListVC: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(27, 8, 27, 8)
+    }
+}
+
+extension FavoriteAlbumListVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
+        vc.album = self.albums[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+// DELETE
+extension FavoriteAlbumListVC {
+    func removeAlbum(sender: UIButton) {
+        print("test")
+        
+        let album = self.albums[sender.tag]
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(atPath: album.url)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong: \(error)")
+        }
+        
+        RealmHelper.removeData(data: album)
+        confirmDeleteView?.remove()
+    }
+}
+
+// UPDATE
+extension FavoriteAlbumListVC {
+    func showCamera(sender: UIButton) {
+        
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
+        guard let indexPath: IndexPath = self.collectionView.indexPathForItem(at: buttonPosition) else { return }
+        
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) {
+            (granted: Bool) -> Void in
+            guard granted else {
+                /// Report an error. We didn't get access to hardware.
+                DispatchQueue.main.async(execute: { () -> Void in
+                    self.tabBarController?.selectedIndex = TapViewControllers.camera.rawValue
+                })
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                let vc = UIStoryboard.init(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: "CustomCameraVC") as! CustomCameraVC
+                vc.cameraType = .select
+                vc.album = Array(self.albums)[indexPath.row]
+                self.present(
+                    vc,
+                    animated: true,
+                    completion: nil
+                )
+            })
+        }
+    }
+    func cellIsEditing(sender: UIButton) {
+        
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.collectionView)
+        guard let indexPath: IndexPath = self.collectionView.indexPathForItem(at: buttonPosition) else { return }
+        let album = self.albums[indexPath.row]
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        if albums[indexPath.row].coverImageData != nil {
+            alert.addAction(UIAlertAction(title: "앨범 커버 사진 삭제", style: .default) { action in
+                
+                let realm = try! Realm()
+                do {
+                    try realm.write {
+                        album.coverImageData = nil
+                    }
+                } catch {
+                    print(error)
+                    print("에러났다 왜냐")
+                }
+                let cell = self.collectionView.cellForItem(at: indexPath) as? AlbumCell
+                cell?.imageView.image = nil
+                self.collectionView.reloadData()
+            })
+        } else {
+            alert.addAction(UIAlertAction(title: "앨범 커버 사진 선택", style: .default) { action in
+                self.addCoverImage()
+                self.selectedAlbum = self.albums[indexPath.row]
+            })
+        }
+        alert.addAction(UIAlertAction(title: "앨범 이름변경", style: .default) { action in
+            
+            let nvc = UIStoryboard.init(name: "Home", bundle: nil).instantiateViewController(withIdentifier: "AlbumNameEditingVC") as! AlbumNameEditingVC
+            nvc.album = album
+            self.navigationController?.pushViewController(nvc, animated: true)
+            
+            
+        })
+        alert.addAction(UIAlertAction(title: "앨범 삭제", style: .default) { action in
+            // perhaps use action.title here
+            
+            self.confirmDeleteView = ConfirmDeleteView(frame: (UIApplication.shared.keyWindow?.frame)!)
+            self.confirmDeleteView?.frame.origin.y = UIApplication.shared.statusBarFrame.height
+            
+            self.confirmDeleteView?.deleteButton.tag = indexPath.row
+            self.confirmDeleteView?.deleteButton.addTarget(
+                self,
+                action: #selector(self.removeAlbum(sender:)),
+                for: .touchUpInside
+            )
+            self.confirmDeleteView?.albumTitleLabel.text = self.albums[indexPath.row].title
+            
+            UIApplication.shared.keyWindow?.addSubview(self.confirmDeleteView!)
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel) { action in
+            
+        })
+        
+        self.present(
+            alert,
+            animated: true,
+            completion: { () in
+                // add view tapped evnets
+        })
+    }
+}
+
+extension FavoriteAlbumListVC : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    
+    func addCoverImage() {
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.delegate = self
+        present(
+            imagePicker,
+            animated: true,
+            completion: nil
+        )
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+        let data = NSData(data: UIImagePNGRepresentation(image)!)
+        
+        let realm = try! Realm()
+        do {
+            try realm.write {
+                self.selectedAlbum?.coverImageData = data
+            }
+        } catch {
+            print(error)
+        }
+        self.selectedAlbum = nil
+        
+        picker.dismiss(
+            animated: true,
+            completion: nil
+        )
     }
 }

@@ -8,23 +8,48 @@
 
 import UIKit
 
+enum SettingTitle : String {
+    case option = "환경설정"
+    case univcam = "유니브캠"
+    case details = "세부사항"
+    case search_results = "검색결과관리"
+    case permission_setting = "접근권한설정"
+    case share_univcam = "유니브캠 공유하기"
+    case evaluate_univcam = "유니브캠 평가하기"
+    case version_info = "버전정보"
+    case developer_github = "개발자 깃허브"
+    case designer_info = "디자이너 정보"
+    case opensource_licence = "Open Source Licence"
+}
+
 class SettingViewController: UIViewController {
     
-    @IBOutlet weak var SettingTableView: UITableView!
+    @IBOutlet weak var settingTableView: UITableView! {
+        didSet {
+            self.settingTableView.delegate = self
+            self.settingTableView.dataSource = self
+            self.settingTableView.register(Cells.setting.nib,
+                                           forCellReuseIdentifier: Cells.setting.identifier)
+            self.settingTableView.register(Cells.setting_header.nib,
+                                           forCellReuseIdentifier: Cells.setting_header.identifier)
+        }
+    }
     @IBOutlet var topBorderView: UIView!
+    @IBOutlet weak var settingLabel: UILabel!
     
-    let index_list = ["환경설정","유니브캠","세부사항"]
-    let title_number = [2,2,4]
-    let titles_section1 = ["검색결과관리","접근권한설정"]
-    let titles_section2 = ["유니브캠 공유하기","유니브캠 평가하기"]
-    let titles_section3 = ["버전정보","개발자 깃허브","디자이너 정보","Open Source Licence"]
-    var section_num : Int = 0
+    let index_list : [SettingTitle] = [.option, .univcam, .details]
+    var title_number : [Int] {
+        get {
+            return [titles_section1.count, titles_section2.count, titles_section3.count]
+        }
+    }
+    let titles_section1 : [SettingTitle] = [.search_results, .permission_setting]
+    let titles_section2 : [SettingTitle] = [.share_univcam, .evaluate_univcam]
+    let titles_section3 : [SettingTitle] = [.version_info, .designer_info, .developer_github, .opensource_licence]
+    
     let shareText = "앨범 및 사진 정리 어플리케이션 UnivCam으로, 더욱 효율적이고 생산적인 앨범 정리를 해보세요!\niOS : , Android : "
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.SettingTableView.delegate = self
-        self.SettingTableView.dataSource = self
-        //self.SettingTableView.tableFooterView = UIView()
         // Do any additional setup after loading the view.
     }
     
@@ -33,27 +58,44 @@ class SettingViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
+    override func viewWillAppear(_ animated: Bool) {
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: settingLabel.font = UIFont(name: settingLabel.font.fontName, size: 22)
+            break
+        case 1: settingLabel.font = UIFont(name: settingLabel.font.fontName, size: 26)
+            break
+        case 2: settingLabel.font = UIFont(name: settingLabel.font.fontName, size: 30)
+            break
+        case 3: settingLabel.font = UIFont(name: settingLabel.font.fontName, size: 33)
+            break
+        default:
+            settingLabel.font = UIFont(name: settingLabel.font.fontName, size: 30)
+            break
+        }
+    }
 }
 
-extension SettingViewController : UITableViewDataSource , UITableViewDelegate {
+extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return index_list.count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header_cell = tableView.dequeueReusableCell(withIdentifier: "SectionCell") as! SettingHeaderTableViewCell
-        header_cell.header_title.text = index_list[section]
+        let header_cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting_header.identifier) as! SettingHeaderCell
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: header_cell.header_title.font = UIFont(name: header_cell.header_title.font.fontName, size: 9)
+            break
+        case 1: header_cell.header_title.font = UIFont(name: header_cell.header_title.font.fontName, size: 10)
+            break
+        case 2: header_cell.header_title.font = UIFont(name: header_cell.header_title.font.fontName, size: 12)
+            break
+        case 3: header_cell.header_title.font = UIFont(name: header_cell.header_title.font.fontName, size: 13)
+            break
+        default:
+            header_cell.header_title.font = UIFont(name: header_cell.header_title.font.fontName, size: 30)
+            break
+        }
+        header_cell.header_title.text = index_list[section].rawValue
         return header_cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -64,55 +106,121 @@ extension SettingViewController : UITableViewDataSource , UITableViewDelegate {
         
         let yPosition = scrollView.contentOffset.y
         
-        if yPosition > 0 {
-            topBorderView.isHidden = false
-        } else {
-            topBorderView.isHidden = true
+        let sectionHeaderHeight: CGFloat = settingTableView.sectionHeaderHeight
+        if yPosition <= sectionHeaderHeight && yPosition >= 0 {
+            scrollView.contentInset = UIEdgeInsetsMake(-yPosition, 0, 0, 0)
         }
-        
-        let sectionHeaderHeight: CGFloat = SettingTableView.sectionHeaderHeight
-        if scrollView.contentOffset.y <= sectionHeaderHeight && scrollView.contentOffset.y >= 0 {
-            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0)
-        }
-        else if scrollView.contentOffset.y >= sectionHeaderHeight {
+        else if yPosition >= sectionHeaderHeight {
             scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0)
         }
+        topBorderView.isHidden = yPosition > 0 ? false : true
         
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let setting_cell = tableView.dequeueReusableCell(withIdentifier: "SettingCell") as! SettingTableViewCell
-        section_num += 1
-        switch section_num {
-        case 1,2:
-            setting_cell.versionInfo.text = ""
-            setting_cell.setting_title.text = titles_section1[indexPath.row]
+        guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else { return UITableViewCell()}
+        let setting_cell = tableView.dequeueReusableCell(withIdentifier: Cells.setting.identifier) as! SettingCell
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: setting_cell.setting_title.font = UIFont(name: setting_cell.setting_title.font.fontName, size: 12)
+        
+        setting_cell.version_info.font = UIFont(name: setting_cell.version_info.font.fontName, size: 12)
             break
-        case 3,4:
-            setting_cell.versionInfo.text = ""
-            setting_cell.setting_title.text = titles_section2[indexPath.row]
+        case 1: setting_cell.setting_title.font = UIFont(name: setting_cell.setting_title.font.fontName, size: 14)
+        setting_cell.version_info.font = UIFont(name: setting_cell.version_info.font.fontName, size: 14)
             break
-        case 5:
-            setting_cell.versionInfo.text = "1.0"
-            setting_cell.setting_title.text = titles_section3[indexPath.row]
+        case 2: setting_cell.setting_title.font = UIFont(name: setting_cell.setting_title.font.fontName, size: 16)
+        setting_cell.version_info.font = UIFont(name: setting_cell.version_info.font.fontName, size: 16)
             break
-        case 6,7,8:
-            setting_cell.versionInfo.text = ""
-            setting_cell.setting_title.text = titles_section3[indexPath.row]
+        case 3: setting_cell.setting_title.font = UIFont(name: setting_cell.setting_title.font.fontName, size: 18)
+        setting_cell.version_info.font = UIFont(name: setting_cell.version_info.font.fontName, size: 18)
+            break
+        default:
+            setting_cell.setting_title.font = UIFont(name: setting_cell.setting_title.font.fontName, size: 16)
+            setting_cell.version_info.font = UIFont(name: settingLabel.font.fontName, size: 16)
+            break
+        }
+        switch indexPath.section {
+        case 0:
+            setting_cell.version_info.isHidden = true
+            setting_cell.setting_title.text = titles_section1[indexPath.row].rawValue
+            break
+        case 1:
+            setting_cell.version_info.isHidden = true
+            setting_cell.setting_title.text = titles_section2[indexPath.row].rawValue
+            break
+        case 2:
+            switch indexPath.row {
+            case 0:
+                setting_cell.version_info.text = appVersion
+                setting_cell.setting_title.text = titles_section3[indexPath.row].rawValue
+                break
+            default:
+                setting_cell.version_info.isHidden = true
+                setting_cell.setting_title.text = titles_section3[indexPath.row].rawValue
+                break
+            }
             break
         default:
             break
         }
         
+        
         return setting_cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let value: CGFloat
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: value = 34.56
+            break
+        case 1: value = 40.896
+            break
+        case 2: value = 48
+            break
+        case 3: value = 52.944
+            break
+        default:
+            value = 48
+            break
+        }
+        return value
+    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 39.5
+        let value: CGFloat
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: value = 28.44
+            break
+        case 1: value = 33.654
+            break
+        case 2: value = 39.5
+            break
+        case 3: value = 43.5685
+            break
+        default:
+            value = 39.5
+            break
+        }
+        return value
     }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 16
+        let value: CGFloat
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: value = 11.52
+            break
+        case 1: value = 13.632
+            break
+        case 2: value = 16
+            break
+        case 3: value = 17.648
+            break
+        default:
+            value = 16
+            break
+        }
+        return value
     }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
     }
@@ -156,12 +264,14 @@ extension SettingViewController : UITableViewDataSource , UITableViewDelegate {
             case 0:
                 break
             case 1:
-                let Crevc = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "CreatorListVC") as! CreatorListVC
-                self.show(Crevc, sender: Any?)
+                let infoVCDesign = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+                infoVCDesign.viewType = .designer
+                self.show(infoVCDesign, sender: Any?)
                 break
             case 2:
-                let Devc = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "DesignerViewController") as! DesignerViewController
-                self.show(Devc, sender: Any?)
+                let infoVCDevelope = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
+                infoVCDevelope.viewType = .developer
+                self.show(infoVCDevelope, sender: Any?)
                 break
             case 3:
                 let Openvc = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "OpenSourceViewController")
@@ -174,8 +284,8 @@ extension SettingViewController : UITableViewDataSource , UITableViewDelegate {
         default:
             break
         }
-        if let index = self.SettingTableView.indexPathForSelectedRow{
-            self.SettingTableView.deselectRow(at: index, animated: true)
+        if let index = self.settingTableView.indexPathForSelectedRow{
+            self.settingTableView.deselectRow(at: index, animated: true)
         }
     }
 }

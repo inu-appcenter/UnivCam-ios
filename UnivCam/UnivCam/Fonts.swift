@@ -17,7 +17,7 @@ extension Fonts {
         get {
             switch self {
             case .navigationTitle:
-                return UIFont(name: "AppleSDGothicNeo-Regular", size:36)!
+                return UIFont(name: "AppleSDGothicNeo-Bold", size:32)!
             }
         }
     }

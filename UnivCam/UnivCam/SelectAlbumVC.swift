@@ -12,18 +12,15 @@ class SelectAlbumVC: UIViewController {
     
     var capturedImage : UIImage?
     
-    
     @IBOutlet var selectMessageLabel: UILabel!
     
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(UINib(nibName: "AlbumCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
+            collectionView.register(Cells.album.nib, forCellWithReuseIdentifier: Cells.album.identifier)
         }
     }
-    
-    
     
     var albums = [Album]()
     var selectedAlbums = [Album]()
@@ -35,8 +32,6 @@ class SelectAlbumVC: UIViewController {
         albums.removeAll()
         RealmHelper.fetchData(dataList: &albums)
         collectionView.reloadData()
-        
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,12 +45,11 @@ class SelectAlbumVC: UIViewController {
     }
     @IBAction func unwindToCapturedVC(_ sender: UIBarButtonItem) {
         print("no")
-        let vc = self.navigationController?.viewControllers[1] as! CapturedImageVC
+        let vc = self.navigationController?.viewControllers[1] as! TakenPhotoVC
         self.navigationController?.popToRootViewController(animated: true)
     }
     @IBAction func storeImagesToFolder(_ sender: Any) {
-        print(capturedImage)
-        print(_selectedCells)
+        
         let fileManager = FileManager.default
         for i in _selectedCells {
             let idx = i as! IndexPath
@@ -82,7 +76,7 @@ class SelectAlbumVC: UIViewController {
         updateAlbum.url = oldAlbum.url
         updateAlbum.photoCount = oldAlbum.photoCount + 1
         
-        let query = "id == \(updateAlbum.id)"
+        let query = "title = '\(updateAlbum.title)'"
         RealmHelper.updateObject(data: updateAlbum, query: query)
         
     }
@@ -114,13 +108,13 @@ extension SelectAlbumVC: UICollectionViewDataSource {
         cell.layer.borderColor = UIColor.lightGray.cgColor
         
         if _selectedCells.contains(indexPath) {
-            cell.isSelected=true
+            cell.isSelected = true
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.top)
             cell.backgroundColor = UIColor.lightGray
             cell.checkImage.isHidden = false
         }
         else{
-            cell.isSelected=false
+            cell.isSelected = false
             cell.checkImage.isHidden = true
         }
         

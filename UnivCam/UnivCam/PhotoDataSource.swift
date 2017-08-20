@@ -20,13 +20,12 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCell
         let photo = photos[indexPath.row]
         cell.imageView.image = photo
-        //cell.backgroundColor = UIColor.brown
-        //cell.backgroundColor = UIColor(patternImage: photo)
+        
+        if indexPath.row == 0 {
+           cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+        }
+     
         
         return cell
     }
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CustomHeaderCell", for: indexPath as IndexPath)
-//        return headerView
-//    }
 }

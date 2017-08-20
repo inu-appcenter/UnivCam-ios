@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="klp-Pb-kOV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="os7-pB-TQd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,7 +27,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fGy-zu-gDS">
-                                <rect key="frame" x="0.0" y="74" width="375" height="544"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="588"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="8" id="DHQ-yg-JWh">
                                     <size key="itemSize" width="226" height="230"/>
@@ -54,6 +54,10 @@
                                     </constraints>
                                 </collectionReusableView>
                             </collectionView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BKl-UT-u7G" customClass="NoMessageView" customModule="UnivCam" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="86" width="375" height="532"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -61,44 +65,22 @@
                             <constraint firstItem="4UH-C2-EXc" firstAttribute="top" secondItem="fGy-zu-gDS" secondAttribute="bottom" id="FER-Ql-j3T"/>
                             <constraint firstItem="fGy-zu-gDS" firstAttribute="leading" secondItem="tH4-zY-zgZ" secondAttribute="leading" id="SlF-FN-NJA"/>
                             <constraint firstItem="fGy-zu-gDS" firstAttribute="top" secondItem="Pkb-aZ-fd6" secondAttribute="bottom" constant="10" id="VXs-Un-urz"/>
+                            <constraint firstItem="4UH-C2-EXc" firstAttribute="top" secondItem="BKl-UT-u7G" secondAttribute="bottom" id="ZkY-xf-6Ub"/>
+                            <constraint firstAttribute="trailing" secondItem="BKl-UT-u7G" secondAttribute="trailing" id="jKR-gX-Wzx"/>
+                            <constraint firstItem="BKl-UT-u7G" firstAttribute="leading" secondItem="tH4-zY-zgZ" secondAttribute="leading" id="tWU-Hx-zky"/>
+                            <constraint firstItem="BKl-UT-u7G" firstAttribute="top" secondItem="Pkb-aZ-fd6" secondAttribute="bottom" constant="66" id="tgE-ZD-qwX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="DBe-6V-Y5d">
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="icSort2X" id="XEK-Qi-b8G"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="DBe-6V-Y5d"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="fGy-zu-gDS" id="7Fm-jQ-oxW"/>
+                        <outlet property="noMessageView" destination="BKl-UT-u7G" id="Kss-oF-p9I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0m-rK-r4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1820" y="480.80959520239884"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="FJi-lf-d0E">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="klp-Pb-kOV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="ic_star" id="EF7-os-c4W">
-                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
-                    </tabBarItem>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="k0I-fQ-xD1">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="os7-pB-TQd" kind="relationship" relationship="rootViewController" id="bRk-NN-KeO"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Y6-7O-9UP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="880.79999999999995" y="480.80959520239884"/>
-        </scene>
     </scenes>
-    <resources>
-        <image name="icSort2X" width="18" height="12"/>
-        <image name="ic_star" width="24" height="24"/>
-    </resources>
 </document>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="AppleSDGothicNeo.ttc">
+            <string>AppleSDGothicNeo-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="SettingCell" id="lZF-gq-sud" customClass="SettingCell" customModule="UnivCam" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lZF-gq-sud" id="Mqq-pz-pVz">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFN-ec-O1C">
+                        <rect key="frame" x="16.5" y="15" width="36" height="19.5"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                        <color key="textColor" red="0.31764705879999999" green="0.34509803919999998" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rlr-8J-gFa">
+                        <rect key="frame" x="323" y="15.5" width="36" height="19.5"/>
+                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
+                        <color key="textColor" red="0.72941176470000002" green="0.72941176470000002" blue="0.75294117650000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RFN-ec-O1C" firstAttribute="centerY" secondItem="Mqq-pz-pVz" secondAttribute="centerY" constant="-1.5" id="DLp-nC-SHU"/>
+                    <constraint firstItem="RFN-ec-O1C" firstAttribute="leading" secondItem="Mqq-pz-pVz" secondAttribute="leading" constant="16.5" id="ear-Ll-wWv"/>
+                    <constraint firstItem="rlr-8J-gFa" firstAttribute="top" secondItem="Mqq-pz-pVz" secondAttribute="topMargin" constant="7.5" id="fKa-9b-8Nv"/>
+                    <constraint firstAttribute="trailing" secondItem="rlr-8J-gFa" secondAttribute="trailing" constant="16.5" id="hOM-lr-Umb"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="setting_title" destination="RFN-ec-O1C" id="REK-kF-rOO"/>
+                <outlet property="version_info" destination="rlr-8J-gFa" id="xzi-OM-hTM"/>
+            </connections>
+            <point key="canvasLocation" x="116.5" y="118"/>
+        </tableViewCell>
+    </objects>
+</document>

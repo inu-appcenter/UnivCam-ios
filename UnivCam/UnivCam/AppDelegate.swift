@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -34,16 +35,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func createLocalFolder() {
         
+        let pathURL = URL(fileURLWithPath: UnivCamAPI.baseURLString)
         var ojeCtBool : ObjCBool = true
-        let isDirExist = FileManager.default.fileExists(atPath: UnivCamAPI.baseURLString, isDirectory: &ojeCtBool)
+        let isDirExist = FileManager.default.fileExists(atPath: UnivCamAPI.baseURLString,
+                                                        isDirectory: &ojeCtBool)
         if !isDirExist {
             do {
-                try FileManager.default.createDirectory(at: URL(fileURLWithPath: UnivCamAPI.baseURLString), withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(at: pathURL,
+                                                        withIntermediateDirectories: true,
+                                                        attributes: nil)
             } catch {
-                print("에러")
+                print("파일 쓰기 에러")
             }
         } else {
-            print("이미 존재하는 폴더입니다.")
+            print("존재 하지않는 경로")
         }
     }
 

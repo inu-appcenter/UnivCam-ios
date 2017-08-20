@@ -11,9 +11,21 @@ import UIKit
 class ConfirmDeleteView: UIView, NibFileOwnerLoadable {
     
     @IBOutlet var albumTitleLabel: UILabel!
+    
+    @IBOutlet var exitButton: UIButton! {
+        didSet {
+            exitButton.addTarget(self,
+                                   action: #selector(remove),
+                                   for: .touchUpInside)
+        }
+    }
+    
     @IBOutlet var cancelButton: UIButton! {
         didSet {
             cancelButton.contentHorizontalAlignment = .left
+            cancelButton.addTarget(self,
+                                   action: #selector(remove),
+                                   for: .touchUpInside)
         }
     }
     
@@ -30,6 +42,9 @@ class ConfirmDeleteView: UIView, NibFileOwnerLoadable {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadNibContent()
+    }
+    func remove() {
+        self.removeFromSuperview()
     }
     
 }

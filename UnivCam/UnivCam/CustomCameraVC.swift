@@ -18,12 +18,13 @@ enum CameraType {
 class CustomCameraVC: UIViewController {
     
     @IBOutlet var cameraView: UIView!
-    
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var layerView: UIView!
     @IBOutlet var shutterButton: UIButton!
     @IBOutlet var toggleCameraButton: UIButton!
     
+    let realm = try! Realm()
+
     let captureSession = AVCaptureSession()
     let stillImageOutput = AVCaptureStillImageOutput()
     var previewLayer : AVCaptureVideoPreviewLayer?
@@ -38,12 +39,7 @@ class CustomCameraVC: UIViewController {
     
     
     override func viewWillAppear(_ animated: Bool) {
-        
         self.navigationController?.navigationBar.isHidden = true
-        print(album?.url)
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +57,7 @@ class CustomCameraVC: UIViewController {
             
             break
         case .select:
-            
+            //folderUpdate()
             break
         }
         
@@ -70,7 +66,6 @@ class CustomCameraVC: UIViewController {
             completion: nil
         )
     }
-    
     
 }
 extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerControllerDelegate {
@@ -119,14 +114,11 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
         self.view.addSubview(cancelButton)
         self.view.addSubview(toggleCameraButton)
         
-        //        self.shutterButton.addTarget(
-        //            self,
-        //            action: #selector(saveCaptureImage),
-        //            for: .touchUpInside
-        //        )
-        self.shutterButton.actionHandle(controlEvents: .touchUpInside) {
-            self.takePhoto()
-        }
+        self.shutterButton.addTarget(
+            self,
+            action: #selector(saveCaptureImage),
+            for: .touchUpInside
+        )
     }
     
     
@@ -144,7 +136,6 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
     }
     func takePhoto() {
         self.shutterButton.isUserInteractionEnabled = false
-        let group = DispatchGroup()
         let name = self.album?.url
         if let videoConnection = stillImageOutput.connection(withMediaType: AVMediaTypeVideo) {
             stillImageOutput.captureStillImageAsynchronously(from: videoConnection, completionHandler: { (CMSampleBuffer, Error) in
@@ -156,17 +147,14 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
                     if let cameraImage = UIImage(data: imageData) {
                         self.storePhotoImage(image: cameraImage, name: name!, completion: { (success) in
                             if success {
-//                                Thread.sleep(forTimeInterval: 5)
-                                //group.leave()
                                 self.shutterButton.isUserInteractionEnabled = true
+                                
                             }
                         })
                     }
                 }
-//                group.notify(queue: .main, execute: {
-//                    self.shutterButton.isUserInteractionEnabled = true
-//                })
-                
+
+
             })
         }
     }
@@ -182,6 +170,7 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
         do {
             try imageData?.write(to: URL.init(fileURLWithPath: name + "/\(imageName)$\(number)"), options: .atomicWrite)
             DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(200), execute: {
+                self.folderUpdate(image: image, photoURLString: name + "/\(imageName)$\(self.number)")
                 self.number = self.number + 1
                 completion(true)
             })
@@ -194,21 +183,51 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
     
     
     
-    func folderUpdate() {
+    func folderUpdate(image: UIImage, photoURLString: String) {
         
         guard let oldAlbum = album else { return }
-        let updateAlbum = Album()
-        updateAlbum.title = oldAlbum.title
-        updateAlbum.id = oldAlbum.id
-        updateAlbum.createdAt = oldAlbum.createdAt
-        updateAlbum.isFavorite = oldAlbum.isFavorite
-        updateAlbum.createdAt = oldAlbum.createdAt
-        updateAlbum.url = oldAlbum.url
-        updateAlbum.photoCount = oldAlbum.photoCount + 1
+//        let updateAlbum = Album()
+//        updateAlbum.title = oldAlbum.title
+//        updateAlbum.id = oldAlbum.id
+//        updateAlbum.createdAt = oldAlbum.createdAt
+//        updateAlbum.isFavorite = oldAlbum.isFavorite
+//        updateAlbum.createdAt = oldAlbum.createdAt
+//        updateAlbum.url = oldAlbum.url
+//        updateAlbum.photoCount = oldAlbum.photoCount + 1
+//        updateAlbum.photos = oldAlbum.photos
         
-        let query = "id == \(updateAlbum.id)"
-        RealmHelper.updateObject(data: updateAlbum, query: query)
+        //let query = "id == \(updateAlbum.id)"
+        //let query = "title = '\(updateAlbum.title)'"
+
         
+        //updateAlbum.photos
+        //let photo = Photo()
+        //photo.url = photoURLString
+        //updateAlbum.photos.append(photo)
+
+        //RealmHelper.updateObject(data: updateAlbum, query: query)
+        
+//        do {
+//            try realm.write {
+//                updateAlbum.photos.append(photo)
+//                print("추가")
+//            }
+//        } catch {
+//            print(error)
+//        }
+       
+        let photo = Photo()
+        photo.url = photoURLString
+        
+        let realm = try! Realm()
+        do {
+            try realm.write {
+                album?.photoCount = (album?.photoCount)! + 1
+                album?.photos.append(photo)
+            }
+        } catch {
+            print(error)
+        }
     }
     
     
@@ -217,15 +236,13 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
             stillImageOutput.captureStillImageAsynchronously(from: videoConnection, completionHandler: { (CMSampleBuffer, Error) in
                 if let imageData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(CMSampleBuffer) {
                     
-                    if let cameraImage = UIImage(data: imageData) {
-                        //UIImageWriteToSavedPhotosAlbum(cameraImage, nil, nil, nil)
+                    guard let cameraImage = UIImage(data: imageData) else { return }
                         
-                        
-                        let nvc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CapturedImageVC") as! CapturedImageVC
+                        guard let nvc = ViewControllers.taken_photo.instance as? TakenPhotoVC else { return }
                         nvc.capturedImage = cameraImage
                         self.navigationController?.pushViewController(nvc, animated: false)
                         
-                    }
+                    
                 }
             })
         }

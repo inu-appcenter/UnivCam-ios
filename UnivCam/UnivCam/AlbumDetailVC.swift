@@ -10,12 +10,34 @@ import UIKit
 
 class AlbumDetailVC: UIViewController {
     
+    @IBOutlet var titleLabel: UILabel! {
+        didSet {
+            titleLabel.text = album?.title
+        }
+    }
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
+            collectionView.allowsMultipleSelection = true
             collectionView.dataSource = self
             collectionView.delegate = self
-            collectionView.register(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: "UICollectionViewCell")
+            collectionView.register(Cells.photo.nib,
+                                    forCellWithReuseIdentifier: Cells.photo.identifier)
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+            
+        }
+    }
+    
+    @IBOutlet var deletePhotoButton: UIBarButtonItem! {
+        didSet {
+            deletePhotoButton.target = self
+            deletePhotoButton.action = #selector(deleteImages)
+        }
+    }
+    
+    @IBOutlet var moreButton: UIBarButtonItem! {
+        didSet {
+            moreButton.target = self
+            moreButton.action = #selector(deleteImages)
         }
     }
     
@@ -31,39 +53,48 @@ class AlbumDetailVC: UIViewController {
     }()
     
     var photos = [UIImage]()
-    var dirPath : String?
+    var selectedPhotos = [UIImage]()
+    var _selectedCells : NSMutableArray = []
+    var album : Album?
     
     override func viewWillAppear(_ animated: Bool) {
-        //self.tabBarController?.tabBar.isHidden = true
-//        let dirPath = UnivCamAPI.baseURL() + "/" + dirName
-        
-        
-        guard let dirPath = dirPath else { return }
-        
-        if let files = try? FileManager.default.contentsOfDirectory(atPath: dirPath) {
-            for filename in files {
-                print(filename)
+        guard let dirPath = album?.url,
+            let files = try? FileManager.default.contentsOfDirectory(atPath: dirPath) else { return }
+        for filename in files {
+            // 파일 확장자 png 체크
+            print("no")
+            let suffixIndex = filename.index(filename.endIndex, offsetBy: -3)
+            _ = filename.substring(from: suffixIndex)
+            //if suffix == "png" {
                 let imageURL = dirPath + "/" + filename
                 photos.append(UIImage(named: imageURL)!)
-            }
+            //}
         }
-        
-//        print(RealmHelper.objectsFromQuery(data: Album(), query: ""))
-        
         
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
-    
-    
     
     func unwindToHome() {
         self.navigationController?.popToRootViewController(animated: true)
     }
-    
+    func deleteImages() {
+        var indexPaths = [IndexPath]()
+        //let fileManager = FileManager.default
+        for indexPath in _selectedCells {
+            guard let indexPath = indexPath as? IndexPath else { return }
+            photos.remove(at: indexPath.row)
+            indexPaths.append(indexPath)
+        }
+        
+        collectionView.deleteItems(at: indexPaths)
+        collectionView.reloadData()
+    }
+    func moreAction() {
+        
+    }
 }
 
 extension AlbumDetailVC: UICollectionViewDataSource {
@@ -76,25 +107,57 @@ extension AlbumDetailVC: UICollectionViewDataSource {
         return photos.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let identifier = "UICollectionViewCell"
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCell
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.photo.identifier,
+                                                      for: indexPath) as! PhotoCell
         let photo = photos[indexPath.row]
         cell.imageView.image = photo
-        //cell.backgroundColor = UIColor.brown
-        //cell.backgroundColor = UIColor(patternImage: photo)
+        
+        if _selectedCells.contains(indexPath) {
+            cell.isSelected = true
+            collectionView.selectItem(at: indexPath,
+                                      animated: true,
+                                      scrollPosition: UICollectionViewScrollPosition.top)
+            cell.backgroundColor = UIColor.lightGray
+            
+        }
+        else {
+            cell.isSelected = false
+        }
+        
         
         return cell
     }
     
+    
+    
 }
 extension AlbumDetailVC: UICollectionViewDelegate {
+    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    //        print("I")
+    //        let nvc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoVC
+    //        nvc.photos = photos
+    //        nvc.selectedIndex = indexPath
+    //
+    //
+    //        self.navigationController?.pushViewController(nvc, animated: true)
+    //    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let nvc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoVC
+        print(_selectedCells)
+        
+        guard let nvc = ViewControllers.photo_album.instance as? PhotoAlbumVC else { return }
         nvc.photos = photos
-        nvc.selectedIndex = indexPath
-        
-        
+        nvc.albumTitle = album?.title
+       
         self.navigationController?.pushViewController(nvc, animated: true)
+        
+        //_selectedCells.add(indexPath)
+        //collectionView.reloadItems(at: [indexPath])
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        //_selectedCells.remove(indexPath)
+        //collectionView.reloadItems(at: [indexPath])
     }
 }
 

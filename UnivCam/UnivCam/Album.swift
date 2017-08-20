@@ -11,19 +11,17 @@ import RealmSwift
 
 class Album: Object {
     
-    dynamic var id = 0
+    dynamic var id = UUID().uuidString
     dynamic var title = ""
     dynamic var isFavorite : Bool = false
-    dynamic var createdAt = NSDate()
+    dynamic var createdAt = Date()
     dynamic var url = ""
+    dynamic var coverImageData : NSData? = nil
+    
     dynamic var photoCount = 0
     
+    var photos = List<Photo>()
     
-    
-    static func incrementID() -> Int {
-        let realm = try! Realm()
-        return (realm.objects(Album.self).max(ofProperty: "id") as Int? ?? 0) + 1
-    }
     override static func primaryKey() -> String? {
         return "id"
     }

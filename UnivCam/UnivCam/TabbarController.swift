@@ -9,83 +9,89 @@
 import AVFoundation
 import UIKit
 
+enum TapViewControllers : Int {
+    case home = 0
+    case search
+    case camera
+    case favorite
+    case setting
+}
+
 class TabbarController: UITabBarController {
     
     lazy var button : UIButton = {
         var btn : UIButton = .init(type: .custom)
-        btn.setImage(
-            Assets.camera.image,
-            for: .normal
-        )
+        btn.setImage(Assets.camera.image,
+                     for: .normal)
         btn.backgroundColor = UIColor.clear
-        btn.addTarget(
-            self,
-            action: #selector(showCameraVC), for: .touchUpInside
-        )
-        btn.frame = .init(
-            x: self.tabBar.center.x - 32,
-            y: self.view.bounds.height - 49,
-            width: 64,
-            height: 50
-        )
+        btn.addTarget(self,
+                      action: #selector(showCamera),
+                      for: .touchUpInside)
+        btn.frame = .init(x: self.tabBar.center.x - 32,
+                          y: self.view.bounds.height - 49,
+                          width: 64,
+                          height: 50)
         return btn
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 탭바에 커스텀 카메라 버튼
         self.tabBar.tintColor = Palette.tabbar.color
-        self.view.insertSubview(button, aboveSubview: self.tabBar)
+        self.tabBar.addSubview(self.button)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override func viewDidLayoutSubviews() {
+        let v = self.tabBarButtons()[2]
+        button.frame = v.frame
+//        if let v = v {
+//        button.frame = v.frame
+        //}
+    }
     
-    func showCameraVC() {
-        
+    func showCamera(){
         AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) {
             (granted: Bool) -> Void in
             guard granted else {
                 /// Report an error. We didn't get access to hardware.
                 DispatchQueue.main.async(execute: { () -> Void in
-                    self.selectedIndex = 2
+                    self.selectedIndex = TapViewControllers.camera.rawValue
                 })
                 return
             }
             
-            // access granted
-            let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CustomCameraNVC")
-            
-            self.present(
-                vc,
-                animated: true,
-                completion: nil
-            )
-
+            DispatchQueue.main.async(execute: { () -> Void in
+                // access granted
+                let vc = ViewControllers.custom_camera.instance
+                self.present(
+                    vc,
+                    animated: true,
+                    completion: nil
+                )
+            })
         }
     }
 }
 
-extension TabbarController : UITabBarControllerDelegate {
-    
-//    // UITabBarDelegate
-//    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-//        self.selectedIndex = 1
-//        print("Selected item")
-//        print(item.description)
-//    }
-//
-//    // UITabBarControllerDelegate
-//    func tabBarController(_ tabBarController: UITabBarController,
-//                          didSelect viewController: UIViewController) {
-//        print(viewController)
-//
-//        //        if viewController == CameraViewController() {
-//        //            // Present image picker
-//        //            print("yes")
-//        //        }
-//    }
+extension UITabBarController{
+    // タブバーを構成している、内部クラスの「UITabBarButton」を探してきて、UIViewの配列として返す。
+    // OSのバージョンアップで使えなくなる可能性がある。
+    func tabBarButtons()->[UIView]{
+        // reduce関数は知らなければ損。
+        return self.tabBar.subviews.reduce([], { (ret:[UIView], item:AnyObject) -> [UIView] in
+            if let v = item as? UIView  {
+                // ここ、クラス判定を「文字列」でやってるから、裏技ちっく。
+                if v.isKind(of: NSClassFromString("UITabBarButton")!) {
+                    return ret + [v]
+                }
+                //                if v.isKindOfClass(NSClassFromString("UITabBarButton")) {
+                //                    return ret + [v]
+                //                }
+            }
+            return ret
+        })
+    }
 }

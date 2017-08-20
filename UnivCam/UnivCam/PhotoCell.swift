@@ -8,13 +8,16 @@
 
 import UIKit
 
-class PhotoCell: UICollectionViewCell {
+class PhotoCell: UICollectionViewCell, UIScrollViewDelegate {
 
     @IBOutlet var imageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        //scrollView.delegate = self
+       
+        //self.scrollView.minimumZoomScale = 1.0
+        //self.scrollView.maximumZoomScale = 6.0
     }
-
 }
