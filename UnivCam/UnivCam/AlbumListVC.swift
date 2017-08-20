@@ -137,13 +137,21 @@ extension AlbumListVC: UICollectionViewDataSource {
             for: .touchUpInside
         )
         
-        if let coverImageData = album.coverImageData {
-            cell.imageView.image = UIImage(data: coverImageData as Data)
+        guard let coverImageURL = album.photos.last?.url else { return cell }
+        guard let coverImageData = album.coverImageData, album.coverImageData != nil else
+        {
+            cell.imageView.image = UIImage(named: coverImageURL)
             return cell
         }
-        if let coverImageURL = album.photos.last?.url {
-            cell.imageView.image = UIImage(named: coverImageURL)
-        }
+        cell.imageView.image = UIImage(data: coverImageData as Data)
+        
+//        if let coverImageData = album.coverImageData {
+//            cell.imageView.image = UIImage(data: coverImageData as Data)
+//            return cell
+//        }
+//        if let coverImageURL = album.photos.last?.url {
+//            cell.imageView.image = UIImage(named: coverImageURL)
+//        }
         
         return cell
     }
@@ -265,8 +273,11 @@ extension AlbumListVC {
     
     /// UPDATE - Toggle Favorite  , 즐겨찾기
     func toggleFavorite(sender: UIButton) {
+        // 버튼이 눌린 셀의 인덱스를 가져옴
         let senderPosition = sender.convert(CGPoint.zero, to: self.collectionView)
         guard let indexPath: IndexPath = self.collectionView.indexPathForItem(at: senderPosition) else { return }
+        
+        // 렘 업데이트
         let realm = try! Realm()
         let query = "title = '\(albums[indexPath.row].title)'"
         guard let album = realm.objects(Album.self).filter(query).first else { return }
@@ -284,8 +295,8 @@ extension AlbumListVC {
 // DELETE
 extension AlbumListVC {
     func removeAlbum(sender: UIButton) {
-        print("test")
         
+        // 앨범 삭제
         let album = self.albums[sender.tag]
         let fileManager = FileManager.default
         do {
@@ -294,7 +305,6 @@ extension AlbumListVC {
         catch let error as NSError {
             print("Ooops! Something went wrong: \(error)")
         }
-        
         RealmHelper.removeData(data: album)
         confirmDeleteView?.remove()
     }

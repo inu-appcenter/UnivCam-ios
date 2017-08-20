@@ -34,11 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     func createLocalFolder() {
-        
+        // 다큐먼트 + /Univcam 경로
+        // Root folder -> sub folders
         let pathURL = URL(fileURLWithPath: UnivCamAPI.baseURLString)
         var ojeCtBool : ObjCBool = true
         let isDirExist = FileManager.default.fileExists(atPath: UnivCamAPI.baseURLString,
                                                         isDirectory: &ojeCtBool)
+        
         if !isDirExist {
             do {
                 try FileManager.default.createDirectory(at: pathURL,

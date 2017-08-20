@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class SelectAlbumVC: UIViewController {
     
@@ -19,18 +20,21 @@ class SelectAlbumVC: UIViewController {
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.register(Cells.album.nib, forCellWithReuseIdentifier: Cells.album.identifier)
+            self.navigationController?.navigationBar.isHidden = false
         }
     }
     
-    var albums = [Album]()
+    var albums: Results<Album> = {
+        let realm = try! Realm()
+        return realm.objects(Album.self)
+    }()
+    
     var selectedAlbums = [Album]()
     var _selectedCells : NSMutableArray = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.navigationController?.navigationBar.isHidden = false
-        albums.removeAll()
-        RealmHelper.fetchData(dataList: &albums)
+        
         collectionView.reloadData()
     }
     override func viewDidLoad() {
@@ -46,7 +50,8 @@ class SelectAlbumVC: UIViewController {
     @IBAction func unwindToCapturedVC(_ sender: UIBarButtonItem) {
         print("no")
         let vc = self.navigationController?.viewControllers[1] as! TakenPhotoVC
-        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToViewController(vc, animated: true)
+        
     }
     @IBAction func storeImagesToFolder(_ sender: Any) {
         
@@ -99,13 +104,10 @@ extension SelectAlbumVC: UICollectionViewDataSource {
         let album = albums[indexPath.row]
         
         cell.cameraButton.isHidden = true
-        cell.imageView.image = UIImage(named: "back")
         cell.titleLabel.text = album.title
         cell.favoriteButton.isHidden = true
         cell.editButton.isHidden = true
         cell.pictureCountLabel.text = String(album.photoCount) + "장의 사진"
-        cell.layer.borderWidth = 0.5
-        cell.layer.borderColor = UIColor.lightGray.cgColor
         
         if _selectedCells.contains(indexPath) {
             cell.isSelected = true
@@ -117,6 +119,14 @@ extension SelectAlbumVC: UICollectionViewDataSource {
             cell.isSelected = false
             cell.checkImage.isHidden = true
         }
+        
+        guard let coverImageURL = album.photos.last?.url else { return cell }
+        guard let coverImageData = album.coverImageData, album.coverImageData != nil else
+        {
+            cell.imageView.image = UIImage(named: coverImageURL)
+            return cell
+        }
+        cell.imageView.image = UIImage(data: coverImageData as Data)
         
         return cell
     }

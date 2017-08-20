@@ -18,6 +18,7 @@ class TakenPhotoVC: UIViewController {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.isHidden = true
         imageView.image = capturedImage
+        UIApplication.shared.isStatusBarHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +37,9 @@ class TakenPhotoVC: UIViewController {
        nvc.capturedImage = self.capturedImage
         self.navigationController?.pushViewController(nvc, animated: false)
     }
-    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     /*
      // MARK: - Navigation

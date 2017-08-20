@@ -40,6 +40,7 @@ class FavoriteAlbumListVC: UIViewController {
         super.viewDidLoad()
         print("값나왔냐", albums.count)
         // Do any additional setup after loading the view.
+        self.addRealmNotification()
     }
     
     func addRealmNotification() {

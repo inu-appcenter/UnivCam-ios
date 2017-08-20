@@ -40,6 +40,7 @@ class CustomCameraVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
+        UIApplication.shared.isStatusBarHidden = true
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +51,10 @@ class CustomCameraVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
     @IBAction func unwindToTabVC(_ sender: UIButton) {
         
         switch cameraType {

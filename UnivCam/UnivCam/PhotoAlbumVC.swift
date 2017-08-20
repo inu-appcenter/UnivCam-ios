@@ -86,6 +86,7 @@ class PhotoAlbumVC: UIViewController {
         
         _selectedCells.add(selectedIndex)
         
+        
     }
     override func viewDidLoad() {
         super.viewDidLoad()

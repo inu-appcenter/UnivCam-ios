@@ -17,10 +17,9 @@ class Album: Object {
     dynamic var createdAt = Date()
     dynamic var url = ""
     dynamic var coverImageData : NSData? = nil
-    
     dynamic var photoCount = 0
     
-    var photos = List<Photo>()
+    var photos = List<Photo>() // 1대 다 관계
     
     override static func primaryKey() -> String? {
         return "id"
