@@ -136,7 +136,8 @@ extension AlbumListVC: UICollectionViewDataSource {
             action: #selector(showCamera(sender:)),
             for: .touchUpInside
         )
-        
+        // 이미지 뷰 잔상 제거하기 위함.
+        cell.imageView.image = nil
         guard let coverImageURL = album.photos.last?.url else { return cell }
         guard let coverImageData = album.coverImageData, album.coverImageData != nil else
         {

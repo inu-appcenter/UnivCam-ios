@@ -76,11 +76,11 @@ class SearchAlbumListVC: UIViewController {
 //        searchedAlbums = Array(albums)
 //        collectionView.reloadData()
 //
-        
+        self.searchAlbumsAsPerText(self.searchTextField)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchAlbumsAsPerText(self.searchTextField)
+        
         self.addRealmNotification()
         
     }
