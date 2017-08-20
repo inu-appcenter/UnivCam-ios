@@ -103,11 +103,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9i-7H-qmy">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o9i-7H-qmy">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iSA-e8-nVS">
-                                        <rect key="frame" x="0.0" y="519" width="375" height="147.5"/>
+                                        <rect key="frame" x="0.0" y="521" width="375" height="147.5"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ZF-ib-EwB">
@@ -115,27 +116,10 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="shutter"/>
                                             </button>
-                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="MD4-Nd-1jr">
-                                                <rect key="frame" x="250" y="39" width="117" height="50"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gEX-uE-Bgo">
+                                                <rect key="frame" x="270" y="24" width="80" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="VUw-tb-mOh">
-                                                    <size key="itemSize" width="50" height="50"/>
-                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                </collectionViewFlowLayout>
-                                                <cells>
-                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6oR-yO-v76">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                        </view>
-                                                    </collectionViewCell>
-                                                </cells>
-                                            </collectionView>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -162,18 +146,13 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="o9i-7H-qmy" firstAttribute="top" secondItem="F22-m3-aGX" secondAttribute="top" id="VRU-cj-3lG"/>
-                            <constraint firstAttribute="trailing" secondItem="o9i-7H-qmy" secondAttribute="trailing" id="a7p-Zw-En6"/>
-                            <constraint firstItem="N8x-gI-2Xj" firstAttribute="top" secondItem="o9i-7H-qmy" secondAttribute="bottom" id="doJ-Kc-uG8"/>
-                            <constraint firstItem="o9i-7H-qmy" firstAttribute="leading" secondItem="F22-m3-aGX" secondAttribute="leading" id="mln-EF-qNS"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fJL-iE-01w"/>
                     <connections>
                         <outlet property="cameraView" destination="o9i-7H-qmy" id="fD7-PI-7a2"/>
                         <outlet property="cancelButton" destination="pr0-ZR-sI8" id="2u9-fG-4Ph"/>
                         <outlet property="layerView" destination="iSA-e8-nVS" id="PRP-rN-dgi"/>
+                        <outlet property="selectShowImage" destination="gEX-uE-Bgo" id="aVJ-Cd-Hff"/>
                         <outlet property="shutterButton" destination="2ZF-ib-EwB" id="A0A-8U-Bvt"/>
                         <outlet property="toggleCameraButton" destination="LHh-TD-TX6" id="ogG-Rw-uvo"/>
                         <segue destination="Iwi-kB-DAh" kind="push" id="9QR-Ps-YTS"/>
@@ -181,7 +160,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oDg-dj-YrK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4180" y="-510"/>
+            <point key="canvasLocation" x="4180" y="-510.49475262368821"/>
         </scene>
         <!--Taken PhotoVC-->
         <scene sceneID="fjU-WN-32P">

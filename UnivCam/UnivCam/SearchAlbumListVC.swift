@@ -31,6 +31,19 @@ class SearchAlbumListVC: UIViewController {
             searchTextField.addTarget(self,
                                       action: #selector(searchAlbumsAsPerText(_ :)),
                                       for: .editingChanged)
+            switch (DeviceUtility.knowDeviceSize()) {
+            case 0: searchTextField.font = UIFont(name: (searchTextField.font?.fontName)!, size: 22)
+                break
+            case 1: searchTextField.font = UIFont(name: (searchTextField.font?.fontName)!, size: 26)
+                break
+            case 2: searchTextField.font = UIFont(name: (searchTextField.font?.fontName)!, size: 30)
+                break
+            case 3: searchTextField.font = UIFont(name: (searchTextField.font?.fontName)!, size: 33)
+                break
+            default:
+                searchTextField.font = UIFont(name: (searchTextField.font?.fontName)!, size: 30)
+                break
+            }
         }
     }
     
@@ -190,6 +203,24 @@ extension SearchAlbumListVC: UICollectionViewDataSource {
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize{
+        
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0:
+            return CGSize(width: 148, height: 204.1)
+        case 1:
+            return CGSize(width: 148, height: 204.1)
+        case 2:
+            return CGSize(width: 175.5, height: 243)
+        case 3:
+            return CGSize(width: 195, height: 269)
+        default:
+            return CGSize(width: 175.5, height: 243)
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let headerCell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader,
                                                                          withReuseIdentifier: "CustomHeaderCell",
@@ -202,12 +233,7 @@ extension SearchAlbumListVC: UICollectionViewDataSource {
 
 
 extension SearchAlbumListVC: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize{
-        
-        return CGSize(width: 175.5, height: 243)
-    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(8, 8, 27, 8)
     }
