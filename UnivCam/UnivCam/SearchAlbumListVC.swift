@@ -76,11 +76,11 @@ class SearchAlbumListVC: UIViewController {
 //        searchedAlbums = Array(albums)
 //        collectionView.reloadData()
 //
-        
+        self.searchAlbumsAsPerText(self.searchTextField)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.searchAlbumsAsPerText(self.searchTextField)
+        
         self.addRealmNotification()
         
     }
@@ -98,6 +98,7 @@ class SearchAlbumListVC: UIViewController {
                     collectionView.insertItems(at: insertions.map { IndexPath(row: $0, section: 0) })
                     collectionView.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
                     collectionView.reloadItems(at: modifications.map { IndexPath(row: $0, section: 0) })
+                    self?.searchCountString = "\(self?.albums.count) 개의 앨범"
                     self?.collectionView.reloadData()
 //                    self?.noMessageView.isHidden = self?.albums.count == 0 ? false : true
                 }, completion: { _ in })

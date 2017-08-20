@@ -44,7 +44,8 @@ class CustomCameraVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-        if let imageUrl = album?.photos.last?.url {
+
+        if let imageUrl = self.album?.photos.last?.url {
             self.selectShowImage.image = UIImage(named: imageUrl)
         }
     }
@@ -57,6 +58,10 @@ class CustomCameraVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
     @IBAction func unwindToTabVC(_ sender: UIButton) {
         
         switch cameraType {
