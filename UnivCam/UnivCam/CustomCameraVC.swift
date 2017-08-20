@@ -44,7 +44,7 @@ class CustomCameraVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-        if let imageUrl = self.album?.photos.last?.url {
+        if let imageUrl = album?.photos.last?.url {
             self.selectShowImage.image = UIImage(named: imageUrl)
         }
     }
