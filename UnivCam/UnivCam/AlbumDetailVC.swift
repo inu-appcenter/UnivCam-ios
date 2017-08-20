@@ -133,15 +133,7 @@ extension AlbumDetailVC: UICollectionViewDataSource {
     
 }
 extension AlbumDetailVC: UICollectionViewDelegate {
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        print("I")
-    //        let nvc = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "PhotoViewController") as! PhotoVC
-    //        nvc.photos = photos
-    //        nvc.selectedIndex = indexPath
-    //
-    //
-    //        self.navigationController?.pushViewController(nvc, animated: true)
-    //    }
+    
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(_selectedCells)
@@ -149,6 +141,7 @@ extension AlbumDetailVC: UICollectionViewDelegate {
         guard let nvc = ViewControllers.photo_album.instance as? PhotoAlbumVC else { return }
         nvc.photos = photos
         nvc.albumTitle = album?.title
+        nvc.selectedIndex = indexPath
        
         self.navigationController?.pushViewController(nvc, animated: true)
         

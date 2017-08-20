@@ -253,7 +253,6 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
                         guard let nvc = ViewControllers.taken_photo.instance as? TakenPhotoVC else { return }
                         nvc.capturedImage = cameraImage
                         self.navigationController?.pushViewController(nvc, animated: false)
-                        
                     
                 }
             })

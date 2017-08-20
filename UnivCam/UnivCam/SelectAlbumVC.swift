@@ -55,13 +55,27 @@ class SelectAlbumVC: UIViewController {
     }
     @IBAction func storeImagesToFolder(_ sender: Any) {
         
-        let fileManager = FileManager.default
-        for i in _selectedCells {
-            let idx = i as! IndexPath
+        for idx in _selectedCells {
+            let indexPath = idx as! IndexPath
             let imageName = String(describing: Date())
             let imageData =  UIImageJPEGRepresentation(capturedImage!, 1.0)
-            try! imageData?.write(to: URL.init(fileURLWithPath: albums[idx.row].url + "/\(imageName)"), options: .atomicWrite)
-            folderUpdate(idx: idx)
+            try! imageData?.write(to: URL.init(fileURLWithPath: albums[indexPath.row].url + "/\(imageName)"), options: .atomicWrite)
+            
+            let realm = try! Realm()
+            let query = "title = '\(albums[indexPath.row].title)'"
+            guard let album = realm.objects(Album.self).filter(query).first else { return }
+            let photo = Photo()
+            photo.url = albums[indexPath.row].url + "/\(imageName)"
+            
+            do {
+                try realm.write {
+                    album.photoCount = album.photoCount + 1
+                    album.photos.append(photo)
+                }
+            } catch {
+                print(error)
+            }
+            
             
         }
         self.dismiss(
@@ -69,22 +83,7 @@ class SelectAlbumVC: UIViewController {
             completion: nil
         )
     }
-    func folderUpdate(idx: IndexPath) {
-        guard let indexPath: IndexPath = idx else { return }
-        let oldAlbum = albums[indexPath.row]
-        let updateAlbum = Album()
-        updateAlbum.title = oldAlbum.title
-        updateAlbum.id = oldAlbum.id
-        updateAlbum.createdAt = oldAlbum.createdAt
-        updateAlbum.isFavorite = oldAlbum.isFavorite
-        updateAlbum.createdAt = oldAlbum.createdAt
-        updateAlbum.url = oldAlbum.url
-        updateAlbum.photoCount = oldAlbum.photoCount + 1
-        
-        let query = "title = '\(updateAlbum.title)'"
-        RealmHelper.updateObject(data: updateAlbum, query: query)
-        
-    }
+    
     
 }
 
