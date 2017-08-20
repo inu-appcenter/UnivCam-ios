@@ -113,6 +113,24 @@ extension FavoriteAlbumListVC: UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize{
+        
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0:
+            return CGSize(width: 148, height: 204.1)
+        case 1:
+            return CGSize(width: 148, height: 204.1)
+        case 2:
+            return CGSize(width: 175.5, height: 243)
+        case 3:
+            return CGSize(width: 195, height: 269)
+        default:
+            return CGSize(width: 175.5, height: 243)
+        }
+    }
+    
 }
 
 extension FavoriteAlbumListVC: UICollectionViewDelegateFlowLayout {
@@ -122,12 +140,7 @@ extension FavoriteAlbumListVC: UICollectionViewDelegateFlowLayout {
                                                                          for: indexPath)
         return headerView
     }
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize{
-        
-        return CGSize(width: 175.5, height: 243)
-    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(27, 8, 27, 8)
     }

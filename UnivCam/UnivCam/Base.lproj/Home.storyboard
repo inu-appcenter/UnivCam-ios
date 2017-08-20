@@ -42,16 +42,23 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="앨범" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tN8-HF-xs8">
-                                            <rect key="frame" x="17" y="8.5" width="55.5" height="38.5"/>
-                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="32"/>
+                                            <rect key="frame" x="17" y="8.5" width="55.5" height="36"/>
+                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="30"/>
                                             <color key="textColor" red="0.20784313725490194" green="0.22352941176470587" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=compact-widthClass=compact">
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="26"/>
+                                            </variation>
+                                            <variation key="heightClass=compact-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="33"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="tN8-HF-xs8" firstAttribute="top" secondItem="Een-by-0uS" secondAttribute="top" constant="8.5" id="4mf-Yn-YkP"/>
                                         <constraint firstItem="tN8-HF-xs8" firstAttribute="leading" secondItem="Een-by-0uS" secondAttribute="leading" constant="17" id="Kzi-Nm-cz2"/>
+                                        <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="tN8-HF-xs8" secondAttribute="trailing" constant="247.5" id="PWv-to-OM6"/>
                                     </constraints>
                                 </collectionReusableView>
                             </collectionView>
@@ -107,7 +114,7 @@
                                 <color key="textColor" red="0.20784313730000001" green="0.22352941179999999" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="검색어를 입력해주세요(20자 이내)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxj-9S-Kv8">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="앨범명을 입력해주세요(20자 이내)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yxj-9S-Kv8">
                                 <rect key="frame" x="17" y="97" width="221.5" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="w9u-WH-f5F"/>

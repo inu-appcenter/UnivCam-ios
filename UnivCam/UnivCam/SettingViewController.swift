@@ -20,6 +20,8 @@ enum SettingTitle : String {
     case developer_github = "개발자 깃허브"
     case designer_info = "디자이너 정보"
     case opensource_licence = "Open Source Licence"
+    case share_url = "https://www.facebook.com/UIAppCenter/?fref=ts"
+    case share_text = "앨범 및 사진 정리 어플리케이션 UnivCam으로, 더욱 효율적이고 생산적인 앨범 정리를 해보세요!\nhttps://www.facebook.com/UIAppCenter/?fref=ts"
 }
 
 class SettingViewController: UIViewController {
@@ -43,11 +45,11 @@ class SettingViewController: UIViewController {
             return [titles_section1.count, titles_section2.count, titles_section3.count]
         }
     }
-    let titles_section1 : [SettingTitle] = [.search_results, .permission_setting]
+//    let titles_section1 : [SettingTitle] = [.search_results, .permission_setting]
+    let titles_section1 : [SettingTitle] = [.permission_setting]
     let titles_section2 : [SettingTitle] = [.share_univcam, .evaluate_univcam]
     let titles_section3 : [SettingTitle] = [.version_info, .designer_info, .developer_github, .opensource_licence]
     
-    let shareText = "앨범 및 사진 정리 어플리케이션 UnivCam으로, 더욱 효율적이고 생산적인 앨범 정리를 해보세요!\niOS : , Android : "
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -232,8 +234,9 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
         case 0:
             switch indexPath.row {
             case 0:
-                let Sevc = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "SearchHistorySettingVC") as! SearchHistorySettingVC
-                self.show(Sevc, sender: Any?)
+//                let Sevc = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "SearchHistorySettingVC") as! SearchHistorySettingVC
+//                self.show(Sevc, sender: Any?)
+                UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
                 break
             case 1:
                 UIApplication.shared.open(URL(string:UIApplicationOpenSettingsURLString)!)
@@ -245,7 +248,7 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
         case 1:
             switch indexPath.row {
             case 0:
-                let appShare = UIActivityViewController(activityItems: [shareText], applicationActivities: nil)
+                let appShare = UIActivityViewController(activityItems: [SettingTitle.share_text.rawValue], applicationActivities: nil)
                 UIButton.appearance().tintColor = UIColor(hex:0x515859)
                 appShare.excludedActivityTypes = [ UIActivityType.airDrop]
                 appShare.popoverPresentationController?.sourceView = self.view
@@ -253,7 +256,7 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
                 
                 break
             case 1:
-                UIApplication.shared.openURL(URL(string: "https://github.com/chojunyng")!)
+                UIApplication.shared.openURL(URL(string: SettingTitle.share_url.rawValue)!)
                 break
             default:
                 break

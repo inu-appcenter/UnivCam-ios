@@ -53,22 +53,15 @@
 		30D996091F33818B00382AD9 /* PhotoDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D996081F33818B00382AD9 /* PhotoDataSource.swift */; };
 		30D9960C1F33902C00382AD9 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30D9960A1F33902C00382AD9 /* PhotoCell.swift */; };
 		30D9960D1F33902C00382AD9 /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30D9960B1F33902C00382AD9 /* PhotoCell.xib */; };
-		30E2DD951F408B050084CDC3 /* DesignerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DD941F408B050084CDC3 /* DesignerTableViewCell.swift */; };
-		30E2DDA31F40908E0084CDC3 /* SearchHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DDA21F40908D0084CDC3 /* SearchHistoryCell.swift */; };
 		30E2DDA51F4090AF0084CDC3 /* SearchDeleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DDA41F4090AF0084CDC3 /* SearchDeleteViewController.swift */; };
-		30E2DDA71F4090C00084CDC3 /* SettingHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DDA61F4090C00084CDC3 /* SettingHeaderTableViewCell.swift */; };
 		30E2DDA91F4090E70084CDC3 /* PermissionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DDA81F4090E70084CDC3 /* PermissionVC.swift */; };
-		30E2DDAB1F4091010084CDC3 /* DesignerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DDAA1F4091010084CDC3 /* DesignerViewController.swift */; };
 		30E2DDAF1F4091B00084CDC3 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DDAE1F4091B00084CDC3 /* SettingViewController.swift */; };
-		30E2DDB11F4091CE0084CDC3 /* CreatorListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DDB01F4091CE0084CDC3 /* CreatorListVC.swift */; };
 		30E2DDB31F4091F40084CDC3 /* SettingHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30E2DDB21F4091F40084CDC3 /* SettingHistoryVC.swift */; };
 		30EB5E1B1F441781005E8345 /* SettingHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5E191F441781005E8345 /* SettingHeaderCell.swift */; };
 		30EB5E1C1F441781005E8345 /* SettingHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30EB5E1A1F441781005E8345 /* SettingHeaderCell.xib */; };
 		30EB5E1E1F4420E7005E8345 /* Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5E1D1F4420E7005E8345 /* Messages.swift */; };
 		30EB5E221F442472005E8345 /* AlbumNamingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30EB5E211F442472005E8345 /* AlbumNamingView.swift */; };
 		30EB5E241F44247F005E8345 /* AlbumNamingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 30EB5E231F44247F005E8345 /* AlbumNamingView.xib */; };
-		30F1650D1F3D6B33005B78C1 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F1650C1F3D6B33005B78C1 /* SettingTableViewCell.swift */; };
-		30F165131F3D785C005B78C1 /* DeveloperInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30F165121F3D785C005B78C1 /* DeveloperInfoCell.swift */; };
 		30FB7FEA1F169850002C66AC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB7FE91F169850002C66AC /* AppDelegate.swift */; };
 		30FB7FEF1F169850002C66AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB7FED1F169850002C66AC /* Main.storyboard */; };
 		30FB7FF41F169850002C66AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB7FF21F169850002C66AC /* LaunchScreen.storyboard */; };
@@ -130,22 +123,15 @@
 		30D996081F33818B00382AD9 /* PhotoDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoDataSource.swift; sourceTree = "<group>"; };
 		30D9960A1F33902C00382AD9 /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
 		30D9960B1F33902C00382AD9 /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
-		30E2DD941F408B050084CDC3 /* DesignerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerTableViewCell.swift; sourceTree = "<group>"; };
-		30E2DDA21F40908D0084CDC3 /* SearchHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryCell.swift; sourceTree = "<group>"; };
 		30E2DDA41F4090AF0084CDC3 /* SearchDeleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDeleteViewController.swift; sourceTree = "<group>"; };
-		30E2DDA61F4090C00084CDC3 /* SettingHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		30E2DDA81F4090E70084CDC3 /* PermissionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionVC.swift; sourceTree = "<group>"; };
-		30E2DDAA1F4091010084CDC3 /* DesignerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignerViewController.swift; sourceTree = "<group>"; };
 		30E2DDAE1F4091B00084CDC3 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		30E2DDB01F4091CE0084CDC3 /* CreatorListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorListVC.swift; sourceTree = "<group>"; };
 		30E2DDB21F4091F40084CDC3 /* SettingHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHistoryVC.swift; sourceTree = "<group>"; };
 		30EB5E191F441781005E8345 /* SettingHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingHeaderCell.swift; sourceTree = "<group>"; };
 		30EB5E1A1F441781005E8345 /* SettingHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingHeaderCell.xib; sourceTree = "<group>"; };
 		30EB5E1D1F4420E7005E8345 /* Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messages.swift; sourceTree = "<group>"; };
 		30EB5E211F442472005E8345 /* AlbumNamingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumNamingView.swift; sourceTree = "<group>"; };
 		30EB5E231F44247F005E8345 /* AlbumNamingView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumNamingView.xib; sourceTree = "<group>"; };
-		30F1650C1F3D6B33005B78C1 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
-		30F165121F3D785C005B78C1 /* DeveloperInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperInfoCell.swift; sourceTree = "<group>"; };
 		30FB7FE61F169850002C66AC /* UnivCam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnivCam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FB7FE91F169850002C66AC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30FB7FEE1F169850002C66AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -225,8 +211,6 @@
 		300D83671F4456A3000BC658 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				30E2DDB01F4091CE0084CDC3 /* CreatorListVC.swift */,
-				30E2DDAA1F4091010084CDC3 /* DesignerViewController.swift */,
 				3019D1D71F46756400073E69 /* InfoViewController.swift */,
 				30E2DDB21F4091F40084CDC3 /* SettingHistoryVC.swift */,
 				30E2DDAE1F4091B00084CDC3 /* SettingViewController.swift */,
@@ -349,18 +333,13 @@
 			isa = PBXGroup;
 			children = (
 				30D996051F3380CB00382AD9 /* DataSources */,
-				30E2DDA21F40908D0084CDC3 /* SearchHistoryCell.swift */,
 				301D76D31F268A490070FCC0 /* AlbumDetailViewCell.swift */,
 				30B936C91F18A1A000F5040F /* PhotoCollectionViewCell.swift */,
 				305E1EE91F1A15C300ADA1CD /* AlbumCollectionViewCell.swift */,
-				30E2DD941F408B050084CDC3 /* DesignerTableViewCell.swift */,
-				30E2DDA61F4090C00084CDC3 /* SettingHeaderTableViewCell.swift */,
 				30D996011F33788B00382AD9 /* AlbumCell.swift */,
 				30D996021F33788B00382AD9 /* AlbumCell.xib */,
 				30D9960A1F33902C00382AD9 /* PhotoCell.swift */,
 				30D9960B1F33902C00382AD9 /* PhotoCell.xib */,
-				30F1650C1F3D6B33005B78C1 /* SettingTableViewCell.swift */,
-				30F165121F3D785C005B78C1 /* DeveloperInfoCell.swift */,
 				30923F121F4412B000CC6DA1 /* SettingCell.swift */,
 				30923F131F4412B000CC6DA1 /* SettingCell.xib */,
 				30EB5E191F441781005E8345 /* SettingHeaderCell.swift */,
@@ -455,7 +434,7 @@
 				TargetAttributes = {
 					30FB7FE51F169850002C66AC = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = AANGG4Q668;
+						DevelopmentTeam = 8MB894TP6V;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -559,7 +538,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30F1650D1F3D6B33005B78C1 /* SettingTableViewCell.swift in Sources */,
 				30B936CA1F18A1A000F5040F /* PhotoCollectionViewCell.swift in Sources */,
 				3061DB861F3F53C2009486EA /* Palette.swift in Sources */,
 				305E1EE81F19FA2800ADA1CD /* AlbumDetailVC.swift in Sources */,
@@ -569,12 +547,10 @@
 				30923F141F4412B000CC6DA1 /* SettingCell.swift in Sources */,
 				3059B95C1F3B6C620013A6E8 /* CreateAlbumView.swift in Sources */,
 				30FB80131F16A0A2002C66AC /* CustomCameraVC.swift in Sources */,
-				30E2DD951F408B050084CDC3 /* DesignerTableViewCell.swift in Sources */,
 				30D996091F33818B00382AD9 /* PhotoDataSource.swift in Sources */,
 				30D996031F33788B00382AD9 /* AlbumCell.swift in Sources */,
 				3034AC321F3FDB02006238D7 /* Assets.swift in Sources */,
 				305E1EEA1F1A15C300ADA1CD /* AlbumCollectionViewCell.swift in Sources */,
-				30E2DDA31F40908E0084CDC3 /* SearchHistoryCell.swift in Sources */,
 				3034AC341F3FE1D7006238D7 /* UINib+Protocol+Extension.swift in Sources */,
 				30FB80021F169BAA002C66AC /* SearchAlbumListVC.swift in Sources */,
 				30EB5E1B1F441781005E8345 /* SettingHeaderCell.swift in Sources */,
@@ -586,7 +562,6 @@
 				3034AC301F3F6006006238D7 /* Fonts.swift in Sources */,
 				30494AF91F3941450092376B /* Album.swift in Sources */,
 				300D83601F443336000BC658 /* Device.swift in Sources */,
-				30E2DDB11F4091CE0084CDC3 /* CreatorListVC.swift in Sources */,
 				30D9960C1F33902C00382AD9 /* PhotoCell.swift in Sources */,
 				30D996071F3380E400382AD9 /* AlbumDataSource.swift in Sources */,
 				301BDDD41F3D7EB900CA90CD /* TutorialView.swift in Sources */,
@@ -596,9 +571,7 @@
 				30E2DDA51F4090AF0084CDC3 /* SearchDeleteViewController.swift in Sources */,
 				30FB7FEA1F169850002C66AC /* AppDelegate.swift in Sources */,
 				30FB800F1F169EB1002C66AC /* AlbumListVC.swift in Sources */,
-				30E2DDA71F4090C00084CDC3 /* SettingHeaderTableViewCell.swift in Sources */,
 				30B936C71F1885B800F5040F /* PhotoType.swift in Sources */,
-				30F165131F3D785C005B78C1 /* DeveloperInfoCell.swift in Sources */,
 				3078DBA01F434AB600D10427 /* NoMessageView.swift in Sources */,
 				30263CA81F3BAFEF0015253A /* TakenPhotoVC.swift in Sources */,
 				30494AF71F38D7060092376B /* RealmHelper.swift in Sources */,
@@ -613,7 +586,6 @@
 				300D836E1F446664000BC658 /* ZoomableImageVC.swift in Sources */,
 				303AD9D01F3B1B7F00A1DB0D /* ConfirmDeleteView.swift in Sources */,
 				3015E0841F49277C00D7714A /* AlbumNameEditingVC.swift in Sources */,
-				30E2DDAB1F4091010084CDC3 /* DesignerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,7 +727,7 @@
 			baseConfigurationReference = D18BD5BE4C131E0E2075C7F6 /* Pods-UnivCam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = AANGG4Q668;
+				DEVELOPMENT_TEAM = 8MB894TP6V;
 				INFOPLIST_FILE = UnivCam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -770,7 +742,7 @@
 			baseConfigurationReference = A6B7E514F2FB01B27372C3D9 /* Pods-UnivCam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = AANGG4Q668;
+				DEVELOPMENT_TEAM = 8MB894TP6V;
 				INFOPLIST_FILE = UnivCam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

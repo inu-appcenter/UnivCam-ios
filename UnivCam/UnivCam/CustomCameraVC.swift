@@ -11,7 +11,9 @@ import AVFoundation
 import RealmSwift
 
 enum CameraType {
+    //셀카메라
     case select
+    //가운데 카메라
     case all
 }
 
@@ -22,6 +24,8 @@ class CustomCameraVC: UIViewController {
     @IBOutlet var layerView: UIView!
     @IBOutlet var shutterButton: UIButton!
     @IBOutlet var toggleCameraButton: UIButton!
+    
+    @IBOutlet weak var selectShowImage: UIImageView!
     
     let realm = try! Realm()
 
@@ -40,7 +44,10 @@ class CustomCameraVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-        UIApplication.shared.isStatusBarHidden = true
+
+        if let imageUrl = self.album?.photos.last?.url {
+            self.selectShowImage.image = UIImage(named: imageUrl)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +66,7 @@ class CustomCameraVC: UIViewController {
         
         switch cameraType {
         case .all:
-            
+            self.selectShowImage.isHidden = true
             break
         case .select:
             //folderUpdate()
@@ -153,7 +160,7 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
                         self.storePhotoImage(image: cameraImage, name: name!, completion: { (success) in
                             if success {
                                 self.shutterButton.isUserInteractionEnabled = true
-                                
+                                self.selectShowImage.image = UIImage(data: imageData)
                             }
                         })
                     }

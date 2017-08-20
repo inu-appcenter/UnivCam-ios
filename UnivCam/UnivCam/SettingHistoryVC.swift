@@ -147,13 +147,16 @@ extension SearchHistorySettingVC : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let changeCell = tableView.cellForRow(at: indexPath) as! SettingCell
         switch indexPath.row {
         case 0:
             let SearchHistoryDeleteAlert = UIAlertController()
             let history_nondelete = UIAlertAction(title: searchTitles.save.rawValue, style: .default, handler: { (action)->Void in
-                print("저장")})
+                changeCell.version_info.text = searchTitles.save.rawValue
+            })
             let history_delete = UIAlertAction(title: searchTitles.unsave.rawValue, style: .default, handler: { (action)->Void in
-                print("저장하지않음")})
+                changeCell.version_info.text = searchTitles.unsave.rawValue
+            })
             let history_cancel = UIAlertAction(title: searchTitles.cancel.rawValue, style: .cancel, handler: { (action)->Void in
                 print("저장하지않음")})
             SearchHistoryDeleteAlert.addAction(history_nondelete)
