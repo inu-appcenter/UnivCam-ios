@@ -44,13 +44,13 @@ class CustomCameraVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-
         if let imageUrl = self.album?.photos.last?.url {
             self.selectShowImage.image = UIImage(named: imageUrl)
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        cameraView.frame = self.view.frame
         self.showCameraView()
     }
     
@@ -103,6 +103,50 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
     }
     
     func beginSession() {
+        let heightForLayerView : CGFloat
+        let widthAndHeightForButtons : CGFloat
+        let yposition : CGFloat
+        let xposition : CGFloat
+        let widthAndHeightForUpperButtons : CGFloat
+        let ypositionForUpperButtons : CGFloat
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: heightForLayerView = 106
+            widthAndHeightForButtons = 58
+            widthAndHeightForUpperButtons = 35
+            yposition = 7
+            ypositionForUpperButtons = 19
+            xposition = 86
+            break
+        case 1: heightForLayerView = 125
+            widthAndHeightForButtons = 68
+            widthAndHeightForUpperButtons = 42
+            yposition = 9
+            ypositionForUpperButtons = 21
+            xposition = 102
+            break
+        case 2: heightForLayerView = 147
+            widthAndHeightForButtons = 80
+            widthAndHeightForUpperButtons = 49
+            yposition = 10
+            ypositionForUpperButtons = 25
+            xposition = 120
+            break
+        case 3: heightForLayerView = 162
+            widthAndHeightForButtons = 88
+            widthAndHeightForUpperButtons = 54
+            yposition = 11
+            ypositionForUpperButtons = 27
+            xposition = 132
+            break
+        default:
+            heightForLayerView = 147
+            widthAndHeightForButtons = 80
+            widthAndHeightForUpperButtons = 49
+            yposition = 10
+            ypositionForUpperButtons = 25
+            xposition = 120
+            break
+        }
         do {
             try captureSession.addInput(AVCaptureDeviceInput(device: captureDevice))
             stillImageOutput.outputSettings = [AVVideoCodecKey:AVVideoCodecJPEG]
@@ -118,11 +162,23 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
             print("no preview layer")
             return
         }
+        //뷰 더하기 및 레이아웃 사이즈 정해주기.
         self.view.layer.addSublayer(previewLayer)
         previewLayer.frame = self.cameraView.layer.frame
         captureSession.startRunning()
         self.layerView.addSubview(shutterButton)
+        self.layerView.frame = CGRect(x: 0, y: (self.view.frame.height - heightForLayerView), width: self.cameraView.frame.width, height: heightForLayerView)
+        self.shutterButton.frame = CGRect(x: 0, y: 0, width: widthAndHeightForButtons, height: widthAndHeightForButtons)
+        self.selectShowImage.frame = CGRect(x: 0, y: 0, width: widthAndHeightForButtons, height: widthAndHeightForButtons)
+        self.shutterButton.center.x = self.layerView.center.x
+        self.shutterButton.center.y = ((self.layerView.frame.height / 2) - yposition)
+        self.selectShowImage.center.x = self.layerView.center.x + xposition
+        self.selectShowImage.center.y = ((self.layerView.frame.height / 2) - yposition)
+        self.layerView.addSubview(shutterButton)
+        self.layerView.addSubview(selectShowImage)
         self.view.addSubview(layerView)
+        self.cancelButton.frame = CGRect(x: 0, y: ypositionForUpperButtons, width: widthAndHeightForUpperButtons, height: widthAndHeightForUpperButtons)
+        self.toggleCameraButton.frame = CGRect(x: (self.view.frame.width - widthAndHeightForUpperButtons), y: ypositionForUpperButtons, width: widthAndHeightForUpperButtons, height: widthAndHeightForUpperButtons)
         self.view.addSubview(cancelButton)
         self.view.addSubview(toggleCameraButton)
         
