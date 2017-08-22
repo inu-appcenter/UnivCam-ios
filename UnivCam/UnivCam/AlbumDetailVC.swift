@@ -148,7 +148,8 @@ extension AlbumDetailVC: UICollectionViewDelegate {
         nvc.photos = photos
         nvc.albumTitle = album?.title
         nvc.selectedIndex = indexPath
-       
+        nvc.selectedIndex = indexPath
+        
         self.navigationController?.pushViewController(nvc, animated: true)
         
         //_selectedCells.add(indexPath)

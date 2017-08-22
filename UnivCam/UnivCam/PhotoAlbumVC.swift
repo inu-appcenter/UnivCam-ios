@@ -26,6 +26,18 @@ class PhotoAlbumVC: UIViewController {
                                              forCellWithReuseIdentifier: Cells.photo.identifier)
         }
     }
+    
+    @IBAction func shareButton(_ sender: UIBarButtonItem) {
+        print(selectedIndex)
+        guard let selectedIndex = selectedIndex else { return }
+        let photo = photos[selectedIndex.row]
+        let pictureShare = UIActivityViewController(activityItems: [photo], applicationActivities: nil)
+        UIButton.appearance().tintColor = UIColor(hex:0x515859)
+        pictureShare.excludedActivityTypes = [ UIActivityType.airDrop]
+        pictureShare.popoverPresentationController?.sourceView = self.view
+        self.present(pictureShare, animated: true, completion: nil)
+    }
+    
     @IBOutlet var deleteButton: UIBarButtonItem! {
         didSet {
             deleteButton.target = self
