@@ -8,6 +8,12 @@
 
 import UIKit
 
+enum actionTitle : String {
+    case select_multi = "사진 선택하기"
+    case select_delete = "사진 삭제하기"
+    case select_share = "사진 공유하기"
+}
+
 class AlbumDetailVC: UIViewController {
     
     @IBOutlet var titleLabel: UILabel! {
@@ -40,6 +46,7 @@ class AlbumDetailVC: UIViewController {
             moreButton.action = #selector(deleteImages)
         }
     }
+    
     
     lazy var backButton : UIButton = {
         let btn : UIButton = .init(type: .system)
@@ -108,8 +115,7 @@ extension AlbumDetailVC: UICollectionViewDataSource {
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.photo.identifier,
-                                                      for: indexPath) as! PhotoCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.photo.identifier, for: indexPath) as! PhotoCell
         let photo = photos[indexPath.row]
         cell.imageView.image = photo
         
@@ -158,8 +164,21 @@ extension AlbumDetailVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize{
-        
-        return CGSize(width: 123, height: 123)
+        let size : CGFloat
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: size = 89
+            break
+        case 1: size = 102
+            break
+        case 2: size = 123
+            break
+        case 3: size = 135
+            break
+        default:
+            size = 123
+            break
+        }
+        return CGSize(width: size, height: size)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 3
