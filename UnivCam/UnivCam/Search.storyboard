@@ -152,7 +152,11 @@
                         <rightBarButtonItems>
                             <barButtonItem image="icMoreVertWhite" id="wST-te-07E"/>
                             <barButtonItem image="icDelete2X" id="8oa-Gh-VJc"/>
-                            <barButtonItem image="icShare2X" id="k0a-wj-t6A"/>
+                            <barButtonItem image="icShare2X" id="k0a-wj-t6A" userLabel="Share Button">
+                                <connections>
+                                    <action selector="shareButton:" destination="yNl-0A-Mk3" id="eBg-iU-aBO"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>

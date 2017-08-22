@@ -434,7 +434,7 @@
 				TargetAttributes = {
 					30FB7FE51F169850002C66AC = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 8MB894TP6V;
+						DevelopmentTeam = 3U3H8GE38E;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -727,7 +727,7 @@
 			baseConfigurationReference = D18BD5BE4C131E0E2075C7F6 /* Pods-UnivCam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8MB894TP6V;
+				DEVELOPMENT_TEAM = 3U3H8GE38E;
 				INFOPLIST_FILE = UnivCam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -742,7 +742,7 @@
 			baseConfigurationReference = A6B7E514F2FB01B27372C3D9 /* Pods-UnivCam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8MB894TP6V;
+				DEVELOPMENT_TEAM = 3U3H8GE38E;
 				INFOPLIST_FILE = UnivCam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
