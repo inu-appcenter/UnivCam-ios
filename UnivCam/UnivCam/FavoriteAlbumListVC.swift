@@ -19,13 +19,24 @@ class FavoriteAlbumListVC: UIViewController {
             collectionView.register(Cells.album.nib, forCellWithReuseIdentifier: Cells.album.identifier)
         }
     }
+    
     @IBOutlet var noMessageView: NoMessageView! {
         didSet {
             noMessageView.messageLabel.text = Messages.has_no_favorite_albums.rawValue
             noMessageView.actionButton.isHidden = true
         }
     }
-    let albums: Results<Album> = {
+    
+    @IBOutlet weak var sortButton: UIBarButtonItem! {
+        didSet {
+            sortButton.target = self
+            sortButton.action = #selector(sortAlbumList)
+        }
+    }
+    
+    
+    
+    var albums: Results<Album> = {
         let realm = try! Realm()
         return realm.objects(Album.self).filter("isFavorite == true")
     }()
@@ -298,5 +309,43 @@ extension FavoriteAlbumListVC : UINavigationControllerDelegate, UIImagePickerCon
             animated: true,
             completion: nil
         )
+    }
+}
+
+extension FavoriteAlbumListVC {
+    
+    func sortAlbumList() {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        alert.addAction(UIAlertAction(title: "이름순으로 정렬", style: .default) { action in
+            //let realm = try! Realm()
+            self.albums = self.albums.sorted(byKeyPath: "title", ascending: true)
+            self.collectionView.reloadData()
+        })
+        alert.addAction(UIAlertAction(title: "이름역순으로 정렬", style: .default) { action in
+            //let realm = try! Realm()
+            self.albums = self.albums.sorted(byKeyPath: "title", ascending: false)
+            self.collectionView.reloadData()
+        })
+        alert.addAction(UIAlertAction(title: "시간순으로 정렬", style: .default) { action in
+            //let realm = try! Realm()
+            self.albums = self.albums.sorted(byKeyPath: "createdAt", ascending: false)
+            self.collectionView.reloadData()
+        })
+        alert.addAction(UIAlertAction(title: "시간역순으로 정렬", style: .default) { action in
+            //let realm = try! Realm()
+            self.albums = self.albums.sorted(byKeyPath: "createdAt", ascending: true)
+            self.collectionView.reloadData()
+        })
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel) { action in
+        })
+        
+        alert.view.tintColor = UIColor(hex: 0x515859)
+        self.present(
+            alert,
+            animated: true,
+            completion: { () in
+                // add view tapped evnets
+        })
     }
 }

@@ -77,19 +77,12 @@ class TabbarController: UITabBarController {
 }
 
 extension UITabBarController{
-    // タブバーを構成している、内部クラスの「UITabBarButton」を探してきて、UIViewの配列として返す。
-    // OSのバージョンアップで使えなくなる可能性がある。
     func tabBarButtons()->[UIView]{
-        // reduce関数は知らなければ損。
         return self.tabBar.subviews.reduce([], { (ret:[UIView], item:AnyObject) -> [UIView] in
             if let v = item as? UIView  {
-                // ここ、クラス判定を「文字列」でやってるから、裏技ちっく。
                 if v.isKind(of: NSClassFromString("UITabBarButton")!) {
                     return ret + [v]
                 }
-                //                if v.isKindOfClass(NSClassFromString("UITabBarButton")) {
-                //                    return ret + [v]
-                //                }
             }
             return ret
         })
