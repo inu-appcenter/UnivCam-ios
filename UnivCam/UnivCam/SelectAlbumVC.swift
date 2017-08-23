@@ -135,7 +135,7 @@ extension SelectAlbumVC: UICollectionViewDataSource {
         print(_selectedCells)
         _selectedCells.add(indexPath)
         collectionView.reloadItems(at: [indexPath])
-        selectMessageLabel.text = "\(_selectedCells.count)개의 사진 선택"
+        selectMessageLabel.text = "\(_selectedCells.count)개의 앨범 선택"
         print("selected")
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -144,7 +144,7 @@ extension SelectAlbumVC: UICollectionViewDataSource {
         if _selectedCells.count == 0 {
             selectMessageLabel.text = "앨범을 선택해주세요"
         } else {
-            selectMessageLabel.text = "\(_selectedCells.count)개의 사진 선택"
+            selectMessageLabel.text = "\(_selectedCells.count)개의 앨범 선택"
         }
         print("deselected")
     }
@@ -156,7 +156,18 @@ extension SelectAlbumVC: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize{
         
-        return CGSize(width: 175.5, height: 243)
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0:
+            return CGSize(width: 148, height: 204.1)
+        case 1:
+            return CGSize(width: 148, height: 204.1)
+        case 2:
+            return CGSize(width: 175.5, height: 243)
+        case 3:
+            return CGSize(width: 195, height: 269)
+        default:
+            return CGSize(width: 175.5, height: 243)
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(27, 8, 27, 8)

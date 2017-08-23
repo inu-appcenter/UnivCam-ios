@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3c1-tN-cFj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3c1-tN-cFj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -178,11 +178,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0Ql-Cb-LoF">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8FR-NS-02n">
-                                <rect key="frame" x="0.0" y="519.5" width="375" height="147.5"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="8FR-NS-02n">
+                                <rect key="frame" x="0.0" y="519.5" width="168" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9X4-RZ-sTY">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="147.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9X4-RZ-sTY">
+                                        <rect key="frame" x="0.0" y="0.0" width="84" height="41"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="24"/>
                                         <state key="normal" title="다시찍기">
@@ -192,8 +193,8 @@
                                             <action selector="unwindToCameraVC:" destination="Iwi-kB-DAh" eventType="touchUpInside" id="khl-yd-Opm"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOF-Ff-NxW">
-                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="147.5"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOF-Ff-NxW">
+                                        <rect key="frame" x="84" y="0.0" width="84" height="41"/>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="24"/>
                                         <state key="normal" title="사진저장">
@@ -204,16 +205,10 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="147.5" id="UNS-f4-rXl"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Yih-ni-s1E" firstAttribute="top" secondItem="8FR-NS-02n" secondAttribute="bottom" id="0ui-j6-lwr"/>
-                            <constraint firstItem="8FR-NS-02n" firstAttribute="leading" secondItem="p7Q-Dv-JZ3" secondAttribute="leading" id="AX9-13-fvz"/>
-                            <constraint firstAttribute="trailing" secondItem="8FR-NS-02n" secondAttribute="trailing" id="Ias-9h-eUH"/>
                             <constraint firstItem="0Ql-Cb-LoF" firstAttribute="top" secondItem="Owv-We-0kY" secondAttribute="bottom" id="Q2D-Us-BDP"/>
                             <constraint firstItem="0Ql-Cb-LoF" firstAttribute="leading" secondItem="p7Q-Dv-JZ3" secondAttribute="leading" id="Q5a-L4-MQv"/>
                             <constraint firstItem="Yih-ni-s1E" firstAttribute="top" secondItem="0Ql-Cb-LoF" secondAttribute="bottom" id="bdr-TG-pYu"/>
@@ -223,6 +218,7 @@
                     <navigationItem key="navigationItem" id="6WC-nw-iNh"/>
                     <connections>
                         <outlet property="imageView" destination="0Ql-Cb-LoF" id="z0q-tZ-mbY"/>
+                        <outlet property="stackView" destination="8FR-NS-02n" id="dWk-rt-KE4"/>
                         <segue destination="kxC-9m-13X" kind="push" id="4ic-Yl-N5L"/>
                     </connections>
                 </viewController>

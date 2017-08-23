@@ -11,7 +11,13 @@ import UIKit
 class PhotoCell: UICollectionViewCell, UIScrollViewDelegate {
 
     @IBOutlet var imageView: UIImageView!
-    
+    @IBOutlet weak var checkedImage: UIImageView! {
+        didSet{
+            checkedImage.isHidden = true
+        }
+    }
+    @IBOutlet weak var translucentView: UIView!
+    var is_selected : Bool = false
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

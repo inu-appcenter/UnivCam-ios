@@ -98,8 +98,13 @@ class PhotoAlbumVC: UIViewController {
         
         _selectedCells.add(selectedIndex)
         
-        
+        print("사진 눌렀음")
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        photoDataSource.photos.removeAll()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -109,7 +114,6 @@ class PhotoAlbumVC: UIViewController {
         button.setTitle("  \(title)", for: .normal)
         button.sizeToFit()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
-        
         button.addTarget(self, action: #selector(unwindToAlbum), for: .touchUpInside)
         
         // Do any additional setup after loading the view.

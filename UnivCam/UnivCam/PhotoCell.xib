@@ -1,39 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="PhotoCell" customModule="UnivCam" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="482" height="438"/>
+            <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="482" height="438"/>
+                <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dtu-vl-335">
-                        <rect key="frame" x="0.0" y="0.0" width="482" height="438"/>
+                        <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
+                    </imageView>
+                    <view alpha="0.34999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cPz-gj-YQU">
+                        <rect key="frame" x="0.0" y="0.0" width="123" height="123"/>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icCheckBox2X" translatesAutoresizingMaskIntoConstraints="NO" id="KIG-Ge-OZ0">
+                        <rect key="frame" x="99" y="8" width="16" height="16"/>
                     </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="dtu-vl-335" secondAttribute="bottom" id="Nej-41-0is"/>
-                <constraint firstAttribute="trailing" secondItem="dtu-vl-335" secondAttribute="trailing" id="Otm-j3-2Od"/>
-                <constraint firstItem="dtu-vl-335" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="eDR-1i-55G"/>
-                <constraint firstItem="dtu-vl-335" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="nsP-dB-RLs"/>
+                <constraint firstAttribute="bottom" secondItem="KIG-Ge-OZ0" secondAttribute="bottom" constant="99" id="9LP-Hw-TFM"/>
+                <constraint firstAttribute="trailing" secondItem="dtu-vl-335" secondAttribute="trailing" id="DAN-4M-D06"/>
+                <constraint firstItem="cPz-gj-YQU" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Mi9-kb-SGr"/>
+                <constraint firstAttribute="trailing" secondItem="cPz-gj-YQU" secondAttribute="trailing" id="O6q-rO-Kwe"/>
+                <constraint firstItem="dtu-vl-335" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RXl-gQ-mcs"/>
+                <constraint firstItem="dtu-vl-335" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="a0L-FE-LNm"/>
+                <constraint firstItem="KIG-Ge-OZ0" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="a6K-gx-WuX"/>
+                <constraint firstAttribute="bottom" secondItem="dtu-vl-335" secondAttribute="bottom" id="dBO-uL-dMA"/>
+                <constraint firstAttribute="bottom" secondItem="cPz-gj-YQU" secondAttribute="bottom" id="ehU-jw-Cjm"/>
+                <constraint firstAttribute="trailing" secondItem="KIG-Ge-OZ0" secondAttribute="trailing" constant="8" id="uu4-Ad-K6L"/>
+                <constraint firstItem="KIG-Ge-OZ0" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="99" id="yOT-WQ-7yV"/>
+                <constraint firstItem="cPz-gj-YQU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zUe-IX-cDA"/>
             </constraints>
-            <size key="customSize" width="482" height="438"/>
+            <size key="customSize" width="651" height="438"/>
             <connections>
+                <outlet property="checkedImage" destination="KIG-Ge-OZ0" id="Zbg-Qp-3Rh"/>
                 <outlet property="imageView" destination="dtu-vl-335" id="zNw-nY-fSH"/>
+                <outlet property="translucentView" destination="cPz-gj-YQU" id="LZ3-fd-Osp"/>
             </connections>
-            <point key="canvasLocation" x="245" y="249"/>
+            <point key="canvasLocation" x="329" y="248.5"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="icCheckBox2X" width="19" height="19"/>
+    </resources>
 </document>

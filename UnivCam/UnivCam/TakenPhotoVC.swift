@@ -11,6 +11,7 @@ import UIKit
 class TakenPhotoVC: UIViewController {
     
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet weak var stackView: UIStackView!
     
     var capturedImage : UIImage?
     
@@ -22,6 +23,25 @@ class TakenPhotoVC: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        let heightForStackView : CGFloat
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0:
+            heightForStackView = 106
+            break
+        case 1:
+            heightForStackView = 125
+            break
+        case 2:
+            heightForStackView = 147
+            break
+        case 3:
+            heightForStackView = 162
+            break
+        default:
+            heightForStackView = 147
+            break
+        }
+        stackView.frame = CGRect(x: 0, y: (self.view.frame.height - heightForStackView), width: self.view.frame.width, height: heightForStackView)
         // Do any additional setup after loading the view.
     }
     

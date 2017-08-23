@@ -12,6 +12,11 @@ enum actionTitle : String {
     case select_multi = "사진 선택하기"
     case select_delete = "사진 삭제하기"
     case select_share = "사진 공유하기"
+    case cancel = "취소"
+    case move = "선택사진 이동"
+    case copy = "선택사진 복사"
+    case share = "선택사진 공유"
+    case delete = "선택사진 삭제"
 }
 
 class AlbumDetailVC: UIViewController {
@@ -23,7 +28,7 @@ class AlbumDetailVC: UIViewController {
     }
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
-            collectionView.allowsMultipleSelection = true
+            collectionView.allowsMultipleSelection = false
             collectionView.dataSource = self
             collectionView.delegate = self
             collectionView.register(Cells.photo.nib,
@@ -43,10 +48,9 @@ class AlbumDetailVC: UIViewController {
     @IBOutlet var moreButton: UIBarButtonItem! {
         didSet {
             moreButton.target = self
-            moreButton.action = #selector(deleteImages)
+            moreButton.action = #selector(moreAction)
         }
     }
-    
     
     lazy var backButton : UIButton = {
         let btn : UIButton = .init(type: .system)
@@ -65,6 +69,11 @@ class AlbumDetailVC: UIViewController {
     var album : Album?
     
     override func viewWillAppear(_ animated: Bool) {
+        self.collectionView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         guard let dirPath = album?.url,
             let files = try? FileManager.default.contentsOfDirectory(atPath: dirPath) else { return }
         for filename in files {
@@ -73,15 +82,10 @@ class AlbumDetailVC: UIViewController {
             let suffixIndex = filename.index(filename.endIndex, offsetBy: -3)
             _ = filename.substring(from: suffixIndex)
             //if suffix == "png" {
-                let imageURL = dirPath + "/" + filename
-                photos.append(UIImage(named: imageURL)!)
+            let imageURL = dirPath + "/" + filename
+            photos.append(UIImage(named: imageURL)!)
             //}
         }
-        
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     func unwindToHome() {
@@ -92,15 +96,72 @@ class AlbumDetailVC: UIViewController {
         //let fileManager = FileManager.default
         for indexPath in _selectedCells {
             guard let indexPath = indexPath as? IndexPath else { return }
-            photos.remove(at: indexPath.row)
+            self.album?.photos.remove(at: indexPath.row)
             indexPaths.append(indexPath)
         }
-        
         collectionView.deleteItems(at: indexPaths)
         collectionView.reloadData()
     }
     func moreAction() {
-        
+        if collectionView.allowsMultipleSelection == false {
+            let moreActionView = UIAlertController()
+            let multiSelect = UIAlertAction(title: actionTitle.select_multi.rawValue, style: .default, handler: { (action)->Void in
+                self.collectionView.allowsMultipleSelection = true
+                self.titleLabel.text = "사진 선택"
+                self.backButton.isHidden = true
+            })
+            let multiDelete = UIAlertAction(title: actionTitle.select_delete.rawValue, style: .default, handler: { (action)->Void in
+                self.collectionView.allowsMultipleSelection = true
+                self.titleLabel.text = "사진 선택"
+                self.backButton.isHidden = true
+                self.deleteImages()
+            })
+            let multiShare = UIAlertAction(title: actionTitle.select_share.rawValue, style: .default, handler: { (action)->Void in
+                self.collectionView.allowsMultipleSelection = true
+                self.titleLabel.text = "사진 선택"
+                self.backButton.isHidden = true
+            })
+            let cancelAction = UIAlertAction(title: actionTitle.cancel.rawValue, style: .cancel, handler: { (action)->Void in
+            })
+            moreActionView.addAction(multiSelect)
+            moreActionView.addAction(multiDelete)
+            moreActionView.addAction(multiShare)
+            moreActionView.addAction(cancelAction)
+            moreActionView.view.tintColor = UIColor(hex: 0x515859)
+            self.present(moreActionView, animated: true, completion: nil)
+        }
+        else {
+            let moreActionView = UIAlertController()
+            let move = UIAlertAction(title: actionTitle.move.rawValue, style: .default, handler: { (action)->Void in
+                self.collectionView.allowsMultipleSelection = false
+                self.titleLabel.text = self.album?.title
+                self.backButton.isHidden = false
+            })
+            let delete = UIAlertAction(title: actionTitle.delete.rawValue, style: .default, handler: { (action)->Void in
+                self.collectionView.allowsMultipleSelection = false
+                self.titleLabel.text = self.album?.title
+                self.backButton.isHidden = false
+            })
+            let copy = UIAlertAction(title: actionTitle.copy.rawValue, style: .default, handler: { (action)->Void in
+                self.collectionView.allowsMultipleSelection = false
+                self.titleLabel.text = self.album?.title
+                self.backButton.isHidden = false
+            })
+            let share = UIAlertAction(title: actionTitle.share.rawValue, style: .default, handler: { (action)->Void in
+                self.collectionView.allowsMultipleSelection = false
+                self.titleLabel.text = self.album?.title
+                self.backButton.isHidden = false
+            })
+            let cancelAction = UIAlertAction(title: actionTitle.cancel.rawValue, style: .cancel, handler: { (action)->Void in
+            })
+            moreActionView.addAction(move)
+            moreActionView.addAction(delete)
+            moreActionView.addAction(copy)
+            moreActionView.addAction(share)
+            moreActionView.addAction(cancelAction)
+            moreActionView.view.tintColor = UIColor(hex: 0x515859)
+            self.present(moreActionView, animated: true, completion: nil)
+        }
     }
 }
 
@@ -118,20 +179,30 @@ extension AlbumDetailVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cells.photo.identifier, for: indexPath) as! PhotoCell
         let photo = photos[indexPath.row]
         cell.imageView.image = photo
-        
+        cell.is_selected = false
+        cell.checkedImage.isHidden = true
+        //        if _selectedCells.contains(indexPath) {
+        //            cell.isSelected = true
+        //            collectionView.selectItem(at: indexPath,
+        //                                      animated: true,
+        //                                      scrollPosition: UICollectionViewScrollPosition.top)
+        //            cell.backgroundColor = UIColor.lightGray
+        //
+        //        }
+        //        else {
+        //            cell.isSelected = false
+        //        }
         if _selectedCells.contains(indexPath) {
-            cell.isSelected = true
-            collectionView.selectItem(at: indexPath,
-                                      animated: true,
-                                      scrollPosition: UICollectionViewScrollPosition.top)
-            cell.backgroundColor = UIColor.lightGray
-            
+            cell.translucentView.backgroundColor = UIColor.lightGray
+            cell.is_selected = true
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.top)
+            cell.checkedImage.isHidden = false
         }
-        else {
-            cell.isSelected = false
+        else{
+            cell.translucentView.backgroundColor = UIColor.clear
+            cell.is_selected = false
+            cell.checkedImage.isHidden = true
         }
-        
-        
         return cell
     }
     
@@ -143,22 +214,38 @@ extension AlbumDetailVC: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(_selectedCells)
-        
-        guard let nvc = ViewControllers.photo_album.instance as? PhotoAlbumVC else { return }
-        nvc.photos = photos
-        nvc.albumTitle = album?.title
-        nvc.selectedIndex = indexPath
-        nvc.selectedIndex = indexPath
-        
-        self.navigationController?.pushViewController(nvc, animated: true)
-        
-        //_selectedCells.add(indexPath)
-        //collectionView.reloadItems(at: [indexPath])
+        if self.collectionView.allowsMultipleSelection == false {
+            guard let nvc = ViewControllers.photo_album.instance as? PhotoAlbumVC else { return }
+            nvc.photos = photos
+            nvc.albumTitle = album?.title
+            nvc.selectedIndex = indexPath
+            nvc.selectedIndex = indexPath
+            
+            self.navigationController?.pushViewController(nvc, animated: true)
+        }
+        else {
+                print(_selectedCells)
+                _selectedCells.add(indexPath)
+                collectionView.reloadItems(at: [indexPath])
+                titleLabel.text = "\(_selectedCells.count)개의 사진 선택"
+                print(indexPath)
+                print(indexPath.row)
+                print("selected")
+        }
     }
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        //_selectedCells.remove(indexPath)
-        //collectionView.reloadItems(at: [indexPath])
-    }
+        func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+            _selectedCells.remove(indexPath)
+            collectionView.reloadItems(at: [indexPath])
+            if _selectedCells.count == 0 {
+                titleLabel.text = "사진 선택"
+            } else {
+                titleLabel.text = "\(_selectedCells.count)개의 사진 선택"
+            }
+            print("deselected")
+        }
+    //_selectedCells.add(indexPath)
+    //collectionView.reloadItems(at: [indexPath])
+
 }
 
 extension AlbumDetailVC: UICollectionViewDelegateFlowLayout {
