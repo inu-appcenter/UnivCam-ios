@@ -37,6 +37,7 @@ class AlbumListVC: UIViewController {
             newAlbumButton.action = #selector(setCreateAlbumView)
         }
     }
+    
     @IBOutlet var sortButton: UIBarButtonItem! {
         didSet {
             sortButton.target = self
@@ -459,14 +460,31 @@ extension AlbumListVC {
     
     func sortAlbumList() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "이름순으로 정렬", style: .default) { action in
+            //let realm = try! Realm()
+            self.albums = self.albums.sorted(byKeyPath: "title", ascending: true)
+            self.collectionView.reloadData()
+        })
+        alert.addAction(UIAlertAction(title: "이름역순으로 정렬", style: .default) { action in
+            //let realm = try! Realm()
+            self.albums = self.albums.sorted(byKeyPath: "title", ascending: false)
+            self.collectionView.reloadData()
+        })
         alert.addAction(UIAlertAction(title: "시간순으로 정렬", style: .default) { action in
             //let realm = try! Realm()
             self.albums = self.albums.sorted(byKeyPath: "createdAt", ascending: false)
             self.collectionView.reloadData()
         })
+        alert.addAction(UIAlertAction(title: "시간역순으로 정렬", style: .default) { action in
+            //let realm = try! Realm()
+            self.albums = self.albums.sorted(byKeyPath: "createdAt", ascending: true)
+            self.collectionView.reloadData()
+        })
         alert.addAction(UIAlertAction(title: "취소", style: .cancel) { action in
         })
         
+        alert.view.tintColor = UIColor(hex: 0x515859)
         self.present(
             alert,
             animated: true,

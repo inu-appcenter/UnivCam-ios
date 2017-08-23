@@ -77,11 +77,14 @@
                             <constraint firstItem="BKl-UT-u7G" firstAttribute="top" secondItem="Pkb-aZ-fd6" secondAttribute="bottom" constant="66" id="tgE-ZD-qwX"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="DBe-6V-Y5d"/>
+                    <navigationItem key="navigationItem" id="DBe-6V-Y5d">
+                        <barButtonItem key="rightBarButtonItem" image="icSort2X" id="fZp-5l-SEk"/>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="fGy-zu-gDS" id="7Fm-jQ-oxW"/>
                         <outlet property="noMessageView" destination="BKl-UT-u7G" id="Kss-oF-p9I"/>
+                        <outlet property="sortButton" destination="fZp-5l-SEk" id="fen-R9-YL1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M0m-rK-r4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -89,4 +92,7 @@
             <point key="canvasLocation" x="1820" y="480.80959520239884"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icSort2X" width="18" height="12"/>
+    </resources>
 </document>
