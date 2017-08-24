@@ -22,7 +22,7 @@ class AlbumNameEditingVC: UIViewController {
     @IBOutlet var renameAlbumButton: UIBarButtonItem! {
         didSet {
             renameAlbumButton.target = self
-            renameAlbumButton.action = #selector(deleteText)
+            renameAlbumButton.action = #selector(renameAlbum)
         }
     }
     
@@ -39,6 +39,7 @@ class AlbumNameEditingVC: UIViewController {
     
     
     var album : Album?
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         albumTitleTextField.text = album?.title
@@ -60,7 +61,7 @@ class AlbumNameEditingVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func deleteText() {
+    func deleteText() { 
         albumTitleTextField.text?.removeAll()
     }
     func renameAlbum() {
@@ -68,6 +69,7 @@ class AlbumNameEditingVC: UIViewController {
         let realm = try! Realm()
         do {
             try realm.write {
+                album?.title.removeAll()
                 album?.title = title
             }
         } catch {
