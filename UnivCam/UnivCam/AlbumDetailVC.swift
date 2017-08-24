@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 enum actionTitle : String {
     case select_multi = "사진 선택하기"
@@ -66,6 +67,7 @@ class AlbumDetailVC: UIViewController {
     var photos = [UIImage]()
     var selectedPhotos = [UIImage]()
     var _selectedCells : NSMutableArray = []
+    var photoUrls = [String]()
     var album : Album?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,6 +85,7 @@ class AlbumDetailVC: UIViewController {
             _ = filename.substring(from: suffixIndex)
             //if suffix == "png" {
             let imageURL = dirPath + "/" + filename
+            photoUrls.append(imageURL)
             photos.append(UIImage(named: imageURL)!)
             //}
         }
@@ -96,30 +99,46 @@ class AlbumDetailVC: UIViewController {
         //let fileManager = FileManager.default
         for indexPath in _selectedCells {
             guard let indexPath = indexPath as? IndexPath else { return }
-            self.album?.photos.remove(at: indexPath.row)
-            indexPaths.append(indexPath)
+            let realm = try! Realm()
+            do {
+//                try realm.write {
+//                    let deletePhoto : Photo
+//                    deletePhoto = (self.album?.photos.filter("url = \"\(photoUrls[indexPath.row])\"").first)!
+//                    realm.delete(deletePhoto)
+//
+////                    self.album?.photoCount = (album?.photoCount)! - 1
+//                    indexPaths.append(indexPath)
+//                }
+            }
+            catch {
+                
+            }
         }
         collectionView.deleteItems(at: indexPaths)
         collectionView.reloadData()
     }
     func moreAction() {
         if collectionView.allowsMultipleSelection == false {
+            
             let moreActionView = UIAlertController()
             let multiSelect = UIAlertAction(title: actionTitle.select_multi.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
                 self.backButton.isHidden = true
+                self.moreButton.image = UIImage(named: "icDone2X")
             })
             let multiDelete = UIAlertAction(title: actionTitle.select_delete.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
                 self.backButton.isHidden = true
                 self.deleteImages()
+                self.moreButton.image = UIImage(named: "icDone2X")
             })
             let multiShare = UIAlertAction(title: actionTitle.select_share.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
                 self.backButton.isHidden = true
+                self.moreButton.image = UIImage(named: "icDone2X")
             })
             let cancelAction = UIAlertAction(title: actionTitle.cancel.rawValue, style: .cancel, handler: { (action)->Void in
             })
@@ -131,26 +150,32 @@ class AlbumDetailVC: UIViewController {
             self.present(moreActionView, animated: true, completion: nil)
         }
         else {
+            
             let moreActionView = UIAlertController()
             let move = UIAlertAction(title: actionTitle.move.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
                 self.backButton.isHidden = false
+                self.moreButton.image = UIImage(named: "icMoreVertWhite")
             })
             let delete = UIAlertAction(title: actionTitle.delete.rawValue, style: .default, handler: { (action)->Void in
+                self.deleteImages()
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
                 self.backButton.isHidden = false
+                self.moreButton.image = UIImage(named: "icMoreVertWhite")
             })
             let copy = UIAlertAction(title: actionTitle.copy.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
                 self.backButton.isHidden = false
+                self.moreButton.image = UIImage(named: "icMoreVertWhite")
             })
             let share = UIAlertAction(title: actionTitle.share.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
                 self.backButton.isHidden = false
+                self.moreButton.image = UIImage(named: "icMoreVertWhite")
             })
             let cancelAction = UIAlertAction(title: actionTitle.cancel.rawValue, style: .cancel, handler: { (action)->Void in
             })
@@ -219,8 +244,8 @@ extension AlbumDetailVC: UICollectionViewDelegate {
             nvc.photos = photos
             nvc.albumTitle = album?.title
             nvc.selectedIndex = indexPath
-            nvc.selectedIndex = indexPath
-            
+//            nvc.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
+//            nvc.thumbnailCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
             self.navigationController?.pushViewController(nvc, animated: true)
         }
         else {
