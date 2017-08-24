@@ -47,11 +47,26 @@ class AlbumListVC: UIViewController {
     
     lazy var titleLabel : UILabel = {
         let titleLabel = UILabel()
+        let value: Int
+        switch (DeviceUtility.knowDeviceSize()) {
+        case 0: value = 210
+            break
+        case 1: value = 210
+            break
+        case 2: value = 265
+            break
+        case 3: value = 300
+            break
+        default:
+            value = 0
+            break
+        }
         titleLabel.text = "앨범"
         titleLabel.textColor = Palette.title.color
         titleLabel.font = Fonts.navigationTitle.style
         titleLabel.sizeToFit()
-        titleLabel.frame = CGRect(x: 0, y: 50, width: 263, height: 44)
+        titleLabel.frame = CGRect(x: 0, y: 50, width: value, height: 44)
+        //plus = 300, 7 = 265, 4,5 = 210
         return titleLabel
     }()
     
