@@ -22,6 +22,9 @@
                 <outlet property="cancelButton" destination="Avz-75-tzc" id="xII-Ub-frl"/>
                 <outlet property="deleteButton" destination="JFQ-TU-IHw" id="yWG-cm-Za2"/>
                 <outlet property="exitButton" destination="VGP-T5-raT" id="VJQ-cz-pa6"/>
+                <outlet property="mainTitle" destination="Tn5-AE-2DG" id="Kxr-cx-Qij"/>
+                <outlet property="subTitle2" destination="fv1-Kl-Gnr" id="MBf-KE-QxI"/>
+                <outlet property="subTitlte1" destination="gkz-Ku-bpW" id="rzl-Uc-nQm"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
