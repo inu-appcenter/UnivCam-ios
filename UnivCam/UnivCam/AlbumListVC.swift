@@ -233,6 +233,8 @@ extension AlbumListVC {
         )
         guard let createAlbumView = self.createAlbumView else { return }
         UIApplication.shared.keyWindow?.addSubview(createAlbumView)
+        createAlbumView.sameNameWarning.isHidden = true
+        
     }
     
     /// CREATE - 앨범 생성
@@ -276,10 +278,11 @@ extension AlbumListVC {
             } catch {
                 print("에러 발생")
             }
+            createAlbumView.remove()
         } else {
             print("이미 파일이 존재합니다.")
+            createAlbumView.sameNameWarning.isHidden = false
         }
-        createAlbumView.remove()
     }
     
 }
@@ -411,7 +414,7 @@ extension AlbumListVC {
         alert.addAction(UIAlertAction(title: "취소", style: .cancel) { action in
             
         })
-        
+        alert.view.tintColor = UIColor(hex: 0x515859)
         self.present(
             alert,
             animated: true,

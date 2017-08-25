@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,6 +13,7 @@
         <array key="AppleSDGothicNeo.ttc">
             <string>AppleSDGothicNeo-Bold</string>
             <string>AppleSDGothicNeo-Medium</string>
+            <string>AppleSDGothicNeo-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -21,6 +22,7 @@
                 <outlet property="albumTitleTextField" destination="HzV-YK-RbC" id="0px-eB-91Q"/>
                 <outlet property="cancelButton" destination="ihp-xu-2e0" id="N7I-dh-X0h"/>
                 <outlet property="createButton" destination="Xeu-8c-Aqx" id="uuJ-z9-806"/>
+                <outlet property="sameNameWarning" destination="XUm-aZ-Lf3" id="b1g-z9-mEg"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -63,15 +65,23 @@
                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이미 동일한 이름을 가진 앨범이 있습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUm-aZ-Lf3">
+                    <rect key="frame" x="16.5" y="201" width="227.5" height="17"/>
+                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                    <color key="textColor" red="1" green="0.27843137254901962" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Auc-Z5-t7u" firstAttribute="top" secondItem="ihp-xu-2e0" secondAttribute="bottom" constant="3" id="3sU-zF-khK"/>
+                <constraint firstItem="XUm-aZ-Lf3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16.5" id="57S-hZ-5JD"/>
                 <constraint firstItem="Auc-Z5-t7u" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16.5" id="Nvj-kC-IdJ"/>
                 <constraint firstItem="Xeu-8c-Aqx" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="OFI-ki-rQ3"/>
                 <constraint firstItem="HzV-YK-RbC" firstAttribute="top" secondItem="Auc-Z5-t7u" secondAttribute="bottom" constant="54.5" id="hWR-D0-5QN"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HzV-YK-RbC" secondAttribute="trailing" constant="16.5" id="mZL-x3-2x4"/>
                 <constraint firstItem="ihp-xu-2e0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="nPS-yw-Xmd"/>
+                <constraint firstItem="XUm-aZ-Lf3" firstAttribute="top" secondItem="HzV-YK-RbC" secondAttribute="bottom" constant="7" id="rPQ-7f-USg"/>
                 <constraint firstItem="ihp-xu-2e0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xeB-5C-6Xx"/>
                 <constraint firstItem="Xeu-8c-Aqx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="y2o-04-uCq"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Auc-Z5-t7u" secondAttribute="trailing" constant="16.5" id="z3i-fa-t2N"/>
