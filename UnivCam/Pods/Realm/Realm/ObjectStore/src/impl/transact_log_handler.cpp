@@ -279,7 +279,7 @@ public:
     bool insert_empty_rows(size_t, size_t, size_t, bool) { return true; }
     bool erase_rows(size_t, size_t, size_t, bool) { return true; }
     bool swap_rows(size_t, size_t) { return true; }
-    bool clear_table() noexcept { return true; }
+    bool clear_table(size_t=0) noexcept { return true; }
     bool link_list_set(size_t, size_t, size_t) { return true; }
     bool link_list_insert(size_t, size_t, size_t) { return true; }
     bool link_list_erase(size_t, size_t) { return true; }
@@ -567,7 +567,7 @@ public:
         return true;
     }
 
-    bool clear_table()
+    bool clear_table(size_t=0)
     {
         auto tbl_ndx = current_table();
         if (m_active_table)
@@ -582,6 +582,8 @@ public:
 
     bool insert_column(size_t ndx, DataType, StringData, bool)
     {
+        m_info.schema_changed = true;
+
         if (m_active_descriptor)
             m_active_descriptor->insert_column(ndx);
         if (m_active_descriptor != m_active_table || !m_is_top_level_table)
@@ -609,6 +611,8 @@ public:
 
     bool insert_group_level_table(size_t ndx, size_t, StringData)
     {
+        m_info.schema_changed = true;
+
         for (auto& list : m_info.lists) {
             if (list.table_ndx >= ndx)
                 ++list.table_ndx;
@@ -623,6 +627,8 @@ public:
 
     bool move_column(size_t from, size_t to)
     {
+        m_info.schema_changed = true;
+
         if (m_active_descriptor)
             m_active_descriptor->move_column(from, to);
         if (m_active_descriptor != m_active_table || !m_is_top_level_table)
@@ -640,6 +646,8 @@ public:
 
     bool move_group_level_table(size_t from, size_t to)
     {
+        m_info.schema_changed = true;
+
         for (auto& list : m_info.lists)
             adjust_for_move(list.table_ndx, from, to);
 

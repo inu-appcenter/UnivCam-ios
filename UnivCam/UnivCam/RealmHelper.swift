@@ -44,6 +44,13 @@ class RealmHelper: NSObject {
         
     }
     
+    static func removePhotos<T : List<Photo>>(data: T) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(data)
+        }
+    }
+    
     static func objectFromType<T: Object>(data: T) -> Results<T> {
         return realm.objects(T.self)
     }

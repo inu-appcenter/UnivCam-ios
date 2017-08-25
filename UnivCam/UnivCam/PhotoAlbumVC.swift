@@ -97,7 +97,12 @@ class PhotoAlbumVC: UIViewController {
                                   scrollPosition: .centeredHorizontally)
         
         _selectedCells.add(selectedIndex)
-        
+//        self.thumbnailCollectionView.selectItem(at: selectedIndex, animated: true, scrollPosition: UICollectionViewScrollPosition())
+//        self.thumbnailCollectionView.scrollToItem(at: selectedIndex, at: .centeredHorizontally, animated: true)
+//        thumbnailCollectionView.cellForItem(at: selectedIndex)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+//        self.collectionView.selectItem(at: selectedIndex, animated: true, scrollPosition: UICollectionViewScrollPosition())
+//        self.collectionView.scrollToItem(at: selectedIndex, at: .centeredHorizontally, animated: true)
+        print(selectedIndex)
         print("사진 눌렀음")
     }
     

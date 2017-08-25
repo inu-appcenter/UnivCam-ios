@@ -68,7 +68,7 @@
                         <viewLayoutGuide key="safeArea" id="cfw-qW-nRF"/>
                     </view>
                     <navigationItem key="navigationItem" id="LCV-Jm-BG2">
-                        <barButtonItem key="rightBarButtonItem" image="icMoreVertWhite" id="OPZ-p0-2ke"/>
+                        <barButtonItem key="rightBarButtonItem" image="icMoreVertWhite" width="49" id="OPZ-p0-2ke"/>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="bAG-qb-aZc" id="L39-BK-lC5"/>

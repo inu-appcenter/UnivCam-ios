@@ -9,10 +9,15 @@
 import UIKit
 import RealmSwift
 
+enum selectType {
+    case single
+    case multi
+}
+
 class SelectAlbumVC: UIViewController {
     
     var capturedImage : UIImage?
-    
+    var selectedImages = List<Photo>()
     @IBOutlet var selectMessageLabel: UILabel!
     
     @IBOutlet var collectionView: UICollectionView! {
