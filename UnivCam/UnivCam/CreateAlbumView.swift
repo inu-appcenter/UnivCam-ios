@@ -21,6 +21,8 @@ class CreateAlbumView: UIView, NibFileOwnerLoadable {
     @IBOutlet var albumTitleTextField: UITextField!
     @IBOutlet var createButton: UIButton!
     
+    @IBOutlet weak var sameNameWarning: UILabel!
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         loadNibContent()
