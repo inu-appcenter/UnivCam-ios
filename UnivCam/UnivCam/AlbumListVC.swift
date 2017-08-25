@@ -19,7 +19,7 @@ class AlbumListVC: UIViewController {
             collectionView.register(Cells.album.nib,
                                     forCellWithReuseIdentifier: Cells.album.identifier)
             self.navigationItem.titleView = titleLabel
-            self.titleLabel.isHidden = false
+            self.titleLabel.isHidden = true
         }
     }
     @IBOutlet var noMessageView: NoMessageView! {
