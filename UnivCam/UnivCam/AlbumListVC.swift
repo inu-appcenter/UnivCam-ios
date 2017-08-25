@@ -19,7 +19,7 @@ class AlbumListVC: UIViewController {
             collectionView.register(Cells.album.nib,
                                     forCellWithReuseIdentifier: Cells.album.identifier)
             self.navigationItem.titleView = titleLabel
-            self.titleLabel.isHidden = true
+            self.titleLabel.isHidden = false
         }
     }
     @IBOutlet var noMessageView: NoMessageView! {
@@ -210,6 +210,8 @@ extension AlbumListVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
         vc.album = self.albums[indexPath.row]
+        self.navigationController?.navigationBar.shadowImage = nil
+        vc.navigationController?.navigationBar.shadowImage = nil
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
