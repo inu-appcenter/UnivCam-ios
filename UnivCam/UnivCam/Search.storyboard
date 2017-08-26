@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8Up-Dp-oob">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8Up-Dp-oob">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -150,7 +150,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="d1W-wV-3bB">
                         <rightBarButtonItems>
-                            <barButtonItem image="icMoreVertWhite" id="wST-te-07E"/>
                             <barButtonItem image="icDelete2X" id="8oa-Gh-VJc"/>
                             <barButtonItem image="icShare2X" id="k0a-wj-t6A" userLabel="Share Button">
                                 <connections>
@@ -232,7 +231,6 @@
     <resources>
         <image name="icCloseWhite2X" width="14" height="14"/>
         <image name="icDelete2X" width="14" height="18"/>
-        <image name="icMoreVertWhite" width="4" height="15"/>
         <image name="icShare2X" width="18" height="20"/>
     </resources>
 </document>

@@ -48,37 +48,48 @@ class PhotoAlbumVC: UIViewController {
     
     func deletePhoto() {
         
-        let indexPath = IndexPath(row: 0, section: 0)
-        let fileManager = FileManager.default
-        do {
-            try fileManager.removeItem(atPath: photoUrls[(selectedIndex?.row)!])
-        }
-        catch {
-            print("사진삭제 못했어;;")
-        }
-        let realm = try! Realm()
-        do {
-            try realm.write {
-                album?.photoCount -= 1
-            }
-        }
-        catch {
+        let alert = UIAlertController()
+        let confirm_delete = UIAlertAction(title: "사진 삭제", style: .default, handler: { (action)->Void in
             
-        }
-        photoDataSource.photos.remove(at: (selectedIndex?.row)!)
-        self.collectionView.deleteItems(at: [selectedIndex!])
-        self.thumbnailCollectionView.deleteItems(at: [selectedIndex!])
-        
-        
-        if !photoDataSource.photos.isEmpty {
-            thumbnailCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
-            thumbnailCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
-            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        }
-        self._selectedCells.remove(selectedIndex)
-        self.viewWillAppear(true)
+            let indexPath = IndexPath(row: 0, section: 0)
+            let fileManager = FileManager.default
+            do {
+                try fileManager.removeItem(atPath: self.photoUrls[(self.selectedIndex?.row)!])
+            }
+            catch {
+                print("사진삭제 못했어;;")
+            }
+            let realm = try! Realm()
+            do {
+                try realm.write {
+                    self.album?.photoCount -= 1
+                }
+            }
+            catch {
+                
+            }
+            self.photoDataSource.photos.remove(at: (self.selectedIndex?.row)!)
+            self.collectionView.deleteItems(at: [self.selectedIndex!])
+            self.thumbnailCollectionView.deleteItems(at: [self.selectedIndex!])
+            
+            if !self.photoDataSource.photos.isEmpty {
+                self.thumbnailCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
+                self.thumbnailCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                self.thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+                self.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
+                self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            }
+            
+//            self._selectedCells.remove(self.selectedIndex)
+            self.viewWillAppear(true)
+        })
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: { (action)->Void in
+            print("저장하지않음")
+        })
+        alert.addAction(confirm_delete)
+        alert.addAction(cancel)
+        alert.view.tintColor = UIColor(hex: 0x515859)
+        self.present(alert, animated: true, completion: nil)
 //        self.collectionView.reloadData()
 //        self.thumbnailCollectionView.reloadData()
     }
@@ -103,20 +114,27 @@ class PhotoAlbumVC: UIViewController {
     var albumTitle : String?
     var onceOnly = false
     var photoUrls = [String]()
+    var returnedFromZoom : Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
-        photoDataSource.photos.removeAll()
-        photoDataSource.photos = photos
-        
-        guard let selectedIndex = selectedIndex else { return }
-        
-        collectionView.selectItem(at: selectedIndex,
-                                  animated: false,
-                                  scrollPosition: .centeredHorizontally)
-        
-        _selectedCells.add(selectedIndex)
+        if returnedFromZoom {
+            returnedFromZoom = false
+            photoDataSource.photos.removeAll()
+            photoDataSource.photos = photos
+        }
+        else {
+            photoDataSource.photos.removeAll()
+            photoDataSource.photos = photos
+            
+            guard let selectedIndex = selectedIndex else { return }
+            
+            //        collectionView.selectItem(at: selectedIndex,
+            //                                  animated: false,
+            //                                  scrollPosition: .centeredHorizontally)
+            
+            _selectedCells.add(selectedIndex)
+        }
 //        self.thumbnailCollectionView.selectItem(at: selectedIndex, animated: true, scrollPosition: UICollectionViewScrollPosition())
 //        self.thumbnailCollectionView.scrollToItem(at: selectedIndex, at: .centeredHorizontally, animated: true)
 //        thumbnailCollectionView.cellForItem(at: selectedIndex)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
@@ -132,7 +150,6 @@ class PhotoAlbumVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let button : UIButton = .init(type : .system)
         button.setImage(Assets.leftNavigationItem.image, for: .normal)
         guard let title = albumTitle else { return }
@@ -168,11 +185,11 @@ class PhotoAlbumVC: UIViewController {
         
         
         if scrollView == collectionView {
-            
-            for indexPath in _selectedCells {
-                guard let indexPath = indexPath as? IndexPath else { return }
-                thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                _selectedCells.remove(indexPath)
+            guard _selectedCells.count == 0 else { return }
+            for cindexPath in _selectedCells {
+                guard let coindexPath = cindexPath as? IndexPath else { return }
+                thumbnailCollectionView.cellForItem(at: coindexPath)?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                _selectedCells.remove(coindexPath)
             }
             
             
@@ -197,10 +214,8 @@ extension PhotoAlbumVC : UICollectionViewDelegate {
         if collectionView == self.collectionView {
             let vc = UIStoryboard(name: "Album", bundle: nil).instantiateViewController(withIdentifier: "ZoomableImageVC") as! ZoomableImageVC
             vc.image = photos[indexPath.row]
-            
-            self.present(vc,
-                         animated: false,
-                         completion: nil)
+            returnedFromZoom = true
+            self.present(vc, animated: false, completion: nil)
         } else if collectionView == self.thumbnailCollectionView {
            
             for indexPath in _selectedCells {

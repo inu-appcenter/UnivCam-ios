@@ -321,7 +321,9 @@ If you have questions, please contact us using the information at www.realm.io/c
                             <constraint firstItem="qFW-PF-r5U" firstAttribute="top" secondItem="2Zd-xs-Gaj" secondAttribute="bottom" constant="-2" id="swj-3H-xgz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="KZR-QH-mdG"/>
+                    <navigationItem key="navigationItem" id="KZR-QH-mdG">
+                        <barButtonItem key="backBarButtonItem" title="뒤로가기" id="vMv-5f-wMB"/>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="settingLabel" destination="TLN-1X-pP6" id="sJn-Pp-fiK"/>
