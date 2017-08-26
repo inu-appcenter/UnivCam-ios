@@ -26,11 +26,30 @@ class CustomCameraVC: UIViewController {
     @IBOutlet var toggleCameraButton: UIButton!
     
     @IBOutlet weak var selectShowImage: UIImageView!
+    @IBOutlet weak var showDetailBttn: UIButton!
+
+    
+    @IBAction func toggleCamera(_ sender: Any) {
+        if isCameraBack {
+            isCameraBack = false
+            self.captureSession = AVCaptureSession.init()
+            self.stillImageOutput = AVCaptureStillImageOutput.init()
+            self.viewDidLoad()
+        }
+        else {
+            isCameraBack = true
+            self.captureSession = AVCaptureSession.init()
+            self.stillImageOutput = AVCaptureStillImageOutput.init()
+            self.viewDidLoad()
+        }
+    }
+    
+    var isCameraBack = true
     
     let realm = try! Realm()
 
-    let captureSession = AVCaptureSession()
-    let stillImageOutput = AVCaptureStillImageOutput()
+    var captureSession = AVCaptureSession()
+    var stillImageOutput = AVCaptureStillImageOutput()
     var previewLayer : AVCaptureVideoPreviewLayer?
     
     // If we find a device we'll store it here for later use
@@ -83,22 +102,43 @@ class CustomCameraVC: UIViewController {
 extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerControllerDelegate {
     func showCameraView() {
         captureSession.sessionPreset = AVCaptureSessionPresetHigh
-        
+        switch isCameraBack {
+        case true:
         if let devices = AVCaptureDevice.devices() as? [AVCaptureDevice] {
             // Loop through all the capture devices on this phone
             for device in devices {
                 // Make sure this particular device supports video
                 if (device.hasMediaType(AVMediaTypeVideo)) {
                     // Finally check the position and confirm we've got the back camera
-                    if (device.position == AVCaptureDevicePosition.back) {
-                        captureDevice = device
-                        if captureDevice != nil {
-                            print("Capture device found")
-                            beginSession()
+                        if (device.position == AVCaptureDevicePosition.back) {
+                            captureDevice = device
+                            if captureDevice != nil {
+                                print("Capture device found")
+                                beginSession()
+                            }
                         }
-                    }
                 }
             }
+        }
+        break
+        case false:
+            if let devices = AVCaptureDevice.devices() as? [AVCaptureDevice] {
+            // Loop through all the capture devices on this phone
+            for device in devices {
+            // Make sure this particular device supports video
+                if (device.hasMediaType(AVMediaTypeVideo)) {
+                    // Finally check the position and confirm we've got the back camera
+                        if (device.position == AVCaptureDevicePosition.front) {
+                            captureDevice = device
+                            if captureDevice != nil {
+                                print("Capture device found")
+                                beginSession()
+                            }
+                        }
+                }
+            }
+        }
+        break
         }
     }
     
@@ -170,12 +210,16 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
         self.layerView.frame = CGRect(x: 0, y: (self.view.frame.height - heightForLayerView), width: self.cameraView.frame.width, height: heightForLayerView)
         self.shutterButton.frame = CGRect(x: 0, y: 0, width: widthAndHeightForButtons, height: widthAndHeightForButtons)
         self.selectShowImage.frame = CGRect(x: 0, y: 0, width: widthAndHeightForButtons, height: widthAndHeightForButtons)
+        self.showDetailBttn.frame = CGRect(x: 0, y: 0, width: widthAndHeightForButtons, height: widthAndHeightForButtons)
         self.shutterButton.center.x = self.layerView.center.x
         self.shutterButton.center.y = ((self.layerView.frame.height / 2) - yposition)
         self.selectShowImage.center.x = self.layerView.center.x + xposition
+        self.showDetailBttn.center.x = self.layerView.center.x + xposition
         self.selectShowImage.center.y = ((self.layerView.frame.height / 2) - yposition)
+        self.showDetailBttn.center.y = ((self.layerView.frame.height / 2) - yposition)
         self.layerView.addSubview(shutterButton)
         self.layerView.addSubview(selectShowImage)
+        self.layerView.insertSubview(showDetailBttn, aboveSubview: selectShowImage)
         self.view.addSubview(layerView)
         self.cancelButton.frame = CGRect(x: 0, y: ypositionForUpperButtons, width: widthAndHeightForUpperButtons, height: widthAndHeightForUpperButtons)
         self.toggleCameraButton.frame = CGRect(x: (self.view.frame.width - widthAndHeightForUpperButtons), y: ypositionForUpperButtons, width: widthAndHeightForUpperButtons, height: widthAndHeightForUpperButtons)
@@ -187,13 +231,19 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
             action: #selector(saveCaptureImage),
             for: .touchUpInside
         )
+        self.showDetailBttn.addTarget(
+            self,
+            action: #selector(showAlbumDetail),
+            for: .touchUpInside
+        )
     }
     
     
     func saveCaptureImage() {
-        
+        showScreenshotEffect()
         switch cameraType {
         case .all:
+            self.showDetailBttn.isHidden = true
             self.showSelectListVC()
             break
         case .select:
@@ -315,6 +365,36 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
         }
     }
     
+    func showScreenshotEffect() {
+        
+        let snapshotView = UIView()
+        snapshotView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(snapshotView)
+        
+        let constraints:[NSLayoutConstraint] = [
+            snapshotView.topAnchor.constraint(equalTo: view.topAnchor),
+            snapshotView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            snapshotView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            snapshotView.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+
+        snapshotView.backgroundColor = UIColor.white
+
+        UIView.animate(withDuration: 0.2, animations: {
+            snapshotView.alpha = 0
+        }) { _ in
+            snapshotView.removeFromSuperview()
+        }
+    }
+    
+    func showAlbumDetail() {
+        guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
+        vc.album = self.album
+        self.navigationController?.navigationBar.shadowImage = nil
+        vc.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 

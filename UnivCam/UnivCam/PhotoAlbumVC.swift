@@ -83,6 +83,7 @@ class PhotoAlbumVC: UIViewController {
     var photos = [UIImage]()
     var _selectedCells : NSMutableArray = []
     var albumTitle : String?
+    var onceOnly = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -135,6 +136,15 @@ class PhotoAlbumVC: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    internal func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if !onceOnly {
+            let indexToScrollTo = IndexPath(item: (selectedIndex?.row)!, section: 0)
+            self.collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+            self.thumbnailCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+            onceOnly = true
+        }
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

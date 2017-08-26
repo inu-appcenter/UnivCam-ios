@@ -120,6 +120,10 @@
                                                 <rect key="frame" x="270" y="24" width="80" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJ4-xR-5Db">
+                                                <rect key="frame" x="270" y="24" width="80" height="80"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -138,7 +142,7 @@
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <state key="normal" image="ic_autorenew_white_2x"/>
                                         <connections>
-                                            <action selector="unwindToTabVC:" destination="Vda-XU-N7E" eventType="touchUpInside" id="qfT-Cb-AfI"/>
+                                            <action selector="toggleCamera:" destination="Vda-XU-N7E" eventType="touchUpInside" id="imO-1K-QR1"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -154,6 +158,7 @@
                         <outlet property="cancelButton" destination="pr0-ZR-sI8" id="2u9-fG-4Ph"/>
                         <outlet property="layerView" destination="iSA-e8-nVS" id="PRP-rN-dgi"/>
                         <outlet property="selectShowImage" destination="gEX-uE-Bgo" id="aVJ-Cd-Hff"/>
+                        <outlet property="showDetailBttn" destination="uJ4-xR-5Db" id="d4B-Yi-UO0"/>
                         <outlet property="shutterButton" destination="2ZF-ib-EwB" id="A0A-8U-Bvt"/>
                         <outlet property="toggleCameraButton" destination="LHh-TD-TX6" id="ogG-Rw-uvo"/>
                         <segue destination="Iwi-kB-DAh" kind="push" id="9QR-Ps-YTS"/>
