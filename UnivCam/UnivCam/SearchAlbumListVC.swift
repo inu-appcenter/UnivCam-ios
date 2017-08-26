@@ -309,7 +309,7 @@ extension SearchAlbumListVC {
         alert.addAction(UIAlertAction(title: "취소", style: .cancel) { action in
             
         })
-        
+        alert.view.tintColor = UIColor(hex: 0x515859)
         self.present(
             alert,
             animated: true,

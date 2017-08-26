@@ -78,6 +78,7 @@ class InfoViewController : UIViewController {
             info_title.text = viewType?.rawValue
             break
         case .developer?:
+            self.infoTableView.alwaysBounceVertical = true
             info_title.text = viewType?.rawValue
             break
         case .none:

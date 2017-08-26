@@ -389,11 +389,17 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
     }
     
     func showAlbumDetail() {
+        print("앨범 들어갑니다")
         guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
         vc.album = self.album
         self.navigationController?.navigationBar.shadowImage = nil
         vc.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.pushViewController(vc, animated: true)
+//        vc.navigationController?.navigationBar.isHidden = false
+        vc.navigationController?.isNavigationBarHidden = false
+        self.present(vc, animated: true) {
+            vc.navigationController?.isNavigationBarHidden = false
+        }
+//        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

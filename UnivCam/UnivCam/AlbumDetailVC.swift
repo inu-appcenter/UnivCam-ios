@@ -78,11 +78,24 @@ class AlbumDetailVC: UIViewController {
     var newalbum : Album?
     
     override func viewWillAppear(_ animated: Bool) {
+        self.photos.removeAll()
+        print(photos.count)
+        self.numberOfRow = 0
+        self.number = 0
+        self.photoUrls.removeAll()
+        self.viewDidLoad()
+        print("포토 갱신")
+        print(photos.count)
+        _allCells.removeAllObjects()
+        _selectedCells.removeAllObjects()
+        _appendCells.removeAllObjects()
+        print("데이터갱신 전")
         self.collectionView.reloadData()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionView.allowsMultipleSelection = false
         appendPhotos = (self.album?.photos)!
         guard let dirPath = album?.url,
             let files = try? FileManager.default.contentsOfDirectory(atPath: dirPath) else { return }
@@ -325,6 +338,8 @@ extension AlbumDetailVC: UICollectionViewDelegate {
             nvc.photos = photos
             nvc.albumTitle = album?.title
             nvc.selectedIndex = indexPath
+            nvc.photoUrls = self.photoUrls
+            nvc.album = self.album
 //            nvc.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
 //            nvc.thumbnailCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: UICollectionViewScrollPosition())
             self.navigationController?.pushViewController(nvc, animated: true)

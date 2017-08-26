@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PhotoAlbumVC: UIViewController {
     
@@ -48,11 +49,25 @@ class PhotoAlbumVC: UIViewController {
     func deletePhoto() {
         
         let indexPath = IndexPath(row: 0, section: 0)
-        
-        photoDataSource.photos.remove(at: indexPath.row)
-        self.collectionView.deleteItems(at: [indexPath])
-        
-        self.thumbnailCollectionView.deleteItems(at: [indexPath])
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(atPath: photoUrls[(selectedIndex?.row)!])
+        }
+        catch {
+            print("사진삭제 못했어;;")
+        }
+        let realm = try! Realm()
+        do {
+            try realm.write {
+                album?.photoCount -= 1
+            }
+        }
+        catch {
+            
+        }
+        photoDataSource.photos.remove(at: (selectedIndex?.row)!)
+        self.collectionView.deleteItems(at: [selectedIndex!])
+        self.thumbnailCollectionView.deleteItems(at: [selectedIndex!])
         
         
         if !photoDataSource.photos.isEmpty {
@@ -62,8 +77,10 @@ class PhotoAlbumVC: UIViewController {
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
-        self.collectionView.reloadData()
-        self.thumbnailCollectionView.reloadData()
+        self._selectedCells.remove(selectedIndex)
+        self.viewWillAppear(true)
+//        self.collectionView.reloadData()
+//        self.thumbnailCollectionView.reloadData()
     }
     
     
@@ -82,8 +99,10 @@ class PhotoAlbumVC: UIViewController {
     var selectedIndex : IndexPath?
     var photos = [UIImage]()
     var _selectedCells : NSMutableArray = []
+    var album : Album?
     var albumTitle : String?
     var onceOnly = false
+    var photoUrls = [String]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -129,8 +148,6 @@ class PhotoAlbumVC: UIViewController {
         if let vc = self.navigationController?.viewControllers[1] {
             self.navigationController?.popToViewController(vc, animated: true)
         }
-        //self.navigationController?.popToRootViewController(animated: true)
-        //self.navigationController?.popToViewController(<#T##viewController: UIViewController##UIViewController#>, animated: <#T##Bool#>)
     }
     
     override func didReceiveMemoryWarning() {
@@ -162,7 +179,7 @@ class PhotoAlbumVC: UIViewController {
             let index = targetContentOffset.pointee.x / view.frame.width
             
             let indexPath = IndexPath(item: Int(index), section: 0)
-            thumbnailCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
+            thumbnailCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
             thumbnailCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             _selectedCells.add(indexPath)
