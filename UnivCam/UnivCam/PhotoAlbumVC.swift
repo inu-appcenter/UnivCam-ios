@@ -68,34 +68,42 @@ class PhotoAlbumVC: UIViewController {
             catch {
                 
             }
+            print("일단 지우기는함")
+            print(self.photos)
             self.photoDataSource.photos.remove(at: (self.selectedIndex?.row)!)
             self.collectionView.deleteItems(at: [self.selectedIndex!])
             self.thumbnailCollectionView.deleteItems(at: [self.selectedIndex!])
             self.photos.remove(at: (self.selectedIndex?.row)!)
             self.photoUrls.remove(at: (self.selectedIndex?.row)!)
-            if !self.photoDataSource.photos.isEmpty {
+            print("지워짐??")
+            print(self.photos)
+            self.photoDataSource.photos.removeAll()
+            self.photoDataSource.photos = self.photos
+            if self.photos.isEmpty == true {
+                self.unwindToAlbum()
+            }
+            else {
                 self.thumbnailCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
                 self.thumbnailCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
                 self.thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
                 self.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
                 self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+                
+                
+                if self.selectedIndex?.row != 0{
+                    self.selectedIndex?.row = (self.selectedIndex?.row)! - 1
+                }
+                else {
+                    self.selectedIndex?.row = 0
+                }
+                self._selectedCells.add(self.selectedIndex)
+                self.collectionView.reloadData()
+                self.thumbnailCollectionView.reloadData()
+                let indexToScrollTo = IndexPath(item: (self.selectedIndex?.row)!, section: 0)
+                self.collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+                self.thumbnailCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+                self._selectedCells.remove(self.selectedIndex)
             }
-
-            if self.selectedIndex?.row != 0{
-                self.selectedIndex?.row = (self.selectedIndex?.row)! - 1
-            }
-            else {
-                self.selectedIndex?.row = 0
-            }
-            self.photoDataSource.photos.removeAll()
-            self.photoDataSource.photos = self.photos
-            self._selectedCells.add(self.selectedIndex)
-            self.collectionView.reloadData()
-            self.thumbnailCollectionView.reloadData()
-            let indexToScrollTo = IndexPath(item: (self.selectedIndex?.row)!, section: 0)
-            self.collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
-            self.thumbnailCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
-            self._selectedCells.remove(self.selectedIndex)
 
         })
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: { (action)->Void in
