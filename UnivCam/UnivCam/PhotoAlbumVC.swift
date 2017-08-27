@@ -71,7 +71,8 @@ class PhotoAlbumVC: UIViewController {
             self.photoDataSource.photos.remove(at: (self.selectedIndex?.row)!)
             self.collectionView.deleteItems(at: [self.selectedIndex!])
             self.thumbnailCollectionView.deleteItems(at: [self.selectedIndex!])
-            
+            self.photos.remove(at: (self.selectedIndex?.row)!)
+            self.photoUrls.remove(at: (self.selectedIndex?.row)!)
             if !self.photoDataSource.photos.isEmpty {
                 self.thumbnailCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
                 self.thumbnailCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
@@ -79,17 +80,27 @@ class PhotoAlbumVC: UIViewController {
                 self.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
                 self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             }
-            
-//            self._selectedCells.remove(self.selectedIndex)
+
+            if self.selectedIndex?.row != 0{
+                self.selectedIndex?.row = (self.selectedIndex?.row)! - 1
+            }
+            else {
+                self.selectedIndex?.row = 0
+            }
             self.viewWillAppear(true)
+            self.collectionView.reloadData()
+            self.thumbnailCollectionView.reloadData()
+            self._selectedCells.remove(self.selectedIndex)
+
         })
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: { (action)->Void in
-            print("저장하지않음")
+            print("취소")
         })
         alert.addAction(confirm_delete)
         alert.addAction(cancel)
         alert.view.tintColor = UIColor(hex: 0x515859)
         self.present(alert, animated: true, completion: nil)
+        
 //        self.collectionView.reloadData()
 //        self.thumbnailCollectionView.reloadData()
     }
@@ -210,7 +221,7 @@ class PhotoAlbumVC: UIViewController {
 extension PhotoAlbumVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        print(indexPath)
         if collectionView == self.collectionView {
             let vc = UIStoryboard(name: "Album", bundle: nil).instantiateViewController(withIdentifier: "ZoomableImageVC") as! ZoomableImageVC
             vc.image = photos[indexPath.row]
