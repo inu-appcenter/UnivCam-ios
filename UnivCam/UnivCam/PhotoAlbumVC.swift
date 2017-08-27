@@ -87,9 +87,14 @@ class PhotoAlbumVC: UIViewController {
             else {
                 self.selectedIndex?.row = 0
             }
-            self.viewWillAppear(true)
+            self.photoDataSource.photos.removeAll()
+            self.photoDataSource.photos = self.photos
+            self._selectedCells.add(self.selectedIndex)
             self.collectionView.reloadData()
             self.thumbnailCollectionView.reloadData()
+            let indexToScrollTo = IndexPath(item: (self.selectedIndex?.row)!, section: 0)
+            self.collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+            self.thumbnailCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
             self._selectedCells.remove(self.selectedIndex)
 
         })
@@ -126,6 +131,8 @@ class PhotoAlbumVC: UIViewController {
     var onceOnly = false
     var photoUrls = [String]()
     var returnedFromZoom : Bool = false
+    var isSrolledLeft : Bool = true
+    var scrollOnce : Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -192,9 +199,24 @@ class PhotoAlbumVC: UIViewController {
         }
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if(scrollView.panGestureRecognizer.translation(in: scrollView).x > 0) {
+            isSrolledLeft = true
+            print("left")
+        }
+        else {
+            isSrolledLeft = false
+            print("right")
+        }
+    }
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        
-        
+        if isSrolledLeft {
+            self.selectedIndex?.row = (self.selectedIndex?.row)! - 1
+        }
+        else {
+            self.selectedIndex?.row = (self.selectedIndex?.row)! + 1
+        }
         if scrollView == collectionView {
             guard _selectedCells.count == 0 else { return }
             for cindexPath in _selectedCells {
@@ -207,11 +229,10 @@ class PhotoAlbumVC: UIViewController {
             let index = targetContentOffset.pointee.x / view.frame.width
             
             let indexPath = IndexPath(item: Int(index), section: 0)
-            thumbnailCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
-            thumbnailCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
+            thumbnailCollectionView.selectItem(at: selectedIndex, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+            thumbnailCollectionView.scrollToItem(at: selectedIndex!, at: .centeredHorizontally, animated: true)
+            thumbnailCollectionView.cellForItem(at: selectedIndex!)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             _selectedCells.add(indexPath)
-            
         }
         print("움직이는중")
     }
@@ -237,9 +258,9 @@ extension PhotoAlbumVC : UICollectionViewDelegate {
             }
             
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            collectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+            self.thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
             _selectedCells.add(indexPath)
-            
+            self.selectedIndex = indexPath
         }
     }
 }
@@ -248,7 +269,12 @@ extension PhotoAlbumVC: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize{
-        return collectionView == thumbnailCollectionView ? CGSize(width: 63, height: 63) : CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 63)
+        if collectionView == thumbnailCollectionView {
+            return CGSize(width: 63, height: 63)
+        }
+        else {
+            return CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 63)
+        }
     }
     
 }

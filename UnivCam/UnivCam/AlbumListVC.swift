@@ -475,6 +475,12 @@ extension AlbumListVC {
     }
 }
 
+extension UIScrollView {
+    func scrollTo(direction: CGPoint, animated: Bool = true) {
+        self.setContentOffset(direction, animated: animated)
+    }
+}
+
 // 정렬 기능
 extension AlbumListVC {
     
