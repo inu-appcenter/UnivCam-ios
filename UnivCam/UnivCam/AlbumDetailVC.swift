@@ -53,6 +53,20 @@ class AlbumDetailVC: UIViewController {
         }
     }
     
+    @IBOutlet weak var doneButton: UIBarButtonItem! {
+        didSet {
+            doneButton.target = self
+            doneButton.action = #selector(moreAction)
+        }
+    }
+    
+    @IBOutlet weak var backSelectButton: UIBarButtonItem! {
+        didSet {
+            backSelectButton.target = self
+            backSelectButton.action = #selector(backSelect)
+        }
+    }
+    
     lazy var backButton : UIButton = {
         let btn : UIButton = .init(type: .system)
         btn.setImage(
@@ -95,6 +109,8 @@ class AlbumDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem = moreButton
         self.collectionView.allowsMultipleSelection = false
         appendPhotos = (self.album?.photos)!
         guard let dirPath = album?.url,
@@ -113,9 +129,18 @@ class AlbumDetailVC: UIViewController {
         }
     }
     
+    func backSelect() {
+        self.collectionView.allowsMultipleSelection = false
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.rightBarButtonItem = moreButton
+        self.navigationItem.leftBarButtonItem = nil
+        self.titleLabel.text = self.album?.title
+    }
+    
     func unwindToHome() {
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
     func deleteImages() {
         var indexPaths = [IndexPath]()
         //let fileManager = FileManager.default

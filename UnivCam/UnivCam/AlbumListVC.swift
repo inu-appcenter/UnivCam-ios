@@ -24,7 +24,12 @@ class AlbumListVC: UIViewController {
     }
     @IBOutlet var noMessageView: NoMessageView! {
         didSet {
-            noMessageView.messageLabel.text = Messages.has_no_albums.rawValue
+            let stringValue = Messages.has_no_albums.rawValue
+            let attrString = NSMutableAttributedString(string: stringValue)
+            let style = NSMutableParagraphStyle()
+            style.lineSpacing = 6
+            attrString.addAttribute(NSParagraphStyleAttributeName, value: style, range: NSRange(location: 0, length: stringValue.characters.count))
+            noMessageView.messageLabel.attributedText = attrString
             noMessageView.actionButton.addTarget(self,
                                                  action: #selector(setCreateAlbumView),
                                                  for: .touchUpInside)
