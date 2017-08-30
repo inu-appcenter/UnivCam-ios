@@ -96,7 +96,8 @@ class PhotoAlbumVC: UIViewController {
                 else {
                     self.selectedIndex?.row = 0
                 }
-                self._selectedCells.add(self.selectedIndex)
+                self.photoDataSource.selectedIndex = self.selectedIndex
+//                self._selectedCells.add(self.selectedIndex)
                 self.collectionView.reloadData()
                 self.thumbnailCollectionView.reloadData()
                 let indexToScrollTo = IndexPath(item: (self.selectedIndex?.row)!, section: 0)
@@ -141,6 +142,7 @@ class PhotoAlbumVC: UIViewController {
     var returnedFromZoom : Bool = false
     var isSrolledLeft : Bool = true
     var scrollOnce : Bool = false
+    var _allCells = [IndexPath]()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -148,6 +150,8 @@ class PhotoAlbumVC: UIViewController {
             returnedFromZoom = false
             photoDataSource.photos.removeAll()
             photoDataSource.photos = photos
+            self._allCells = photoDataSource._allCells
+            photoDataSource.selectedIndex = self.selectedIndex
         }
         else {
             photoDataSource.photos.removeAll()
@@ -172,10 +176,12 @@ class PhotoAlbumVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         photoDataSource.photos.removeAll()
+        photoDataSource._allCells.removeAll()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        photoDataSource.selectedIndex = self.selectedIndex
         let button : UIButton = .init(type : .system)
         button.setImage(Assets.leftNavigationItem.image, for: .normal)
         guard let title = albumTitle else { return }
@@ -183,7 +189,7 @@ class PhotoAlbumVC: UIViewController {
         button.sizeToFit()
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: button)
         button.addTarget(self, action: #selector(unwindToAlbum), for: .touchUpInside)
-        
+        self._allCells = photoDataSource._allCells
         // Do any additional setup after loading the view.
     }
     
@@ -203,46 +209,54 @@ class PhotoAlbumVC: UIViewController {
             let indexToScrollTo = IndexPath(item: (selectedIndex?.row)!, section: 0)
             self.collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
             self.thumbnailCollectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
+            self.thumbnailCollectionView.cellForItem(at: indexToScrollTo)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
             onceOnly = true
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if(scrollView.panGestureRecognizer.translation(in: scrollView).x > 0) {
-            isSrolledLeft = true
-            print("left")
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if(scrollView.panGestureRecognizer.translation(in: scrollView).x > 0) {
+//            isSrolledLeft = true
+//        }
+//        else {
+//            isSrolledLeft = false
+//        }
+//        if scrollView == self.collectionView {
+//            let visibleRect = CGRect(origin: self.collectionView.contentOffset, size: self.collectionView.bounds.size)
+//            let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+//            let nowIndexPath = self.collectionView.indexPathForItem(at: visiblePoint)
+//            print(nowIndexPath)
+//            self.selectedIndex = nowIndexPath
+//        }
+//    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        var visibleRect = CGRect()
+
+        visibleRect.origin = collectionView.contentOffset
+        visibleRect.size = collectionView.bounds.size
+
+        let visiblePoint = CGPoint(x: visibleRect.midX, y: visibleRect.midY)
+
+        let visibleIndexPath: IndexPath = collectionView.indexPathForItem(at: visiblePoint)!
+        self.selectedIndex = visibleIndexPath
+        let cellNum = self.collectionView.numberOfItems(inSection: 0) - 1
+        if scrollView == collectionView {
+            print("Show")
+            for num in 0...cellNum {
+                let cindexPath = self.photoDataSource._allCells[num]
+                thumbnailCollectionView.cellForItem(at: cindexPath)?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            }
+            thumbnailCollectionView.selectItem(at: selectedIndex, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
+            thumbnailCollectionView.scrollToItem(at: selectedIndex!, at: .centeredHorizontally, animated: true)
+            thumbnailCollectionView.cellForItem(at: selectedIndex!)?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
         }
-        else {
-            isSrolledLeft = false
-            print("right")
-        }
+        print("움직이는중")
+        print(visibleIndexPath)
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if isSrolledLeft {
-            self.selectedIndex?.row = (self.selectedIndex?.row)! - 1
-        }
-        else {
-            self.selectedIndex?.row = (self.selectedIndex?.row)! + 1
-        }
-        if scrollView == collectionView {
-            guard _selectedCells.count == 0 else { return }
-            for cindexPath in _selectedCells {
-                guard let coindexPath = cindexPath as? IndexPath else { return }
-                thumbnailCollectionView.cellForItem(at: coindexPath)?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                _selectedCells.remove(coindexPath)
-            }
-            
-            
-            let index = targetContentOffset.pointee.x / view.frame.width
-            
-            let indexPath = IndexPath(item: Int(index), section: 0)
-            thumbnailCollectionView.selectItem(at: selectedIndex, animated: true, scrollPosition: UICollectionViewScrollPosition.centeredHorizontally)
-            thumbnailCollectionView.scrollToItem(at: selectedIndex!, at: .centeredHorizontally, animated: true)
-            thumbnailCollectionView.cellForItem(at: selectedIndex!)?.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-            _selectedCells.add(indexPath)
-        }
-        print("움직이는중")
+
     }
     
     
@@ -257,13 +271,17 @@ extension PhotoAlbumVC : UICollectionViewDelegate {
             returnedFromZoom = true
             self.present(vc, animated: false, completion: nil)
         } else if collectionView == self.thumbnailCollectionView {
-           
-            for indexPath in _selectedCells {
-                guard let indexPath = indexPath as? IndexPath else { return }
-                thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                print(indexPath)
-                _selectedCells.remove(indexPath)
+            let cellNum = self.collectionView.numberOfItems(inSection: 0) - 1
+            for num in 0...cellNum {
+                let cindexPath = self.photoDataSource._allCells[num]
+                thumbnailCollectionView.cellForItem(at: cindexPath)?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             }
+//            for indexPath in _selectedCells {
+//                guard let indexPath = indexPath as? IndexPath else { return }
+//                thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+//                print(indexPath)
+//                _selectedCells.remove(indexPath)
+//            }
             
             self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             self.thumbnailCollectionView.cellForItem(at: indexPath)?.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)

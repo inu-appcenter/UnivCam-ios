@@ -67,10 +67,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cfw-qW-nRF"/>
                     </view>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="LCV-Jm-BG2">
+                        <barButtonItem key="backBarButtonItem" title="뒤로가기" id="BWA-xq-o8r"/>
+                        <barButtonItem key="leftBarButtonItem" image="icCloseWhite2X-1" width="49" id="bsr-sP-E80"/>
                         <barButtonItem key="rightBarButtonItem" image="icMoreVertWhite" width="49" id="OPZ-p0-2ke"/>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cancelAllButton" destination="bsr-sP-E80" id="Sfc-Jb-VKk"/>
                         <outlet property="collectionView" destination="bAG-qb-aZc" id="L39-BK-lC5"/>
                         <outlet property="moreButton" destination="OPZ-p0-2ke" id="fQ0-oJ-haI"/>
                         <outlet property="titleLabel" destination="srW-UH-ndq" id="fuG-Yg-V0J"/>
@@ -143,6 +148,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icCloseWhite2X-1" width="14" height="14"/>
         <image name="icMoreVertWhite" width="4" height="15"/>
     </resources>
 </document>

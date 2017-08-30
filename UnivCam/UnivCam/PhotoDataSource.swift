@@ -11,6 +11,8 @@ import UIKit
 class PhotoDataSource: NSObject, UICollectionViewDataSource {
     
     var photos = [UIImage]()
+    var _allCells = [IndexPath]()
+    var selectedIndex : IndexPath?
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photos.count
@@ -20,8 +22,8 @@ class PhotoDataSource: NSObject, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! PhotoCell
         let photo = photos[indexPath.row]
         cell.imageView.image = photo
-        
-        if indexPath.row == 0 {
+        _allCells.append(indexPath)
+        if indexPath.row == selectedIndex?.row {
            cell.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
         }
      
