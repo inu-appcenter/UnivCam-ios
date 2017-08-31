@@ -13,6 +13,7 @@ enum actionTitle : String {
     case select_multi = "사진 선택하기"
     case select_delete = "사진 삭제하기"
     case select_share = "사진 공유하기"
+    case all_cancel = "사진선택 취소"
     case cancel = "취소"
     case move = "선택사진 이동"
     case copy = "선택사진 복사"
@@ -117,7 +118,7 @@ class AlbumDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.setLeftBarButtonItems([UIBarButtonItem(customView: backButton), cancelAllButton], animated: false)
+        self.navigationItem.setLeftBarButtonItems([UIBarButtonItem(customView: backButton)], animated: false)
         self.navigationItem.rightBarButtonItem = nil
         self.navigationItem.rightBarButtonItem = moreButton
         self.collectionView.allowsMultipleSelection = false
@@ -252,24 +253,20 @@ class AlbumDetailVC: UIViewController {
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
                 self.moreButton.image = UIImage(named: "icDone2X")
-                self.navigationItem.leftItemsSupplementBackButton = false
-                self.navigationItem.leftBarButtonItems?.removeAll()
-                self.navigationItem.setLeftBarButton(self.cancelAllButton, animated: false)
+                self.backButton.isHidden = true
                 self.actionType = .multi
             })
             let multiDelete = UIAlertAction(title: actionTitle.select_delete.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
-                self.navigationItem.leftBarButtonItems?.removeAll()
-                self.navigationItem.leftBarButtonItem = self.cancelAllButton
+                self.backButton.isHidden = true
                 self.moreButton.image = UIImage(named: "icDone2X")
                 self.actionType = .delete
             })
             let multiShare = UIAlertAction(title: actionTitle.select_share.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
-                self.navigationItem.leftBarButtonItems?.removeAll()
-                self.navigationItem.leftBarButtonItem = self.cancelAllButton
+                self.backButton.isHidden = true
                 self.moreButton.image = UIImage(named: "icDone2X")
                 self.actionType = .share
             })
@@ -288,27 +285,35 @@ class AlbumDetailVC: UIViewController {
             let move = UIAlertAction(title: actionTitle.move.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
-                self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.backButton)
+                self.backButton.isHidden = false
                 self.moreButton.image = UIImage(named: "icMoreVertWhite")
             })
             let delete = UIAlertAction(title: actionTitle.delete.rawValue, style: .default, handler: { (action)->Void in
                 self.deleteImages()
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
-                self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.backButton)
+                self.backButton.isHidden = false
                 self.moreButton.image = UIImage(named: "icMoreVertWhite")
             })
             let copy = UIAlertAction(title: actionTitle.copy.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
-                self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.backButton)
+                self.backButton.isHidden = false
                 self.moreButton.image = UIImage(named: "icMoreVertWhite")
             })
             let share = UIAlertAction(title: actionTitle.share.rawValue, style: .default, handler: { (action)->Void in
                 self.shareImages()
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
-                self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: self.backButton)
+                self.backButton.isHidden = false
+                self.moreButton.image = UIImage(named: "icMoreVertWhite")
+                self._selectedCells.removeAllObjects()
+                self.collectionView.reloadData()
+            })
+            let cancelAllAction = UIAlertAction(title: actionTitle.all_cancel.rawValue, style: .default, handler: { (action)->Void in
+                self.collectionView.allowsMultipleSelection = false
+                self.titleLabel.text = self.album?.title
+                self.backButton.isHidden = false
                 self.moreButton.image = UIImage(named: "icMoreVertWhite")
                 self._selectedCells.removeAllObjects()
                 self.collectionView.reloadData()
@@ -332,6 +337,7 @@ class AlbumDetailVC: UIViewController {
             }
             //moreActionView.addAction(move)
             //moreActionView.addAction(copy)
+            moreActionView.addAction(cancelAllAction)
             moreActionView.addAction(cancelAction)
             moreActionView.view.tintColor = UIColor(hex: 0x515859)
             self.present(moreActionView, animated: true, completion: nil)
