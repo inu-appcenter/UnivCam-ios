@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import AVFoundation
 
 enum actionTitle : String {
     case select_multi = "사진 선택하기"
@@ -58,22 +59,27 @@ class AlbumDetailVC: UIViewController {
             moreButton.action = #selector(moreAction)
         }
     }
-    
-    @IBOutlet weak var doneButton: UIBarButtonItem! {
+    @IBOutlet weak var takePictureButton: UIBarButtonItem! {
         didSet {
-            doneButton.target = self
-            doneButton.action = #selector(moreAction)
+            takePictureButton.target = self
+            takePictureButton.action = #selector(showCamera(sender:))
         }
     }
     
-    @IBOutlet weak var cancelAllButton: UIBarButtonItem! {
-        didSet {
-            cancelAllButton.tintColor = UIColor.clear
-            cancelAllButton.target = self
-            cancelAllButton.action = #selector(moreAction)
-            cancelAllButton.isEnabled = false
-        }
+    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var cancelAllButton: UIButton!
+    @IBAction func clickDone(_ sender: Any) {
+        moreAction()
     }
+    @IBAction func clickCancel(_ sender: Any) {
+        self.collectionView.allowsMultipleSelection = false
+        self.titleLabel.text = self.album?.title
+        self.backButton.isHidden = false
+        self._selectedCells.removeAllObjects()
+        self.collectionView.reloadData()
+        hideButtons()
+    }
+    
     
     lazy var backButton : UIButton = {
         let btn : UIButton = .init(type: .system)
@@ -99,6 +105,7 @@ class AlbumDetailVC: UIViewController {
     var number = 0
     var newalbum : Album?
     var actionType : actionCase?
+    let popupView = UIView()
     
     override func viewWillAppear(_ animated: Bool) {
         self.photos.removeAll()
@@ -118,9 +125,10 @@ class AlbumDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.cancelAllButton.isHidden = true
+        self.doneButton.isHidden = true
         self.navigationItem.setLeftBarButtonItems([UIBarButtonItem(customView: backButton)], animated: false)
-        self.navigationItem.rightBarButtonItem = nil
-        self.navigationItem.rightBarButtonItem = moreButton
+
         self.collectionView.allowsMultipleSelection = false
         appendPhotos = (self.album?.photos)!
         guard let dirPath = album?.url,
@@ -246,37 +254,43 @@ class AlbumDetailVC: UIViewController {
     }
     
     func moreAction() {
+
         if collectionView.allowsMultipleSelection == false {
             
             let moreActionView = UIAlertController()
             let multiSelect = UIAlertAction(title: actionTitle.select_multi.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
-                self.moreButton.image = UIImage(named: "icDone2X")
+                self.showButtons()
                 self.backButton.isHidden = true
                 self.actionType = .multi
+                self.recoverButtons()
             })
             let multiDelete = UIAlertAction(title: actionTitle.select_delete.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
                 self.backButton.isHidden = true
-                self.moreButton.image = UIImage(named: "icDone2X")
+                self.showButtons()
                 self.actionType = .delete
+                self.recoverButtons()
             })
             let multiShare = UIAlertAction(title: actionTitle.select_share.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = true
                 self.titleLabel.text = "사진 선택"
                 self.backButton.isHidden = true
-                self.moreButton.image = UIImage(named: "icDone2X")
+                self.showButtons()
                 self.actionType = .share
+                self.recoverButtons()
             })
             let cancelAction = UIAlertAction(title: actionTitle.cancel.rawValue, style: .cancel, handler: { (action)->Void in
+                self.recoverButtons()
             })
             moreActionView.addAction(multiSelect)
             moreActionView.addAction(multiDelete)
             moreActionView.addAction(multiShare)
             moreActionView.addAction(cancelAction)
             moreActionView.view.tintColor = UIColor(hex: 0x515859)
+            self.pauseButtons()
             self.present(moreActionView, animated: true, completion: nil)
         }
         else {
@@ -286,39 +300,36 @@ class AlbumDetailVC: UIViewController {
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
                 self.backButton.isHidden = false
-                self.moreButton.image = UIImage(named: "icMoreVertWhite")
+                self.hideButtons()
+                self.recoverButtons()
             })
             let delete = UIAlertAction(title: actionTitle.delete.rawValue, style: .default, handler: { (action)->Void in
                 self.deleteImages()
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
                 self.backButton.isHidden = false
-                self.moreButton.image = UIImage(named: "icMoreVertWhite")
+                self.hideButtons()
+                self.recoverButtons()
             })
             let copy = UIAlertAction(title: actionTitle.copy.rawValue, style: .default, handler: { (action)->Void in
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
                 self.backButton.isHidden = false
-                self.moreButton.image = UIImage(named: "icMoreVertWhite")
+                self.hideButtons()
+                self.recoverButtons()
             })
             let share = UIAlertAction(title: actionTitle.share.rawValue, style: .default, handler: { (action)->Void in
                 self.shareImages()
                 self.collectionView.allowsMultipleSelection = false
                 self.titleLabel.text = self.album?.title
                 self.backButton.isHidden = false
-                self.moreButton.image = UIImage(named: "icMoreVertWhite")
+                self.hideButtons()
                 self._selectedCells.removeAllObjects()
                 self.collectionView.reloadData()
-            })
-            let cancelAllAction = UIAlertAction(title: actionTitle.all_cancel.rawValue, style: .default, handler: { (action)->Void in
-                self.collectionView.allowsMultipleSelection = false
-                self.titleLabel.text = self.album?.title
-                self.backButton.isHidden = false
-                self.moreButton.image = UIImage(named: "icMoreVertWhite")
-                self._selectedCells.removeAllObjects()
-                self.collectionView.reloadData()
+                self.recoverButtons()
             })
             let cancelAction = UIAlertAction(title: actionTitle.cancel.rawValue, style: .cancel, handler: { (action)->Void in
+                self.recoverButtons()
             })
             
             switch self.actionType {
@@ -337,9 +348,9 @@ class AlbumDetailVC: UIViewController {
             }
             //moreActionView.addAction(move)
             //moreActionView.addAction(copy)
-            moreActionView.addAction(cancelAllAction)
             moreActionView.addAction(cancelAction)
             moreActionView.view.tintColor = UIColor(hex: 0x515859)
+            self.pauseButtons()
             self.present(moreActionView, animated: true, completion: nil)
         }
     }
@@ -503,4 +514,68 @@ extension AlbumDetailVC {
             self.photos.append(UIImage(named: imageURL)!)
         }
     }
+    
+    func showButtons() {
+        popupView.frame = CGRect(x: 0, y: 25, width: self.view.frame.width, height: 49)
+        doneButton.frame = CGRect(x: popupView.frame.width - 49, y: 0, width: 49, height: 49)
+        doneButton.isHidden = false
+        cancelAllButton.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
+        cancelAllButton.isHidden = false
+        popupView.addSubview(doneButton)
+        popupView.addSubview(cancelAllButton)
+        moreButton.image = nil
+        moreButton.isEnabled = false
+        takePictureButton.image = nil
+        takePictureButton.isEnabled = false
+        if let window = UIApplication.shared.keyWindow {
+//            window.addSubview(popupView)
+            window.insertSubview(popupView, belowSubview: self.view)
+            print("팝업")
+        }
+    }
+    
+    func hideButtons() {
+        doneButton.isHidden = true
+        cancelAllButton.isHidden = true
+        moreButton.image = UIImage(named: "icMoreVertWhite")
+        moreButton.isEnabled = true
+        takePictureButton.image = UIImage(named: "_ic_camera__ic_camera")
+        takePictureButton.isEnabled = true
+        popupView.removeFromSuperview()
+    }
+    
+    func pauseButtons() {
+        doneButton.isEnabled = false
+        cancelAllButton.isEnabled = false
+    }
+    
+    func recoverButtons() {
+        doneButton.isEnabled = true
+        cancelAllButton.isEnabled = true
+    }
+    
+    func showCamera(sender: UIButton) {
+        
+        AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo) {
+            (granted: Bool) -> Void in
+            guard granted else {
+                /// Report an error. We didn't get access to hardware.
+                DispatchQueue.main.async(execute: { () -> Void in
+                    self.tabBarController?.selectedIndex = TapViewControllers.camera.rawValue
+                })
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                let vc = UIStoryboard.init(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: "CustomCameraVC") as! CustomCameraVC
+                vc.cameraType = .inside
+                vc.album = self.album
+                self.present(
+                    vc,
+                    animated: true,
+                    completion: nil
+                )
+            })
+        }
+    }
 }
+

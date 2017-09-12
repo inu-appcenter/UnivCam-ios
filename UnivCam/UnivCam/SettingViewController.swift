@@ -269,16 +269,16 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
             case 1:
                 let infoVCDesign = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
                 infoVCDesign.viewType = .designer
-                self.show(infoVCDesign, sender: Any?)
+                self.show(infoVCDesign, sender: Any.self)
                 break
             case 2:
                 let infoVCDevelope = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "InfoViewController") as! InfoViewController
                 infoVCDevelope.viewType = .developer
-                self.show(infoVCDevelope, sender: Any?)
+                self.show(infoVCDevelope, sender: Any.self)
                 break
             case 3:
                 let Openvc = UIStoryboard.init(name: "Settings", bundle: nil).instantiateViewController(withIdentifier: "OpenSourceViewController")
-                self.show(Openvc, sender: Any?)
+                self.show(Openvc, sender: Any.self)
                 break
             default:
                 break

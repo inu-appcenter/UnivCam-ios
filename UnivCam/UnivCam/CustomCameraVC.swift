@@ -15,6 +15,8 @@ enum CameraType {
     case select
     //가운데 카메라
     case all
+    //디테일뷰 카메라
+    case inside
 }
 
 class CustomCameraVC: UIViewController {
@@ -90,7 +92,9 @@ class CustomCameraVC: UIViewController {
         case .select:
             //folderUpdate()
             break
-        }
+        case .inside:
+            break
+}
         
         self.dismiss(
             animated: true,
@@ -249,7 +253,9 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
         case .select:
             self.takePhoto()
             break
-        }
+        case .inside:
+            self.takePhoto()
+}
         
     }
     func takePhoto() {
@@ -389,9 +395,7 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
     }
     
     func showAlbumDetail() {
-//        print("앨범 들어갑니다")
-//        guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
-//        vc.album = self.album
+        print("앨범 들어갑니다")
 //        self.navigationController?.navigationBar.shadowImage = nil
 //        vc.navigationController?.navigationBar.shadowImage = nil
 ////        vc.navigationController?.navigationBar.isHidden = false
@@ -400,6 +404,19 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
 //            vc.navigationController?.isNavigationBarHidden = false
 //        }
 //        self.navigationController?.pushViewController(vc, animated: true)
+        switch cameraType {
+        case .all:
+            break
+        case .select:
+            self.dismiss(animated: true, completion: {
+                guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
+                vc.album = self.album
+                self.navigationController?.pushViewController(vc, animated: true)})
+            break
+        case .inside:
+            self.dismiss(animated: true, completion: nil)
+            break
+        }
     }
 }
 

@@ -310,3 +310,9 @@ extension PhotoAlbumVC: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+extension PhotoAlbumVC {
+    func showBttns() {
+        
+    }
+}

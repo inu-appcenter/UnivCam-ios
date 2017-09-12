@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -73,7 +73,7 @@
 		30FB800F1F169EB1002C66AC /* AlbumListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB800E1F169EB1002C66AC /* AlbumListVC.swift */; };
 		30FB80111F169FC3002C66AC /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB80101F169FC3002C66AC /* Camera.storyboard */; };
 		30FB80131F16A0A2002C66AC /* CustomCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB80121F16A0A2002C66AC /* CustomCameraVC.swift */; };
-		4585736EB77610F31A9E5E6B /* Pods_UnivCam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81F006F911FE39D296130AC8 /* Pods_UnivCam.framework */; };
+		DCD68555A7A05079ECA2A7B7 /* Pods_UnivCam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559EF38E69B76B004FEFFA45 /* Pods_UnivCam.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -145,9 +145,9 @@
 		30FB800E1F169EB1002C66AC /* AlbumListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumListVC.swift; sourceTree = "<group>"; tabWidth = 3; };
 		30FB80101F169FC3002C66AC /* Camera.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Camera.storyboard; sourceTree = "<group>"; };
 		30FB80121F16A0A2002C66AC /* CustomCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCameraVC.swift; sourceTree = "<group>"; };
-		81F006F911FE39D296130AC8 /* Pods_UnivCam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnivCam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A6B7E514F2FB01B27372C3D9 /* Pods-UnivCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnivCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam.release.xcconfig"; sourceTree = "<group>"; };
-		D18BD5BE4C131E0E2075C7F6 /* Pods-UnivCam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnivCam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam.debug.xcconfig"; sourceTree = "<group>"; };
+		559EF38E69B76B004FEFFA45 /* Pods_UnivCam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnivCam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		94F4A2F4AE6E547EB59024BC /* Pods-UnivCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnivCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam.release.xcconfig"; sourceTree = "<group>"; };
+		E15A529152D0A781A213E49D /* Pods-UnivCam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnivCam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,22 +155,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4585736EB77610F31A9E5E6B /* Pods_UnivCam.framework in Frameworks */,
+				DCD68555A7A05079ECA2A7B7 /* Pods_UnivCam.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1B5BFFC3D828437586A0C6B9 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D18BD5BE4C131E0E2075C7F6 /* Pods-UnivCam.debug.xcconfig */,
-				A6B7E514F2FB01B27372C3D9 /* Pods-UnivCam.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		300D83631F445683000BC658 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,8 +354,8 @@
 				30FB7FE81F169850002C66AC /* UnivCam */,
 				30FB7FE71F169850002C66AC /* Products */,
 				305E1EE51F19F57600ADA1CD /* Assets.xcassets */,
-				1B5BFFC3D828437586A0C6B9 /* Pods */,
-				632AD19AA8F3781BD2A9CFF3 /* Frameworks */,
+				DD0FE6ABFE7AD5B17654C7C6 /* Pods */,
+				61D79B8502D573466A9238A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -391,12 +382,21 @@
 			path = UnivCam;
 			sourceTree = "<group>";
 		};
-		632AD19AA8F3781BD2A9CFF3 /* Frameworks */ = {
+		61D79B8502D573466A9238A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				81F006F911FE39D296130AC8 /* Pods_UnivCam.framework */,
+				559EF38E69B76B004FEFFA45 /* Pods_UnivCam.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD0FE6ABFE7AD5B17654C7C6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E15A529152D0A781A213E49D /* Pods-UnivCam.debug.xcconfig */,
+				94F4A2F4AE6E547EB59024BC /* Pods-UnivCam.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,12 +406,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30FB7FF81F169850002C66AC /* Build configuration list for PBXNativeTarget "UnivCam" */;
 			buildPhases = (
-				E22F42E89CAA3B5C77D1B2C1 /* [CP] Check Pods Manifest.lock */,
+				C0B52FE55185B80AC21B9CAA /* [CP] Check Pods Manifest.lock */,
 				30FB7FE21F169850002C66AC /* Sources */,
 				30FB7FE31F169850002C66AC /* Frameworks */,
 				30FB7FE41F169850002C66AC /* Resources */,
-				3F5B96B60DB33E564F11FE45 /* [CP] Embed Pods Frameworks */,
-				5712AC9827D9264284D83AB2 /* [CP] Copy Pods Resources */,
+				C0D09456DD90B23AF1A0BB64 /* [CP] Embed Pods Frameworks */,
+				89BE6EA5F3E88728A33EE7CC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -440,7 +440,7 @@
 				};
 			};
 			buildConfigurationList = 30FB7FE11F169850002C66AC /* Build configuration list for PBXProject "UnivCam" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -486,7 +486,40 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3F5B96B60DB33E564F11FE45 /* [CP] Embed Pods Frameworks */ = {
+		89BE6EA5F3E88728A33EE7CC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0B52FE55185B80AC21B9CAA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UnivCam-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0D09456DD90B23AF1A0BB64 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -504,39 +537,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5712AC9827D9264284D83AB2 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E22F42E89CAA3B5C77D1B2C1 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-UnivCam-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -732,31 +732,33 @@
 		};
 		30FB7FF91F169850002C66AC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D18BD5BE4C131E0E2075C7F6 /* Pods-UnivCam.debug.xcconfig */;
+			baseConfigurationReference = E15A529152D0A781A213E49D /* Pods-UnivCam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8MB894TP6V;
 				INFOPLIST_FILE = UnivCam/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "INU-Appcenter.UnivCam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		30FB7FFA1F169850002C66AC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6B7E514F2FB01B27372C3D9 /* Pods-UnivCam.release.xcconfig */;
+			baseConfigurationReference = 94F4A2F4AE6E547EB59024BC /* Pods-UnivCam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8MB894TP6V;
 				INFOPLIST_FILE = UnivCam/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "INU-Appcenter.UnivCam";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
