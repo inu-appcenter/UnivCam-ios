@@ -516,7 +516,7 @@ extension AlbumDetailVC {
     }
     
     func showButtons() {
-        popupView.frame = CGRect(x: 0, y: 25, width: self.view.frame.width, height: 49)
+        popupView.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: self.view.frame.width, height: 49)
         doneButton.frame = CGRect(x: popupView.frame.width - 49, y: 0, width: 49, height: 49)
         doneButton.isHidden = false
         cancelAllButton.frame = CGRect(x: 0, y: 0, width: 49, height: 49)
@@ -579,3 +579,28 @@ extension AlbumDetailVC {
     }
 }
 
+extension AlbumDetailVC {
+    func sortDateNum() -> Int {
+        var result : Int = 0
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KO")
+        dateFormatter.dateFormat = "yyyy년 MM월 dd일"
+        let photoCount = self.photos.count - 1
+        var dateconvert : [Date] = []
+        for nums in 0...photoCount {
+            var countNum = 0
+            if nums == 0 {
+                dateconvert.append((self.album?.photos[nums].createdAt)!)
+                result += 1
+            }
+            else {
+                if self.album?.photos[nums].createdAt != dateconvert[result - 1] {
+                    dateconvert.append((self.album?.photos[nums].createdAt)!)
+                    result += 1
+                }
+            }
+        }
+        print(result)
+        return result
+    }
+}

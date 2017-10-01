@@ -20,6 +20,8 @@ enum CameraType {
 }
 
 class CustomCameraVC: UIViewController {
+
+    var delegate:ViewCallback?
     
     @IBOutlet var cameraView: UIView!
     @IBOutlet var cancelButton: UIButton!
@@ -29,7 +31,9 @@ class CustomCameraVC: UIViewController {
     
     @IBOutlet weak var selectShowImage: UIImageView!
     @IBOutlet weak var showDetailBttn: UIButton!
-
+    
+//    var selected_index:Int?
+    
     
     @IBAction func toggleCamera(_ sender: Any) {
         if isCameraBack {
@@ -49,7 +53,7 @@ class CustomCameraVC: UIViewController {
     var isCameraBack = true
     
     let realm = try! Realm()
-
+    
     var captureSession = AVCaptureSession()
     var stillImageOutput = AVCaptureStillImageOutput()
     var previewLayer : AVCaptureVideoPreviewLayer?
@@ -82,7 +86,7 @@ class CustomCameraVC: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-
+    
     @IBAction func unwindToTabVC(_ sender: UIButton) {
         
         switch cameraType {
@@ -94,7 +98,7 @@ class CustomCameraVC: UIViewController {
             break
         case .inside:
             break
-}
+        }
         
         self.dismiss(
             animated: true,
@@ -108,7 +112,7 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
         captureSession.sessionPreset = AVCaptureSessionPresetHigh
         switch isCameraBack {
         case true:
-        if let devices = AVCaptureDevice.devices() as? [AVCaptureDevice] {
+            if let devices = AVCaptureDevice.devices() as? [AVCaptureDevice] {
             // Loop through all the capture devices on this phone
             for device in devices {
                 // Make sure this particular device supports video
@@ -396,22 +400,14 @@ extension CustomCameraVC : AVCapturePhotoCaptureDelegate,UIImagePickerController
     
     func showAlbumDetail() {
         print("앨범 들어갑니다")
-//        self.navigationController?.navigationBar.shadowImage = nil
-//        vc.navigationController?.navigationBar.shadowImage = nil
-////        vc.navigationController?.navigationBar.isHidden = false
-//        vc.navigationController?.isNavigationBarHidden = false
-//        self.present(vc, animated: true) {
-//            vc.navigationController?.isNavigationBarHidden = false
-//        }
-//        self.navigationController?.pushViewController(vc, animated: true)
         switch cameraType {
         case .all:
             break
         case .select:
+            let vc = self.parent as? AlbumListVC
             self.dismiss(animated: true, completion: {
-                guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
-                vc.album = self.album
-                self.navigationController?.pushViewController(vc, animated: true)})
+                self.delegate?.passData(data: self.album, code: "pushvc")
+            })
             break
         case .inside:
             self.dismiss(animated: true, completion: nil)

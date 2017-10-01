@@ -121,6 +121,14 @@ class AlbumListVC: UIViewController {
             }
         }
     }
+    
+    func pushToAlbum(_ album: Album, ani: Bool){
+        guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
+        vc.album = album
+        self.navigationController?.navigationBar.shadowImage = nil
+        vc.navigationController?.navigationBar.shadowImage = nil
+        self.navigationController?.pushViewController(vc, animated: ani)
+    }
 }
 
 extension AlbumListVC: UICollectionViewDataSource {
@@ -213,13 +221,18 @@ extension AlbumListVC: UICollectionViewDelegateFlowLayout {
 }
 extension AlbumListVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
-        vc.album = self.albums[indexPath.row]
-        self.navigationController?.navigationBar.shadowImage = nil
-        vc.navigationController?.navigationBar.shadowImage = nil
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.pushToAlbum(self.albums[indexPath.row], ani: true)
     }
     
+}
+
+extension AlbumListVC: ViewCallback {
+    func passData(data: Any, code: String) {
+        if code == "pushvc" {
+            let res = data as? Album
+            self.pushToAlbum(res!,ani: false)
+        }
+    }
 }
 
 
@@ -355,6 +368,7 @@ extension AlbumListVC {
             }
             DispatchQueue.main.async(execute: { () -> Void in
                 let vc = UIStoryboard.init(name: "Camera", bundle: nil).instantiateViewController(withIdentifier: "CustomCameraVC") as! CustomCameraVC
+                vc.delegate = self
                 vc.cameraType = .select
                 vc.album = Array(self.albums)[indexPath.row]
                 self.present(

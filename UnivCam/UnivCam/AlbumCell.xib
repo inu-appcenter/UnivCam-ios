@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13178.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13156.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -42,10 +42,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ISt-mm-dCA">
-                        <rect key="frame" x="127.5" y="181" width="48" height="48"/>
+                        <rect key="frame" x="127.5" y="185" width="48" height="48"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="48" id="3ZA-2t-tyX"/>
-                            <constraint firstAttribute="height" constant="48" id="52f-Dm-cSi"/>
+                            <constraint firstAttribute="height" constant="48" id="GuM-lU-2MY"/>
+                            <constraint firstAttribute="width" constant="48" id="fzX-iZ-jIz"/>
                         </constraints>
                         <state key="normal" image="_ic_camera__ic_camera"/>
                     </button>
@@ -80,22 +80,22 @@
             </view>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="ISt-mm-dCA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cvl-c3-sM8" secondAttribute="trailing" id="4EN-BY-lbW"/>
                 <constraint firstItem="cvl-c3-sM8" firstAttribute="top" secondItem="ASn-Y1-qXz" secondAttribute="bottom" constant="15" id="AKk-6a-jQn"/>
                 <constraint firstItem="ASn-Y1-qXz" firstAttribute="leading" secondItem="rh5-0Y-Lge" secondAttribute="leading" id="BXq-Yn-qde"/>
                 <constraint firstItem="EB1-BG-ukj" firstAttribute="top" secondItem="rh5-0Y-Lge" secondAttribute="top" constant="8" id="DXg-ZF-sH5"/>
                 <constraint firstItem="0GH-Zl-oU7" firstAttribute="top" secondItem="rh5-0Y-Lge" secondAttribute="top" id="LaC-HP-TJu"/>
                 <constraint firstItem="ASn-Y1-qXz" firstAttribute="top" secondItem="rh5-0Y-Lge" secondAttribute="top" id="NIh-od-U8M"/>
                 <constraint firstItem="ihm-s7-X4O" firstAttribute="leading" secondItem="cvl-c3-sM8" secondAttribute="leading" id="OKs-ob-XeV"/>
+                <constraint firstAttribute="trailing" secondItem="ISt-mm-dCA" secondAttribute="trailing" id="PHs-xk-MYG"/>
                 <constraint firstAttribute="trailing" secondItem="dyh-Tj-mbc" secondAttribute="trailing" id="RhP-ZM-5dk"/>
                 <constraint firstItem="dyh-Tj-mbc" firstAttribute="top" secondItem="rh5-0Y-Lge" secondAttribute="top" id="WOh-y2-w1k"/>
+                <constraint firstItem="ISt-mm-dCA" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cvl-c3-sM8" secondAttribute="trailing" constant="17.5" id="XqQ-HZ-cvk"/>
                 <constraint firstItem="0GH-Zl-oU7" firstAttribute="leading" secondItem="rh5-0Y-Lge" secondAttribute="leading" id="YH7-4U-sqF"/>
-                <constraint firstItem="ISt-mm-dCA" firstAttribute="top" secondItem="ASn-Y1-qXz" secondAttribute="bottom" constant="5.5" id="d6w-LH-Z9o"/>
                 <constraint firstAttribute="trailing" secondItem="ASn-Y1-qXz" secondAttribute="trailing" id="dfO-zL-7b5"/>
                 <constraint firstAttribute="trailing" secondItem="EB1-BG-ukj" secondAttribute="trailing" constant="8" id="j5g-KK-SED"/>
                 <constraint firstItem="ihm-s7-X4O" firstAttribute="top" secondItem="cvl-c3-sM8" secondAttribute="bottom" constant="5.5" id="jQC-zj-ysw"/>
-                <constraint firstAttribute="trailing" secondItem="ISt-mm-dCA" secondAttribute="trailing" id="jig-C6-7Sm"/>
                 <constraint firstItem="cvl-c3-sM8" firstAttribute="leading" secondItem="rh5-0Y-Lge" secondAttribute="leading" constant="8.5" id="kZa-0X-vbq"/>
+                <constraint firstItem="ISt-mm-dCA" firstAttribute="top" secondItem="ASn-Y1-qXz" secondAttribute="bottom" constant="9.5" id="srw-v3-xBZ"/>
                 <constraint firstAttribute="bottom" secondItem="ASn-Y1-qXz" secondAttribute="bottom" constant="67.5" id="tu1-6l-EQ3"/>
             </constraints>
             <size key="customSize" width="175.5" height="243"/>

@@ -18,11 +18,7 @@ class SearchAlbumListVC: UIViewController {
             collectionView.delegate = self
             collectionView.register(Cells.album.nib,
                                     forCellWithReuseIdentifier: Cells.album.identifier)
-            let tapGesture = UITapGestureRecognizer(
-                target: self,
-                action: #selector(keyboardWillHide)
-            )
-            collectionView.addGestureRecognizer(tapGesture)
+
         }
     }
     @IBOutlet var searchTextField: UITextField! {
@@ -54,6 +50,11 @@ class SearchAlbumListVC: UIViewController {
     }
     @IBOutlet var albumCountLabel: UILabel!
     
+    let tapGesture = UITapGestureRecognizer(
+        target: self,
+        action: #selector(keyboardWillHide)
+    )
+    
     var albums = AppDelegate.getDelegate().albums
     var notificationToken: NotificationToken? = nil
     
@@ -83,7 +84,14 @@ class SearchAlbumListVC: UIViewController {
         
         self.addRealmNotification()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear), name: Notification.Name.UIKeyboardWillShow, object: nil)
     }
+    
+    @objc func keyboardWillAppear() {
+        print("keyboard showed")
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
     func addRealmNotification() {
         notificationToken = albums.addNotificationBlock { [weak self] (changes: RealmCollectionChange) in
             guard let collectionView = self?.collectionView else { return }
@@ -118,6 +126,8 @@ class SearchAlbumListVC: UIViewController {
     }
     
     func keyboardWillHide() {
+        print("tapped")
+        self.view.removeGestureRecognizer(tapGesture)
         self.searchTextField.endEditing(true)
     }
     
@@ -153,6 +163,7 @@ class SearchAlbumListVC: UIViewController {
             searchedAlbums.removeAll()
             searchedAlbums = Array(albums)
             collectionView.reloadData()
+            keyboardWillHide()
         }
     }
     
@@ -249,6 +260,11 @@ extension SearchAlbumListVC: UITextFieldDelegate {
         }
         
         return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.keyboardWillHide()
+        return false
     }
 }
 
@@ -384,4 +400,11 @@ extension SearchAlbumListVC : UINavigationControllerDelegate, UIImagePickerContr
     }
 }
 
+extension SearchAlbumListVC : UICollectionViewDelegate{
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let vc = ViewControllers.album_detail.instance as? AlbumDetailVC else { return }
+        vc.album = self.albums[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+}
 

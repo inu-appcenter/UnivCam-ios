@@ -73,6 +73,7 @@
 		30FB800F1F169EB1002C66AC /* AlbumListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB800E1F169EB1002C66AC /* AlbumListVC.swift */; };
 		30FB80111F169FC3002C66AC /* Camera.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30FB80101F169FC3002C66AC /* Camera.storyboard */; };
 		30FB80131F16A0A2002C66AC /* CustomCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FB80121F16A0A2002C66AC /* CustomCameraVC.swift */; };
+		DACE7FAE1F69562B00B0A37A /* AVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DACE7FAD1F69562B00B0A37A /* AVC.swift */; };
 		DCD68555A7A05079ECA2A7B7 /* Pods_UnivCam.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 559EF38E69B76B004FEFFA45 /* Pods_UnivCam.framework */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +148,7 @@
 		30FB80121F16A0A2002C66AC /* CustomCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCameraVC.swift; sourceTree = "<group>"; };
 		559EF38E69B76B004FEFFA45 /* Pods_UnivCam.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnivCam.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94F4A2F4AE6E547EB59024BC /* Pods-UnivCam.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnivCam.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam.release.xcconfig"; sourceTree = "<group>"; };
+		DACE7FAD1F69562B00B0A37A /* AVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVC.swift; sourceTree = "<group>"; };
 		E15A529152D0A781A213E49D /* Pods-UnivCam.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnivCam.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnivCam/Pods-UnivCam.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -370,6 +372,7 @@
 		30FB7FE81F169850002C66AC /* UnivCam */ = {
 			isa = PBXGroup;
 			children = (
+				DACE7FAC1F69561C00B0A37A /* Test */,
 				30FB7FE91F169850002C66AC /* AppDelegate.swift */,
 				30B936BF1F186E6300F5040F /* Helper */,
 				30B936B61F186B9B00F5040F /* ViewController */,
@@ -388,6 +391,14 @@
 				559EF38E69B76B004FEFFA45 /* Pods_UnivCam.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DACE7FAC1F69561C00B0A37A /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				DACE7FAD1F69562B00B0A37A /* AVC.swift */,
+			);
+			name = Test;
 			sourceTree = "<group>";
 		};
 		DD0FE6ABFE7AD5B17654C7C6 /* Pods */ = {
@@ -551,6 +562,7 @@
 				305E1EE81F19FA2800ADA1CD /* AlbumDetailVC.swift in Sources */,
 				30E2DDB31F4091F40084CDC3 /* SettingHistoryVC.swift in Sources */,
 				30FB80041F169BF1002C66AC /* FavoriteAlbumListVC.swift in Sources */,
+				DACE7FAE1F69562B00B0A37A /* AVC.swift in Sources */,
 				30263CA61F3BAC5E0015253A /* SelectAlbumVC.swift in Sources */,
 				30923F141F4412B000CC6DA1 /* SettingCell.swift in Sources */,
 				3059B95C1F3B6C620013A6E8 /* CreateAlbumView.swift in Sources */,
