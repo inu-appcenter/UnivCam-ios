@@ -746,7 +746,7 @@
 			baseConfigurationReference = E15A529152D0A781A213E49D /* Pods-UnivCam.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8MB894TP6V;
+				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = UnivCam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -762,7 +762,7 @@
 			baseConfigurationReference = 94F4A2F4AE6E547EB59024BC /* Pods-UnivCam.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8MB894TP6V;
+				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = UnivCam/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
