@@ -11,6 +11,7 @@ import AVFoundation
 import RealmSwift
 
 class SearchAlbumListVC: UIViewController {
+    var confirmDeleteView : ConfirmDeleteView?
     
     @IBOutlet var collectionView: UICollectionView! {
         didSet {
@@ -320,7 +321,18 @@ extension SearchAlbumListVC {
         })
         alert.addAction(UIAlertAction(title: "앨범 삭제", style: .default) { action in
             // perhaps use action.title here
+            self.confirmDeleteView = ConfirmDeleteView(frame: (UIApplication.shared.keyWindow?.frame)!)
+            self.confirmDeleteView?.frame.origin.y = UIApplication.shared.statusBarFrame.height
             
+            self.confirmDeleteView?.deleteButton.tag = indexPath.row
+            self.confirmDeleteView?.deleteButton.addTarget(
+                self,
+                action: #selector(self.removeAlbum(sender:)),
+                for: .touchUpInside
+            )
+            self.confirmDeleteView?.albumTitleLabel.text = self.albums[indexPath.row].title
+            
+            UIApplication.shared.keyWindow?.addSubview(self.confirmDeleteView!)
         })
         alert.addAction(UIAlertAction(title: "취소", style: .cancel) { action in
             
@@ -362,6 +374,23 @@ extension SearchAlbumListVC {
                 )
             })
         }
+    }
+}
+
+extension SearchAlbumListVC {
+    func removeAlbum(sender: UIButton) {
+        
+        // 앨범 삭제
+        let album = self.albums[sender.tag]
+        let fileManager = FileManager.default
+        do {
+            try fileManager.removeItem(atPath: album.url)
+        }
+        catch let error as NSError {
+            print("Ooops! Something went wrong: \(error)")
+        }
+        RealmHelper.removeData(data: album)
+        confirmDeleteView?.remove()
     }
 }
 

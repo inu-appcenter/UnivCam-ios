@@ -152,16 +152,21 @@ class AlbumDetailVC: UIViewController {
     }
     
     func shareImages() {
-        var sharePhotos = [UIImage]()
-        
+        var sharePhotos : [UIImage] = []
+        var newShare : [UIImage] = []
         for cindexPath in _selectedCells {
             guard let coindexPath = cindexPath as? IndexPath else { return }
-            sharePhotos.append(photos[coindexPath.row])
+            sharePhotos.append(photos[coindexPath.row] as UIImage)
         }
-        let pictureShare = UIActivityViewController(activityItems: sharePhotos, applicationActivities: nil)
+        for item in sharePhotos {
+            newShare.append(item as! UIImage)
+        }
+        print(sharePhotos)
+        print("---------------------------")
+        print(newShare)
+        let pictureShare = UIActivityViewController(activityItems: newShare, applicationActivities: [])
         UIButton.appearance().tintColor = UIColor(hex:0x515859)
-        pictureShare.excludedActivityTypes = [ UIActivityType.airDrop]
-        pictureShare.popoverPresentationController?.sourceView = self.view
+        pictureShare.excludedActivityTypes = [UIActivityType.message]
         self.present(pictureShare, animated: true, completion: nil)
     }
     
