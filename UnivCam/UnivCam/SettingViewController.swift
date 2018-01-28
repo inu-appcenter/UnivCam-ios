@@ -94,7 +94,7 @@ extension SettingViewController : UITableViewDataSource, UITableViewDelegate {
         case 3: header_cell.header_title.font = UIFont(name: header_cell.header_title.font.fontName, size: 13)
             break
         default:
-            header_cell.header_title.font = UIFont(name: header_cell.header_title.font.fontName, size: 30)
+            header_cell.header_title.font = UIFont(name: header_cell.header_title.font.fontName, size: 13)
             break
         }
         header_cell.header_title.text = index_list[section].rawValue

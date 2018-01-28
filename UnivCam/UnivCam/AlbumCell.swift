@@ -18,6 +18,7 @@ class AlbumCell: UICollectionViewCell {
     @IBOutlet var pictureCountLabel: UILabel!
     @IBOutlet var imageView: UIImageView! {
         didSet {
+            imageView.clipsToBounds = true
             imageView.image = nil
             imageView.layer.borderColor = UIColor.lightGray.cgColor
             imageView.layer.borderWidth = 0.5

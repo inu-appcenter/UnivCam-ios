@@ -120,7 +120,7 @@ extension InfoViewController : UITableViewDelegate , UITableViewDataSource {
         case 3: cell.header_title.font = UIFont(name: cell.header_title.font.fontName, size: 13)
             break
         default:
-            cell.header_title.font = UIFont(name: cell.header_title.font.fontName, size: 30)
+            cell.header_title.font = UIFont(name: cell.header_title.font.fontName, size: 13)
             break
         }
         switch viewType {
