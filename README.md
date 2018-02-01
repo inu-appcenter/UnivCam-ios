@@ -31,7 +31,7 @@ College students who want to sort and classify their ‘**study-related**’ ima
 김승현
 
 ## Design
-<a href="https://spemer.com/portfolio/album-image-sort-application-univcam.html" target="_blank" title="spemer.com">Click here to watch full design</a>
+<a href="https://medium.com/spemer/univcam-ux-case-study-design-process-62742826c9a7" target="_blank" title="spemer.com">Click here to watch full design</a>
 
 ## Preview
 ![UnivCam](dribbble.png)
