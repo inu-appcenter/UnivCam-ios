@@ -8,11 +8,11 @@
 
 ## Goals
 
-To design an application for college students - to sort and classify albums and images that they taken in their college classes, in clean and intuitive way.
+To design an application for **college students** - to sort and classify albums and images that they taken in their college classes, in clean and intuitive way.
 
 ## Targets
 
-College students who want to sort and classify their ‘study-related’ images in clean and intuitive way.
+College students who want to sort and classify their ‘**study-related**’ images in clean and intuitive way.
 
 ## Team
 
