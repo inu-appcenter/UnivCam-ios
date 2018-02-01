@@ -24,9 +24,9 @@ College students who want to sort and classify their ‘study-related’ images 
 <a href="https://github.com/zunzunzun" target="_blank" title="GitHub"><br/>**이준상**</a> (@zunzunzun)
 <a href="https://github.com/chojunyng" target="_blank" title="GitHub"><br/>**조준영**</a> (@chojunyng)
 
-- **PM**
+- **PM** <br/>
 김승현
 
+ - **Preview**
 ![UnivCam](dribbble.png)
-Format: ![UnivCam](dribbble.png)
 
