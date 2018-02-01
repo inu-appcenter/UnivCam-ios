@@ -4,19 +4,19 @@
 
 > **App ADS**
 >
-대학생을 위한 사진 관리 앨범 어플리케이션
+Image & Album sorting & classifying application for University students
 
-## 소개
+## Goals
 
-대학생들이 수업 내용을 사진으로 남기는 경우가 많은데 찍은 사진을 폴더별로 정리하는 것을 용이하게 하기 위함
+To design an application for college students - to sort and classify albums and images that they taken in their college classes, in clean and intuitive way.
 
-## 타겟팅
+## Targets
 
-앨범 별 사진 관리가 필요한 대학생, 일반인 등
+College students who want to sort and classify their ‘study-related’ images in clean and intuitive way.
 
-## 팀원
+## Team
 
-- **디자인**
+- **Design**
 서혁(Spemer)
 
 - **iOS**
@@ -24,7 +24,7 @@
 이준상
 조준영
 
-- **기획**
+- **PM**
 김승현
 
 
