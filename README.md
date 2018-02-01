@@ -1,10 +1,10 @@
 
 
-# UnivCam
+# UnivCam 📷
 
 > **App ADS**
 >
-📷 Image & Album sorting & classifying application for University students
+Image & Album sorting & classifying application for University students
 
 ## Goals
 
