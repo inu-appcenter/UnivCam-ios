@@ -28,5 +28,5 @@ College students who want to sort and classify their ‘study-related’ images 
 김승현
 
 ![UnivCam](https://spemer.com/img/works/univcam/dribbble.png)
-Format: ![UnivCam](https://spemer.com/portfolio/album-image-sort-application-univcam.html d)
+Format: ![UnivCam](https://spemer.com/img/works/univcam/dribbble.png)
 
