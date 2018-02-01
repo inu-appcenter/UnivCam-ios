@@ -27,5 +27,8 @@ College students who want to sort and classify their ‘**study-related**’ ima
 - **PM** <br/>
 김승현
 
+## Design
+<a href="https://spemer.com/portfolio/album-image-sort-application-univcam.html" target="_blank" title="spemer.com">Click here to watch full design</a>
+
 ## Preview
 ![UnivCam](dribbble.png)
