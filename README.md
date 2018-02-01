@@ -24,6 +24,9 @@ College students who want to sort and classify their ‘**study-related**’ ima
 <a href="https://github.com/zunzunzun" target="_blank" title="GitHub"><br/>**이준상**</a> (@zunzunzun)
 <a href="https://github.com/chojunyng" target="_blank" title="GitHub"><br/>**조준영**</a> (@chojunyng)
 
+- **Android**
+<a href="https://github.com/chaeeun" target="_blank" title="GitHub"><br/>**이채은**</a> (@chaeeun)
+
 - **PM** <br/>
 김승현
 
