@@ -27,6 +27,5 @@ College students who want to sort and classify their ‘study-related’ images 
 - **PM** <br/>
 김승현
 
-##Preview##
+## Preview
 ![UnivCam](dribbble.png)
-
